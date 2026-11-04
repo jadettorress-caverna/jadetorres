@@ -1,0 +1,660 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Despertando Mentoras · Workshop com Jade Torres</title>
+<meta name="description" content="Em apenas um sábado, organize o seu projeto digital, do posicionamento ao funil de vendas. Workshop online e ao vivo, 21 de novembro.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+/* Versão 2 do rascunho: topo com a foto da Jade, sombra suave na foto e botão com brilho (inspiração na página da Diandra, visual da Caverna). */
+:root {
+  --bg-base: #0A0A08;
+  --bg-2: #111108;
+  --gold: #C9A84C;
+  --gold-light: #E8C96A;
+  --gold-dark: #8B6914;
+  --white: #F5F0E8;
+  --white-dim: rgba(245,240,232,0.75);
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'Montserrat', 'Segoe UI', sans-serif;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg-base); color: var(--white); font-family: var(--font-body); font-weight: 300; }
+.aviso-rascunho { text-align: center; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--bg-base); background: var(--gold); padding: 6px 16px; font-weight: 600; }
+
+/* Barra do topo */
+.barra { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 14px 24px; border-bottom: 1px solid rgba(201,168,76,0.18); background: var(--bg-2); }
+.marca { font-family: var(--font-display); font-size: 15px; letter-spacing: 4px; text-transform: uppercase; line-height: 1.2; }
+.marca small { display: block; font-family: var(--font-body); font-size: 10px; letter-spacing: 3px; color: var(--gold); }
+.barra-btn { font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--bg-base); background: var(--white); text-decoration: none; padding: 10px 16px; border-radius: 999px; white-space: nowrap; }
+
+/* Topo com foto */
+.topo { display: grid; grid-template-columns: 1.05fr 1fr; min-height: 640px; }
+.texto { padding: 56px 40px 56px max(24px, calc((100vw - 1160px) / 2)); display: flex; flex-direction: column; justify-content: center; align-items: flex-start; }
+.badge { display: inline-block; border: 1px solid rgba(201,168,76,0.5); background: rgba(201,168,76,0.08); color: var(--gold);
+  font-size: 12px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; padding: 8px 16px; border-radius: 999px; margin-bottom: 22px; }
+.slogan { font-family: var(--font-display); font-style: italic; color: var(--gold); font-size: 22px; margin: 0 0 8px; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(36px, 4.6vw, 58px); line-height: 1.08; margin: 0 0 14px; }
+h1 em { font-style: italic; color: var(--gold); }
+.complemento { font-family: var(--font-display); font-size: clamp(22px, 2.4vw, 28px); line-height: 1.3; margin: 0 0 22px; }
+.complemento b { font-weight: 600; color: var(--gold); }
+.sub { font-size: 17px; line-height: 1.65; color: var(--white-dim); margin: 0 0 22px; max-width: 560px; }
+.sub strong { color: var(--white); font-weight: 400; }
+.checks { list-style: none; margin: 0 0 28px; padding: 0; display: flex; flex-direction: column; gap: 8px; font-size: 15px; color: var(--white-dim); }
+.checks li::before { content: "✓"; color: var(--gold); font-weight: 700; margin-right: 10px; }
+.checks b { color: var(--white); font-weight: 600; }
+
+/* Botão com brilho */
+.cta { position: relative; display: inline-flex; align-items: center; gap: 14px; text-decoration: none; color: var(--bg-base);
+  background: linear-gradient(180deg, var(--gold-light) 0%, var(--gold) 55%, #B08F38 100%);
+  padding: 16px 26px 16px 18px; border-radius: 999px; font-weight: 700; font-size: 16px;
+  box-shadow: 0 0 0 1px rgba(232,201,106,.6), 0 12px 36px rgba(201,168,76,.45), inset 0 1px 0 rgba(255,255,255,.55);
+  overflow: hidden; transition: transform .15s, box-shadow .15s; }
+.cta::after { content: ""; position: absolute; top: 0; left: -60%; width: 40%; height: 100%;
+  background: linear-gradient(100deg, transparent, rgba(255,255,255,.55), transparent); animation: brilho 3.2s ease-in-out infinite; }
+@keyframes brilho { 0%, 55% { left: -60%; } 100% { left: 130%; } }
+.cta:hover { transform: translateY(-2px); box-shadow: 0 0 0 1px rgba(232,201,106,.8), 0 16px 44px rgba(201,168,76,.6), inset 0 1px 0 rgba(255,255,255,.55); }
+.cta:focus-visible { outline: 2px solid var(--white); outline-offset: 4px; }
+.cta .ponto { width: 26px; height: 26px; border-radius: 50%; background: var(--bg-base); display: grid; place-items: center; flex: none; }
+.cta .ponto::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--gold-light); box-shadow: 0 0 8px var(--gold-light); }
+.cta .preco { border-left: 1px solid rgba(10,10,8,.3); padding-left: 14px; font-size: 14px; letter-spacing: .02em; }
+.info { margin-top: 16px; font-size: 14px; color: var(--white-dim); }
+
+/* Foto com sombra que se mistura ao fundo */
+.foto { position: relative; overflow: hidden; }
+.foto img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 25%; display: block; }
+.foto::after { content: ""; position: absolute; inset: 0; pointer-events: none;
+  background:
+    linear-gradient(90deg, var(--bg-base) 0%, rgba(10,10,8,.55) 18%, rgba(10,10,8,0) 45%),
+    linear-gradient(0deg, var(--bg-base) 0%, rgba(10,10,8,0) 30%),
+    linear-gradient(180deg, rgba(10,10,8,.35) 0%, rgba(10,10,8,0) 20%); }
+.trocar { position: absolute; right: 14px; bottom: 14px; z-index: 2; display: flex; gap: 6px; }
+.trocar button { font: inherit; font-size: 12px; font-weight: 600; color: var(--white); background: rgba(10,10,8,.7); border: 1px solid var(--gold); border-radius: 999px; padding: 6px 12px; cursor: pointer; }
+.trocar button.ativo { background: var(--gold); color: var(--bg-base); }
+.trocar button:focus-visible { outline: 2px solid var(--white); outline-offset: 2px; }
+
+/* Cenário: antes e hoje (como o bloco de cenário da Diandra, logo depois do topo) */
+.cenario { background: var(--bg-2); padding: 110px 20px; border-top: 1px solid rgba(201,168,76,0.18); }
+.cenario .col { max-width: 560px; margin: 0 auto; display: flex; flex-direction: column; gap: 56px; }
+.cenario p { margin: 0; font-size: 18px; line-height: 1.7; color: var(--white-dim); }
+.cenario .grupo { display: flex; flex-direction: column; gap: 14px; }
+.cenario p b { color: var(--white); font-weight: 400; }
+.cenario .marco { display: block; font-size: 20px; letter-spacing: .22em; text-transform: uppercase; color: var(--gold); font-weight: 700; margin-bottom: 12px; }
+.cenario .forte { font-family: var(--font-display); font-size: clamp(28px, 4.4vw, 40px); line-height: 1.2; color: var(--white); font-weight: 400; }
+.cenario .forte em { font-style: italic; color: var(--gold); }
+/* O problema */
+.problema { background: var(--bg-2); border-top: 1px solid rgba(201,168,76,0.18); padding: 96px 20px; text-align: center; }
+.problema .label { font-size: 11px; letter-spacing: .25em; text-transform: uppercase; color: var(--gold); margin: 0 0 18px; font-weight: 600; }
+.problema h2 { font-family: var(--font-display); font-weight: 300; font-size: clamp(32px, 5vw, 50px); line-height: 1.15; margin: 0 auto 36px; max-width: 760px; }
+.problema h2 em { font-style: italic; color: var(--gold); }
+.problema h2 strong { font-weight: 700; }
+.problema .lista { font-size: 19px; line-height: 1.75; color: var(--white-dim); margin: 0 auto 36px; max-width: 470px; }
+.problema .lista span { display: inline-block; white-space: nowrap; }
+.problema .virada { font-family: var(--font-display); font-size: clamp(24px, 3.4vw, 32px); line-height: 1.35; margin: 0; }
+.problema .virada b { color: var(--gold); font-weight: 600; }
+/* Teste de fundo do problema: escuro, amarelo ou bege (a letra muda junto) */
+.problema { position: relative; transition: background .3s, color .3s; }
+.problema.amarelo { background: var(--amarelo, #E8C96A); color: #1E1A10; border-top-color: #C9A84C; }
+.problema.amarelo { --destaque: #5C1A1A; }
+.problema.amarelo h2 em, .problema.amarelo .virada b, .problema.amarelo .label { color: var(--destaque); }
+.teste-destaque { display: none; }
+.problema.amarelo .teste-destaque { display: flex; }
+.problema.amarelo .lista { color: rgba(15,12,6,.85); }
+.problema.amarelo { color: #0F0C06; }
+.problema.bege { background: #EFE4D2; color: #2A2116; border-top-color: #D9C7A8; }
+.problema.bege h2 em, .problema.bege .virada b, .problema.bege .label { color: #8B6914; }
+.problema.bege .lista { color: rgba(42,33,22,.78); }
+.testes { position: absolute; top: 16px; right: 16px; display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
+.teste-fundo, .teste-destaque { display: flex; gap: 6px; align-items: center; }
+.teste-destaque span { font-size: 11px; color: rgba(30,26,16,.7); }
+.teste-fundo button, .teste-destaque button { font: inherit; font-size: 12px; font-weight: 600; border-radius: 999px; padding: 6px 12px; cursor: pointer; border: 1px solid #C9A84C; background: rgba(10,10,8,.7); color: #F5F0E8; }
+.teste-fundo button.ativo, .teste-destaque button.ativo { background: #C9A84C; color: #0A0A08; }
+.teste-fundo button:focus-visible { outline: 2px solid #5C1A1A; outline-offset: 2px; }
+@media (max-width: 600px) { .testes { position: static; align-items: center; margin-bottom: 24px; } }
+/* Bloco amarelo longo: "antes e hoje" + "Você tem autoridade", na mesma cor (como o bloco do cenário da Diandra) */
+.bloco-amarelo { background: var(--amarelo); color: #0F0C06; }
+.bloco-amarelo .cenario, .bloco-amarelo .problema { background: transparent; border-top: 0; }
+.bloco-amarelo .cenario { padding-bottom: 40px; }
+.bloco-amarelo .problema { padding-top: 40px; }
+.bloco-amarelo .cenario p { color: rgba(15,12,6,.85); }
+.bloco-amarelo .cenario p b { color: #0A0A08; font-weight: 600; }
+.bloco-amarelo .cenario .marco { color: #0A0A08; }
+.bloco-amarelo .cenario .forte { color: #0A0A08; }
+.bloco-amarelo .cenario .forte em { color: #0A0A08; font-weight: 600; }
+/* Teste da abertura do bloco amarelo: com aspa ou só aproximar */
+.aspa { display: none; font-family: var(--font-display); font-size: 140px; line-height: .6; color: #6B4E0E; height: 56px; margin-bottom: -44px; }
+.cenario.com-aspa .aspa { display: block; }
+.claquete { width: 54px; height: 47px; color: #6B4E0E; display: block; margin-bottom: -28px; }
+.cenario.centro .claquete { margin-left: auto; margin-right: auto; }
+.claquete-sep { margin: 0 auto 28px; }
+.cenario.com-aspa { padding-top: 40px; }
+.cenario.proximo { padding-top: 56px; }
+.cenario.centro .col { text-align: center; align-items: center; }
+
+.cenario { position: relative; }
+.teste-aspa { position: absolute; top: 12px; right: 12px; display: flex; gap: 6px; flex-wrap: wrap; }
+.teste-aspa button { font: inherit; font-size: 12px; font-weight: 600; border-radius: 999px; padding: 6px 12px; cursor: pointer; border: 1px solid #0A0A08; background: transparent; color: #0A0A08; }
+.teste-aspa button.ativo { background: #0A0A08; color: #F5F0E8; }
+/* Mecanismo: a ordem errada x a ordem das 12 Semanas no Ar (inspirado no "mecanismo" da Diandra + jornada da proposta do programa) */
+.mecanismo { background: var(--bg-base); padding: 96px 20px; text-align: center; }
+.mecanismo .col { max-width: 880px; margin: 0 auto; }
+.mecanismo h2 { font-family: var(--font-display); font-weight: 400; font-size: clamp(32px, 5vw, 50px); line-height: 1.15; margin: 0 auto 20px; max-width: 720px; }
+.mecanismo h2 em { font-style: italic; color: var(--gold); }
+.mecanismo .lead { font-size: 18px; line-height: 1.7; color: var(--white-dim); max-width: 600px; margin: 0 auto 48px; }
+.mecanismo .lead b { color: var(--white); font-weight: 400; }
+.ordens { max-width: 440px; margin: 0 auto; text-align: center; }
+.ordem .cab { font-size: 12px; letter-spacing: .2em; text-transform: uppercase; font-weight: 600; margin-bottom: 14px; color: var(--white-dim); }
+.ordem .cab.certa { color: var(--gold); }
+.barras { display: flex; flex-direction: column; gap: 8px; align-items: center; }
+.barra-o { border-radius: 6px; padding: 12px 14px; font-size: 15px; font-weight: 500; }
+.errada .barra-o { background: rgba(201,168,76,.07); color: var(--gold); border: 1px dashed rgba(201,168,76,.45); display: flex; align-items: center; justify-content: center; gap: 10px;
+  opacity: 0; transform: translateY(-42px); transition: opacity .5s ease, transform .7s cubic-bezier(.34,1.56,.64,1); }
+.errada .barra-o::before { content: "✕"; color: #E0483E; font-weight: 700; font-size: 14px; }
+.errada.visivel .barra-o { opacity: 1; transform: none; }
+.errada.visivel .barra-o:nth-child(2) { transition-delay: .5s; } .errada.visivel .barra-o:nth-child(3) { transition-delay: 1s; } .errada.visivel .barra-o:nth-child(4) { transition-delay: 1.5s; }
+.cab .x-verm { color: #E0483E; font-weight: 700; }
+.errada.amarelo .barra-o { background: linear-gradient(180deg, #EDD27A 0%, #E2C062 45%, #C9A84C 100%); color: #0A0A08; border: 0; font-weight: 600; box-shadow: 0 6px 18px rgba(201,168,76,.25); }
+.errada.amarelo .barra-o::before { color: #C0261C; }
+@media (prefers-reduced-motion: reduce) { .errada .barra-o { opacity: 1; transform: none; transition: none; } }
+.errada .barras { max-width: 300px; margin: 0 auto; }
+.errada .barra-o:nth-child(1) { width: 100%; } .errada .barra-o:nth-child(2) { width: 86%; } .errada .barra-o:nth-child(3) { width: 72%; } .errada .barra-o:nth-child(4) { width: 60%; }
+.mecanismo .ouro { color: var(--gold); }
+.certa-l .barra-o { width: 100%; color: #F5F0E8; text-align: left; display: flex; flex-direction: column; gap: 2px; }
+.certa-l .barra-o small { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; opacity: .75; font-weight: 600; }
+.certa-l .az { background: linear-gradient(90deg, #1F3A5F, #2C5282); }
+.certa-l .vm { background: linear-gradient(90deg, #6B1A1A, #8E2424); }
+.certa-l .virada-o { font-family: var(--font-display); font-style: italic; color: var(--gold); font-size: 19px; padding: 4px 0; }
+/* Linha do tempo das 12 etapas (desenho da proposta do programa, nas cores do workshop) */
+.ensino-cab { margin: 64px 0 28px; font-size: 12px; letter-spacing: .2em; text-transform: uppercase; font-weight: 600; color: var(--gold); }
+.trilha-linha { position: relative; max-width: 900px; margin: 0 auto; text-align: left; }
+.trilha-linha::before { content: ""; position: absolute; left: 50%; top: 0; bottom: 0; width: 2px; margin-left: -1px;
+  background: linear-gradient(#3D6B8C 0%, #3D6B8C 45%, #A8443A 55%, #A8443A 88%, var(--gold) 100%); opacity: .7; }
+.parada { position: relative; display: grid; grid-template-columns: 1fr 56px 1fr; align-items: center; margin-bottom: 36px; }
+.parada .no { grid-column: 2; grid-row: 1; justify-self: center; width: 22px; height: 22px; border-radius: 50%; border: 2px solid; background: var(--bg-base); z-index: 1; }
+.parada.az .no { border-color: #3D6B8C; background: #3D6B8C; }
+.parada.vm .no { border-color: #A8443A; background: #A8443A; }
+.parada.chegada .no { border-color: var(--gold); background: var(--gold); box-shadow: 0 0 0 6px rgba(201,168,76,.18); }
+.parada .cartao { grid-row: 1; background: #F5F0E8; color: #1E1A10; border-radius: 14px; padding: 20px 22px; box-shadow: 0 14px 34px rgba(0,0,0,.35); }
+.parada.esq .cartao { grid-column: 1; } .parada.dir .cartao { grid-column: 3; }
+.parada.az .cartao { border-top: 4px solid #3D6B8C; } .parada.vm .cartao { border-top: 4px solid #A8443A; }
+.parada.chegada .cartao { border-top: 4px solid var(--gold); background: #EDD27A; }
+.cartao .qual { font-size: 11px; letter-spacing: .18em; text-transform: uppercase; font-weight: 600; }
+.az .cartao .qual { color: #3D6B8C; } .vm .cartao .qual { color: #A8443A; } .chegada .cartao .qual { color: #6B4E0E; }
+.cartao h3 { font-family: var(--font-display); font-weight: 600; font-size: 24px; line-height: 1.15; margin: 6px 0 6px; }
+.cartao p { font-size: 15px; line-height: 1.55; color: rgba(30,26,16,.75); margin: 0; }
+.parada.troca { display: block; text-align: center; }
+.virada-t { display: inline-block; position: relative; z-index: 1; background: var(--bg-base); padding: 6px 16px; font-family: var(--font-display); font-style: italic; font-size: 20px; color: var(--white-dim); }
+.virada-t b { color: #D9796E; font-weight: 600; }
+@media (max-width: 760px) {
+  .trilha-linha::before { left: 11px; }
+  .parada { grid-template-columns: 22px 1fr; column-gap: 16px; margin-bottom: 24px; }
+  .parada .no { grid-column: 1; align-self: start; margin-top: 22px; }
+  .parada.esq .cartao, .parada.dir .cartao { grid-column: 2; }
+  .parada.troca { text-align: left; padding-left: 26px; }
+}
+/* Tudo em dourado: no workshop não aparece a divisão Trilha Azul / Vermelha (isso é da proposta do programa) */
+.trilha-linha::before { background: var(--gold); opacity: .18; }
+.parada.az .no, .parada.vm .no, .parada.chegada .no { border-color: var(--gold); background: var(--bg-base); box-shadow: none; transition: background .4s ease, box-shadow .4s ease, transform .4s cubic-bezier(.34,1.56,.64,1); }
+.parada .no.acesa { background: var(--gold) !important; box-shadow: 0 0 0 6px rgba(201,168,76,.18), 0 0 18px rgba(232,201,106,.7) !important; transform: scale(1.15); }
+.trilha-fill { position: absolute; left: 50%; top: 0; width: 2px; margin-left: -1px; height: 0; background: linear-gradient(180deg, var(--gold), var(--gold-light)); box-shadow: 0 0 10px rgba(232,201,106,.6); z-index: 0; }
+@media (max-width: 760px) { .trilha-fill { left: 11px; } }
+.parada.az .cartao, .parada.vm .cartao { border-top-color: var(--gold); }
+.az .cartao .qual, .vm .cartao .qual { color: #8B6914; }
+.virada-t b { color: var(--gold); }
+.mecanismo .fecho { font-size: 18px; line-height: 1.7; color: var(--white-dim); max-width: 600px; margin: 48px auto 0; }
+.mecanismo .fecho b { color: var(--white); font-weight: 400; }
+@media (max-width: 760px) { .ordens { grid-template-columns: 1fr; gap: 40px; } }
+/* Resultados das mentoradas (intenção dos "resultados" da Diandra, com as alunas da Jade) */
+.resultados { background: linear-gradient(180deg, #EDD27A 0%, #E2C062 35%, #C9A84C 75%, #B08F38 100%); color: #0F0C06; padding: 88px 0 72px; text-align: center; }
+.resultados .rotulo { font-size: 12px; letter-spacing: .25em; text-transform: uppercase; font-weight: 600; margin: 0 0 14px; color: #3F2E10; }
+.resultados h2 { font-family: var(--font-display); font-weight: 400; font-size: clamp(30px, 4.6vw, 46px); line-height: 1.15; margin: 0 20px 40px; }
+.resultados h2 em { font-style: italic; font-weight: 600; }
+.faixa-alunas { display: flex; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 4px max(20px, calc((100vw - 1100px) / 2)) 18px; }
+.aluna { flex: none; width: 220px; margin: 0; scroll-snap-align: center; background: #0A0A08; border-radius: 14px; overflow: hidden; box-shadow: 0 14px 30px rgba(63,46,16,.35); text-align: left; }
+.aluna img { width: 100%; height: 270px; object-fit: cover; display: block; }
+.aluna figcaption { padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 6px; }
+.aluna .quem { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); font-weight: 600; }
+.aluna .fez { font-family: var(--font-display); font-size: 19px; line-height: 1.25; color: #F5F0E8; }
+.aluna .fez b { color: var(--gold); font-weight: 600; }
+.resultados .dica { font-size: 13px; margin: 6px 0 0; color: #3F2E10; }
+/* O que você vai construir: 3 pilares numerados (intenção do bloco da Diandra, palavras da Jade) */
+.construir { background: var(--bg-base); padding: 64px 20px 40px; }
+.construir h2 { font-family: var(--font-display); font-weight: 400; font-size: clamp(30px, 4.6vw, 46px); line-height: 1.15; text-align: center; margin: 0 auto 28px; max-width: 760px; }
+.construir h2 em { font-style: italic; color: var(--gold); }
+.construir h2 + .pilar { padding-top: 24px; }
+.pilar { max-width: 980px; margin: 0 auto; display: grid; grid-template-columns: 130px 260px 1fr; gap: 32px; align-items: center; padding: 48px 0; border-top: 1px solid rgba(201,168,76,.2); }
+.pilar-num { font-family: var(--font-display); font-variant-numeric: lining-nums; font-size: 96px; line-height: 1; color: var(--gold); text-shadow: 0 0 28px rgba(201,168,76,.45); text-align: center; }
+.pilar-img { height: 170px; border-radius: 12px; overflow: hidden; border: 1px solid rgba(201,168,76,.35); }
+.pilar-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.pilar-img img.clara { filter: brightness(.82) contrast(1.05); }
+.pilar-img.vazio { display: grid; place-items: center; text-align: center; font-size: 13px; color: rgba(245,240,232,.45); border-style: dashed; }
+.pilar-txt h3 { font-family: var(--font-display); font-weight: 600; font-size: 30px; color: var(--gold); margin: 0 0 8px; }
+.pilar-txt .sai { font-size: 17px; line-height: 1.6; color: var(--white-dim); margin: 0 0 12px; }
+.pilar-txt .sai b { color: var(--white); font-weight: 400; }
+.pilar-txt ul { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 6px; font-size: 15px; color: var(--white-dim); }
+.pilar-txt li::marker { color: var(--gold); }
+@media (max-width: 860px) {
+  .pilar { grid-template-columns: 1fr; gap: 18px; text-align: left; padding: 40px 0; }
+  .pilar-num { font-size: 72px; text-align: left; }
+  .pilar-img { height: 200px; }
+}
+.proxima { max-width: 880px; margin: 0 auto; padding: 48px 20px 64px; text-align: center; color: rgba(245,240,232,0.45); font-size: 14px; }
+
+@media (max-width: 860px) {
+  .topo { grid-template-columns: 1fr; }
+  .foto { order: -1; height: 420px; }
+  .foto::after { background: linear-gradient(0deg, var(--bg-base) 0%, rgba(10,10,8,.6) 22%, rgba(10,10,8,0) 55%); }
+  .texto { padding: 0 20px 48px; margin-top: -60px; position: relative; z-index: 1; align-items: center; text-align: center; }
+  .checks { align-items: flex-start; text-align: left; }
+  .cta { width: 100%; justify-content: center; }
+  .barra-btn span { display: none; }
+  .barra { padding: 12px 16px; }
+  .marca { font-size: 13px; letter-spacing: 2px; }
+  .marca small { letter-spacing: 2px; }
+  .barra-btn { padding: 9px 12px; font-size: 11px; }
+}
+@media (prefers-reduced-motion: reduce) { .cta::after { animation: none; } }
+/* Cronograma do sábado (fundo amarelo, alterna com o bloco escuro dos pilares) */
+.cronograma { background: linear-gradient(180deg, #EDD27A 0%, #E2C062 35%, #C9A84C 75%, #B08F38 100%); color: #0F0C06; padding: 80px 20px 72px; text-align: center; }
+.cronograma h2 { font-family: var(--font-display); font-weight: 400; font-size: clamp(30px, 4.6vw, 46px); line-height: 1.15; margin: 0 0 6px; }
+.cronograma .quando { font-size: 13px; letter-spacing: .22em; text-transform: uppercase; font-weight: 600; color: #3F2E10; margin: 0 0 36px; }
+.agenda { max-width: 640px; margin: 0 auto; list-style: none; padding: 0; text-align: left; }
+.agenda li { display: grid; grid-template-columns: 150px 1fr; gap: 18px; align-items: baseline; padding: 18px 4px; border-top: 1px solid rgba(15,12,6,.22); }
+.agenda li:last-child { border-bottom: 1px solid rgba(15,12,6,.22); }
+.agenda .hora { font-family: var(--font-display); font-variant-numeric: lining-nums; font-size: 24px; font-weight: 600; color: #0A0A08; white-space: nowrap; }
+.agenda .oque { font-family: var(--font-display); font-size: 24px; line-height: 1.25; color: #0A0A08; }
+.agenda .oque small { display: block; font-family: var(--font-body); font-size: 12px; letter-spacing: .16em; text-transform: uppercase; font-weight: 600; color: #3F2E10; margin-bottom: 2px; }
+.agenda li.pausa .hora, .agenda li.pausa .oque { font-size: 19px; color: rgba(15,12,6,.6); font-style: italic; }
+@media (max-width: 600px) {
+  .agenda li { grid-template-columns: 1fr; gap: 2px; padding: 16px 4px; }
+  .agenda .hora { font-size: 20px; }
+}
+/* Depoimentos em print (fundo escuro, carrossel de arrastar) */
+.prints { background: var(--bg-base); padding: 80px 0 72px; text-align: center; }
+.prints h2 { font-family: var(--font-display); font-weight: 400; font-size: clamp(30px, 4.6vw, 46px); line-height: 1.15; margin: 0 20px 36px; }
+.prints h2 em { font-style: italic; color: var(--gold); }
+.faixa-prints { display: flex; gap: 18px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 4px 20px 18px; align-items: flex-start; scrollbar-color: var(--gold) transparent; }
+.faixa-prints .slide { flex: 0 0 auto; width: 300px; display: flex; flex-direction: column; gap: 14px; scroll-snap-align: center; }
+.faixa-prints img { width: 100%; height: auto; background: #fff; border-radius: 14px; border: 1px solid rgba(201,168,76,.45); box-shadow: 0 10px 28px rgba(0,0,0,.45); display: block; }
+.prints .dica { font-size: 13px; color: var(--white-dim); margin: 8px 0 0; }
+@media (max-width: 600px) { .faixa-prints .slide { width: 78vw; } }
+/* Caixa da oferta (fundo amarelo, cartão escuro) */
+.oferta { background: linear-gradient(180deg, #EDD27A 0%, #E2C062 35%, #C9A84C 75%, #B08F38 100%); padding: 80px 20px; }
+.oferta-card { max-width: 560px; margin: 0 auto 28px; background: #0A0A08; color: var(--white); border-radius: 22px; padding: 40px 34px 34px; text-align: center; box-shadow: 0 24px 60px rgba(60,40,5,.45); border: 1px solid rgba(201,168,76,.5); }
+.oferta-card .nome { font-size: 12px; letter-spacing: .24em; text-transform: uppercase; color: var(--gold); font-weight: 600; margin: 0 0 14px; }
+.oferta-card h2 { font-family: var(--font-display); font-weight: 400; font-size: clamp(28px, 4vw, 38px); line-height: 1.15; margin: 0 0 26px; }
+.oferta-card h2 em { font-style: italic; color: var(--gold); }
+.oferta-card .checks { text-align: left; font-size: 15.5px; line-height: 1.45; gap: 12px; margin: 0 0 30px; }
+.oferta-card .checks li { display: flex; gap: 10px; }
+.oferta-card .checks li::before { margin-right: 0; }
+.oferta-card .rotulo-preco { font-size: 13px; letter-spacing: .16em; text-transform: uppercase; color: var(--white-dim); margin: 0; }
+.oferta-card .valor { font-family: var(--font-display); font-variant-numeric: lining-nums; font-size: 76px; line-height: 1; color: var(--gold); margin: 6px 0 24px; text-shadow: 0 0 30px rgba(201,168,76,.35); }
+.oferta-card .valor small { font-size: 30px; vertical-align: 26px; margin-right: 4px; }
+.oferta-card.destaque { border: 2px solid var(--gold); box-shadow: 0 0 0 4px rgba(10,10,8,.12), 0 24px 60px rgba(60,40,5,.5); }
+.oferta-card .gravacao { margin: 26px 0 0; padding-top: 20px; border-top: 1px solid rgba(201,168,76,.25); font-size: 14.5px; line-height: 1.55; color: var(--white-dim); }
+.oferta-card .gravacao b { color: var(--white); font-weight: 600; }
+.resultados > .claquete, .cronograma > .claquete, .oferta > .claquete { margin: 0 auto 52px; }
+.resultados, .cronograma, .oferta { padding-top: 40px !important; }
+/* Quem é a Jade (fundo escuro, foto + texto; texto aprovado da proposta do programa) */
+.quem { background: var(--bg-base); padding: 88px 20px; }
+.quem-wrap { max-width: 980px; margin: 0 auto; display: grid; grid-template-columns: 340px 1fr; gap: 56px; align-items: center; }
+.quem-foto img { width: 100%; height: auto; aspect-ratio: 1080 / 1460; object-fit: cover; object-position: top; border-radius: 16px; border: 1px solid rgba(201,168,76,.45); box-shadow: 0 20px 50px rgba(0,0,0,.5); display: block; }
+.quem .etiqueta { font-size: 12px; letter-spacing: .24em; text-transform: uppercase; color: var(--gold); font-weight: 600; margin: 0 0 10px; }
+.quem h2 { font-family: var(--font-display); font-weight: 400; font-size: clamp(32px, 4.6vw, 46px); line-height: 1.1; margin: 0 0 12px; }
+.quem h2 em { font-style: italic; color: var(--gold); }
+.quem .lead { font-family: var(--font-display); font-size: 22px; line-height: 1.35; color: var(--white); margin: 0 0 18px; }
+.quem p { font-size: 15.5px; line-height: 1.7; color: var(--white-dim); margin: 0 0 14px; }
+.quem p b { color: var(--white); font-weight: 600; }
+.quem .frase { font-family: var(--font-display); font-style: italic; font-size: 24px; line-height: 1.35; color: var(--gold); margin: 22px 0 0; padding-left: 18px; border-left: 2px solid var(--gold); }
+@media (max-width: 860px) { .quem-wrap { grid-template-columns: 1fr; gap: 32px; } .quem-foto img { max-width: 420px; margin: 0 auto; } }
+.leva-oferta { text-align: center; padding: 36px 20px 8px; }
+html { scroll-behavior: smooth; }
+.parada .cartao h3 .ouro-forte { color: #8A6410; font-weight: 700; }
+/* Garantia (fundo amarelo, cartão escuro com escudo) */
+.garantia { background: linear-gradient(180deg, #EDD27A 0%, #E2C062 35%, #C9A84C 75%, #B08F38 100%); padding: 72px 20px; }
+.garantia-card { max-width: 560px; margin: 0 auto; background: #0A0A08; color: var(--white); border-radius: 22px; padding: 40px 34px; text-align: center; border: 1px solid rgba(201,168,76,.5); box-shadow: 0 24px 60px rgba(60,40,5,.45); }
+.garantia .escudo { width: 56px; height: 56px; margin: 0 auto 18px; border-radius: 50%; display: grid; place-items: center; background: rgba(201,168,76,.12); box-shadow: 0 0 0 8px rgba(201,168,76,.06); color: var(--gold); }
+.garantia h2 { font-family: var(--font-display); font-weight: 400; font-size: clamp(28px, 4vw, 36px); margin: 0 0 14px; }
+.garantia h2 em { font-style: italic; color: var(--gold); }
+.garantia p { font-size: 16px; line-height: 1.7; color: var(--white-dim); margin: 0; }
+.garantia p b { color: var(--white); font-weight: 600; }
+/* Perguntas frequentes (fundo escuro, abre e fecha) */
+.faq { background: var(--bg-base); padding: 80px 20px; }
+.faq h2 { font-family: var(--font-display); font-weight: 400; font-size: clamp(30px, 4.6vw, 44px); text-align: center; margin: 0 0 36px; }
+.faq h2 em { font-style: italic; color: var(--gold); }
+.faq-lista { max-width: 680px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
+.faq details { background: #15140F; border: 1px solid rgba(201,168,76,.28); border-radius: 14px; padding: 0 20px; }
+.faq details[open] { border-color: rgba(201,168,76,.6); }
+.faq summary { list-style: none; cursor: pointer; padding: 18px 28px 18px 0; position: relative; font-size: 16px; font-weight: 600; color: var(--white); }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: "+"; position: absolute; right: 0; top: 50%; transform: translateY(-50%); color: var(--gold); font-size: 22px; font-weight: 400; transition: transform .25s ease; }
+.faq details[open] summary::after { transform: translateY(-50%) rotate(45deg); }
+.faq details p { margin: 0 0 18px; font-size: 15.5px; line-height: 1.7; color: var(--white-dim); }
+.faq details p b { color: var(--white); font-weight: 600; }
+/* Última chamada (fundo amarelo, título + dois botões) e rodapé */
+.ultima { background: linear-gradient(180deg, #EDD27A 0%, #E2C062 35%, #C9A84C 75%, #B08F38 100%); color: #0F0C06; padding: 40px 20px 80px; text-align: center; }
+.ultima > .claquete { margin: 0 auto 40px; }
+.ultima h2 { font-family: var(--font-display); font-weight: 400; font-size: clamp(30px, 4.6vw, 46px); line-height: 1.15; margin: 0 auto 32px; max-width: 720px; }
+.ultima h2 em { font-style: italic; font-weight: 600; }
+.ultima-botoes { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+.btn-ult { display: flex; flex-direction: column; align-items: center; gap: 2px; min-width: 250px; text-decoration: none; background: #0A0A08; color: var(--gold); border-radius: 18px; padding: 16px 26px; box-shadow: 0 14px 34px rgba(60,40,5,.35); transition: transform .2s ease; }
+.btn-ult:hover { transform: translateY(-2px); }
+.btn-ult .v { font-family: var(--font-display); font-variant-numeric: lining-nums; font-size: 34px; line-height: 1.1; }
+.btn-ult .o { font-size: 12px; letter-spacing: .16em; text-transform: uppercase; font-weight: 600; color: var(--white); }
+.btn-ult.destaque { border: 2px solid var(--gold); }
+.rodape { background: var(--bg-base); color: rgba(245,240,232,.5); text-align: center; font-size: 13px; padding: 34px 20px 44px; line-height: 1.8; }
+.rodape a { color: rgba(245,240,232,.7); }
+@media (max-width: 600px) { .btn-ult { width: 100%; } }
+</style>
+</head>
+<body>
+
+<nav class="barra">
+  <div class="marca">Despertando Mentoras<small>workshop online</small></div>
+  <a class="barra-btn" href="https://pay.kiwify.com.br/SeZuRuN">Pegar meu ingresso <span>· R$27</span></a>
+</nav>
+
+<header class="topo">
+  <div class="texto">
+    <span class="badge">Online e ao vivo · sábado, 21/11</span>
+    <p class="slogan">Despertando Mentoras</p>
+    <h1>Em apenas <em>um sábado</em>,<br>eu vou organizar a sua bagunça de ideias</h1>
+    <p class="complemento">para você começar 2027 com o seu projeto digital estruturado, <b>do posicionamento ao funil de vendas.</b></p>
+    <p class="sub" id="sub"><strong>Pela primeira vez, vou mostrar fora dos bastidores da minha mentoria</strong> o passo a passo completo, com as <strong>12 etapas da metodologia 12 Semanas no Ar</strong>, que eu usei para conquistar mentoradas em vários estados do Brasil, <strong>sem depender de métricas de rede social.</strong></p>
+    <ul class="checks">
+      <li>com a <b>inteligência artificial</b> a seu favor</li>
+      <li>sem depender de uma <b>equipe cara</b></li>
+    </ul>
+    <a class="cta" href="https://pay.kiwify.com.br/SeZuRuN"><span class="ponto" aria-hidden="true"></span>Pegar meu ingresso<span class="preco">R$27</span></a>
+  </div>
+  <div class="foto">
+    <img id="foto-jade" src="fotos/jade-claquete-cadeira-limpa.webp" alt="Jade Torres">
+  </div>
+</header>
+
+<div class="bloco-amarelo" style="--amarelo:linear-gradient(180deg, #EDD27A 0%, #E2C062 35%, #C9A84C 75%, #B08F38 100%)">
+<section class="cenario com-aspa centro" id="cenario" aria-label="Antes e hoje">
+  <div class="col">
+    <svg class="claquete" viewBox="0 0 64 56" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M8 24 L57 12" />
+      <path d="M8 24 L6 16 L55 4 L57 12" />
+      <path d="M16 14 L20 20 M28 11 L32 17 M40 8 L44 14" />
+      <rect x="8" y="24" width="50" height="28" rx="2.5" />
+      <path d="M8 31 H58" />
+      <path d="M19 24 L15 31 M31 24 L27 31 M43 24 L39 31 M55 24 L51 31" />
+    </svg>
+    <div class="grupo">
+      <p><span class="marco">antes</span>Para colocar um projeto digital no ar, você precisava <b>pagar caro por uma parceria</b> ou <b>contratar às cegas</b> um designer, um copywriter, um gestor de tráfego, um editor...</p>
+      <p>E muitas vezes recebia um trabalho <b>que não tinha <span style="white-space:nowrap">a sua essência.</span></b></p>
+    </div>
+    <div class="grupo">
+      <p><span class="marco">hoje</span>A inteligência artificial faz boa parte disso com você, <b>no seu tempo e <span style="white-space:nowrap">do seu jeito.</span></b></p>
+      <p>Mas, se você não tiver clareza de como estruturar o seu projeto, <b>a IA não faz milagre.</b> Ela só acelera a bagunça.</p>
+    </div>
+  </div>
+</section>
+
+<section class="problema amarelo" id="problema" style="--destaque:#0A0A08;--amarelo:linear-gradient(180deg, #EDD27A 0%, #E2C062 35%, #C9A84C 75%, #B08F38 100%)" aria-label="O problema">
+  <svg class="claquete claquete-sep" viewBox="0 0 64 56" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M8 24 L57 12" />
+      <path d="M8 24 L6 16 L55 4 L57 12" />
+      <path d="M16 14 L20 20 M28 11 L32 17 M40 8 L44 14" />
+      <rect x="8" y="24" width="50" height="28" rx="2.5" />
+      <path d="M8 31 H58" />
+      <path d="M19 24 L15 31 M31 24 L27 31 M43 24 L39 31 M55 24 L51 31" />
+    </svg>
+  <h2>Você tem <strong>autoridade</strong> de sobra no assunto.<br><em>O que falta é transformá-la em um <strong>negócio</strong>.</em></h2>
+  <p class="lista"><span>São anos de experiência,</span> <span>ideias anotadas no celular,</span> <span>cursos na gaveta,</span> <span>posts sem estratégia e um</span> <span>projeto que vive na sua cabeça,</span> <span>mas nunca vai ao ar.</span></p>
+  <p class="virada">Não é falta de capacidade.<br><b>É falta de um caminho <span style="white-space:nowrap">simples e prático.</span></b></p>
+</section>
+</div>
+
+<section class="mecanismo" aria-label="A ordem certa">
+  <div class="col">
+    <h2>Te ensinaram a começar no digital <em>pelo fim.</em></h2>
+    <p class="lead">Você abre o Instagram, <span class="ouro">posta, posta, posta</span> e espera vender.<br>Só que a venda depende de <b>um caminho orquestrado.</b><br>Esse caminho depende de <b>uma oferta bem definida.</b><br>E a oferta depende de <b>um método ancorado em um posicionamento claro.</b></p>
+    <div class="ordens">
+      <div class="ordem errada amarelo">
+        <div class="cab"><span class="x-verm">✕</span> como te ensinaram</div>
+        <div class="barras">
+          <div class="barra-o">Abre um Instagram</div>
+          <div class="barra-o">Produz conteúdo</div>
+          <div class="barra-o">Engaja o perfil</div>
+          <div class="barra-o">Tenta vender</div>
+        </div>
+      </div>
+    </div>
+    <div class="cab certa ensino-cab">✓ como eu ensino</div>
+    <div class="trilha-linha">
+      <div class="trilha-fill" aria-hidden="true"></div>
+      <div class="parada az esq"><span class="no"></span><div class="cartao"><div class="qual">etapas 1 e 2</div><h3>Assume seu <b class="ouro-forte">lugar de fala</b> e se <b class="ouro-forte">posiciona</b> de forma única</h3></div></div>
+      <div class="parada az dir"><span class="no"></span><div class="cartao"><div class="qual">etapas 3 e 4</div><h3>Organiza seu <b class="ouro-forte">método autoral</b> e extrai um <b class="ouro-forte">produto principal</b></h3></div></div>
+      <div class="parada az esq"><span class="no"></span><div class="cartao"><div class="qual">etapas 5 e 6</div><h3>Planeja sua <b class="ouro-forte">linha editorial</b> e deixa seu <b class="ouro-forte">perfil pronto</b></h3></div></div>
+      <div class="parada troca"><div class="virada-t">projeto construído. agora, o <b>setor de vendas</b>.</div></div>
+      <div class="parada vm dir"><span class="no"></span><div class="cartao"><div class="qual">etapas 7 e 8</div><h3>Estrutura uma <b class="ouro-forte">oferta irresistível</b> e organiza seu <b class="ouro-forte">funil de vendas</b></h3></div></div>
+      <div class="parada vm esq"><span class="no"></span><div class="cartao"><div class="qual">etapas 9 e 10</div><h3>Faz <b class="ouro-forte">tráfego pago e orgânico</b> e estrutura seu <b class="ouro-forte">processo comercial</b></h3></div></div>
+      <div class="parada vm dir"><span class="no"></span><div class="cartao"><div class="qual">etapas 11 e 12</div><h3>Organiza o <b class="ouro-forte">onboarding</b>, <b class="ouro-forte">entrega</b> seu produto e colhe depoimentos para vender mais</h3></div></div>
+      <div class="parada chegada esq"><span class="no"></span><div class="cartao"><div class="qual">Chegada</div><h3>o seu projeto no ar, vendendo</h3><p>Uma metodologia distribuída em produtos autorais, conteúdo que conecta e um setor de vendas funcionando.</p></div></div>
+    </div>
+    <p class="fecho">Quando a base está firme, cada post tem direção e cada anúncio leva para uma oferta que faz sentido. <b>É essa ordem que eu vou abrir com você no sábado.</b></p>
+  </div>
+</section>
+
+<section class="resultados" aria-label="Resultados das mentoradas">
+  <svg class="claquete claquete-sep" viewBox="0 0 64 56" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M8 24 L57 12" />
+      <path d="M8 24 L6 16 L55 4 L57 12" />
+      <path d="M16 14 L20 20 M28 11 L32 17 M40 8 L44 14" />
+      <rect x="8" y="24" width="50" height="28" rx="2.5" />
+      <path d="M8 31 H58" />
+      <path d="M19 24 L15 31 M31 24 L27 31 M43 24 L39 31 M55 24 L51 31" />
+    </svg>
+
+  <p class="rotulo">mentoradas pelo Brasil</p>
+  <h2>Elas tiraram o projeto <span style="white-space:nowrap">da bagunça de ideias</span><br>e <em>colocaram no ar</em></h2>
+  <div class="faixa-alunas">
+      <figure class="aluna"><img src="fotos/alunas/jamille-capa-video.jpg" alt="Jamille Secchi"><figcaption><span class="quem">Jamille Secchi · SC</span><span class="fez">de zero vendas a <b>+&nbsp;de&nbsp;R$&nbsp;100 mil</b> no digital</span></figcaption></figure>
+      <figure class="aluna"><img src="fotos/alunas/maze-capa-video.jpg" alt="Mazé Araújo"><figcaption><span class="quem">Mazé Araújo · AC</span><span class="fez">investiu R$&nbsp;197 e faturou <b>R$&nbsp;9.600</b></span></figcaption></figure>
+      <figure class="aluna"><img src="fotos/alunas/kelen-capa-video.jpg" alt="Kelen Cristina"><figcaption><span class="quem">Kelen Cristina · GO</span><span class="fez">da sessão de R$&nbsp;150 a uma <b>mentoria de R$&nbsp;2.497</b></span></figcaption></figure>
+      <figure class="aluna"><img src="fotos/alunas/kennya-capa-video.jpg" alt="Kennya Gralha"><figcaption><span class="quem">Kennya Gralha · RN</span><span class="fez">um <b>livro lançado</b> na Bienal do Rio</span></figcaption></figure>
+      <figure class="aluna"><img src="fotos/alunas/flavia-capa-video.jpg" alt="Flávia Pigatti"><figcaption><span class="quem">Flávia Pigatti · PA</span><span class="fez">de personal organizer a <b>mentora</b>, com o método Casa com Significado</span></figcaption></figure>
+      <figure class="aluna"><img src="fotos/alunas/daniella-capa-video.jpg" alt="Daniella Reis"><figcaption><span class="quem">Daniella Reis · PR</span><span class="fez">o próprio método: <b>O Castelo</b></span></figcaption></figure>
+      <figure class="aluna"><img src="fotos/alunas/eliene-capa-video.jpg" alt="Eliene Carvalho"><figcaption><span class="quem">Eliene Carvalho</span><span class="fez">dos desafios de R$&nbsp;130 a uma <b>comunidade de R$&nbsp;1.297</b></span></figcaption></figure>
+      <figure class="aluna"><img src="fotos/alunas/luziane-capa-video.jpg" alt="Luziane Mendes"><figcaption><span class="quem">Luziane Mendes</span><span class="fez">de fisioterapeuta a <b>mentora</b> dos próprios pacientes</span></figcaption></figure>
+  </div>
+  <p class="dica">arraste para o lado →</p>
+</section>
+
+<section class="construir" aria-label="O que você vai construir">
+  <h2><span style="white-space:nowrap">Algumas horas comigo</span> <span style="white-space:nowrap">para organizar o seu</span> <span style="white-space:nowrap">projeto digital,</span><br><em>da sua comunicação até a venda <span style="white-space:nowrap">e a entrega</span> do seu <span style="white-space:nowrap">principal produto</span></em></h2>
+  <div class="pilar">
+    <div class="pilar-num">01</div>
+    <div class="pilar-img"><img src="fotos/pilares/lugar-de-fala-microfone-perto.jpg" alt="" style="object-position: 50% 42%"></div>
+    <div class="pilar-txt">
+      <h3>Lugar de Fala</h3>
+      <p class="sai">Você sai sabendo <b>o que te diferencia de qualquer pessoa da sua área.</b></p>
+      <ul><li>a sua causa: por que você fala sobre isso</li><li>para quem você fala, com clareza</li><li>sprint de decisões</li><li>posicionamento único</li><li>a sua fatia de subnicho</li></ul>
+    </div>
+  </div>
+  <div class="pilar">
+    <div class="pilar-num">02</div>
+    <div class="pilar-img"><img src="fotos/pilares/metodologia-ia-peca-dourada.jpg" alt="" style="object-position: 50% 36%"></div>
+    <div class="pilar-txt">
+      <h3>Metodologia Organizada</h3>
+      <p class="sai">Você sai com <b>a sua metodologia desenhada</b>, num passo a passo prático e simples.</p>
+      <ul><li>a sua trajetória organizada em etapas</li><li>método e ferramentas autorais</li><li>um formato que as suas alunas seguem sem sentir falta da sala de Zoom</li></ul>
+    </div>
+  </div>
+  <div class="pilar">
+    <div class="pilar-num">03</div>
+    <div class="pilar-img"><img src="fotos/pilares/projeto-no-ar-blazer-icones.jpg" alt="" style="object-position: 50% 32%"></div>
+    <div class="pilar-txt">
+      <h3>Projeto no Ar</h3>
+      <p class="sai">Você sai enxergando <b>o caminho que leva o seu público até o produto, e do produto até a entrega.</b></p>
+      <ul><li>a oferta</li><li>o funil de vendas</li><li>o comercial</li><li>o onboarding e a entrega</li></ul>
+    </div>
+  </div>
+  <div class="leva-oferta"><a class="cta" href="#oferta"><span class="ponto" aria-hidden="true"></span>Escolher meu ingresso</a></div>
+</section>
+
+<section class="cronograma" aria-label="Cronograma">
+  <svg class="claquete claquete-sep" viewBox="0 0 64 56" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M8 24 L57 12" />
+      <path d="M8 24 L6 16 L55 4 L57 12" />
+      <path d="M16 14 L20 20 M28 11 L32 17 M40 8 L44 14" />
+      <rect x="8" y="24" width="50" height="28" rx="2.5" />
+      <path d="M8 31 H58" />
+      <path d="M19 24 L15 31 M31 24 L27 31 M43 24 L39 31 M55 24 L51 31" />
+    </svg>
+
+  <h2>Sábado, 21 de novembro</h2>
+  <p class="quando">online · ao vivo</p>
+  <ul class="agenda">
+    <li><span class="hora">9h às 12h</span><span class="oque">Lugar de Fala e Metodologia</span></li>
+    <li class="pausa"><span class="hora">12h às 14h</span><span class="oque">almoço</span></li>
+    <li><span class="hora">14h às 16h</span><span class="oque">Sistema de Vendas</span></li>
+    <li class="pausa"><span class="hora">16h às 16h15</span><span class="oque">café e toalete</span></li>
+    <li><span class="hora">16h15 às 17h</span><span class="oque">Projeto no Ar</span></li>
+    <li><span class="hora">17h às 18h</span><span class="oque"><small>momento hot seat</small>Dúvidas e orientações</span></li>
+  </ul>
+</section>
+
+<section class="prints" aria-label="Mensagens das mentoradas">
+  <h2>Nas palavras <em>delas</em></h2>
+  <div class="faixa-prints">
+    <div class="slide"><img src="fotos/depoimentos/print-02.jpg" alt="Mensagem de mentorada para a Jade"></div>
+    <div class="slide"><img src="fotos/depoimentos/print-03.jpg" alt="Mensagem de mentorada para a Jade"><img src="fotos/depoimentos/print-05.jpg" alt="Mensagem de mentorada para a Jade"></div>
+    <div class="slide"><img src="fotos/depoimentos/print-04.jpg" alt="Mensagem de mentorada para a Jade"></div>
+    <div class="slide"><img src="fotos/depoimentos/print-flavia.jpg" alt="Mensagem de mentorada para a Jade"><img src="fotos/depoimentos/print-07.jpg" alt="Mensagem de mentorada para a Jade"></div>
+    <div class="slide"><img src="fotos/depoimentos/print-06.jpg" alt="Mensagem de mentorada para a Jade"></div>
+    <div class="slide"><img src="fotos/depoimentos/print-maze-vendas.jpg" alt="Mensagem de mentorada para a Jade"></div>
+    <div class="slide"><img src="fotos/depoimentos/print-01.jpg" alt="Mensagem de mentorada para a Jade"><img src="fotos/depoimentos/print-10.jpg" alt="Mensagem de mentorada para a Jade"></div>
+    <div class="slide"><img src="fotos/depoimentos/print-daisy.jpg" alt="Mensagem de mentorada para a Jade"></div>
+    <div class="slide"><img src="fotos/depoimentos/print-eliene.jpg" alt="Mensagem de mentorada para a Jade"><img src="fotos/depoimentos/print-11.jpg" alt="Mensagem de mentorada para a Jade"></div>
+    <div class="slide"><img src="fotos/depoimentos/print-08.jpg" alt="Mensagem de mentorada para a Jade"></div>
+    <div class="slide"><img src="fotos/depoimentos/print-monique.jpg" alt="Mensagem de mentorada para a Jade"></div>
+    <div class="slide"><img src="fotos/depoimentos/print-13.jpg" alt="Mensagem de mentorada para a Jade"><img src="fotos/depoimentos/print-jamille.jpg" alt="Mensagem de mentorada para a Jade"></div>
+  </div>
+  <p class="dica">arraste para o lado →</p>
+  <div class="leva-oferta"><a class="cta" href="#oferta"><span class="ponto" aria-hidden="true"></span>Escolher meu ingresso</a></div>
+</section>
+
+<section class="oferta" id="oferta" aria-label="Oferta">
+  <svg class="claquete claquete-sep" viewBox="0 0 64 56" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M8 24 L57 12" />
+      <path d="M8 24 L6 16 L55 4 L57 12" />
+      <path d="M16 14 L20 20 M28 11 L32 17 M40 8 L44 14" />
+      <rect x="8" y="24" width="50" height="28" rx="2.5" />
+      <path d="M8 31 H58" />
+      <path d="M19 24 L15 31 M31 24 L27 31 M43 24 L39 31 M55 24 L51 31" />
+    </svg>
+
+  <div class="oferta-card">
+    <p class="nome">Workshop Despertando Mentoras</p>
+    <h2>Em apenas um sábado, o seu projeto digital <em>organizado, do posicionamento ao funil de vendas</em></h2>
+    <ul class="checks">
+      <li><span><b>Workshop ao vivo</b> no sábado, 21/11, das 9h às 18h</span></li>
+      <li><span><b>Manual de preparação</b>, para você chegar pronta no sábado</span></li>
+      <li><span><b>Mapa do evento</b> com 12 atividades prontas, uma para cada etapa, para usar ao vivo com a inteligência artificial</span></li>
+      <li><span><b>Momento hot seat</b>: dúvidas e orientações ao vivo</span></li>
+    </ul>
+    <p class="rotulo-preco">ingresso ao vivo</p>
+    <p class="valor"><small>R$</small>27</p>
+    <a class="cta" href="https://pay.kiwify.com.br/SeZuRuN"><span class="ponto" aria-hidden="true"></span>Pegar meu ingresso<span class="preco">R$27</span></a>
+  </div>
+  <div class="oferta-card destaque">
+    <p class="nome">Ao vivo + gravação</p>
+    <h2>Participe no sábado e <em>leve tudo para aplicar <span style="white-space:nowrap">no seu tempo</span></em></h2>
+    <ul class="checks">
+      <li><span><b>Tudo do ingresso ao vivo</b></span></li>
+      <li><span><b>Gravação completa</b>, com acesso por 1 ano</span></li>
+      <li><span><b>Os slides</b> do workshop</span></li>
+      <li><span><b>Skill do Cubo Mágico + aplicativo</b>, para criar e organizar a sua linha editorial com a IA, com uma aula curta de como instalar e usar</span></li>
+    </ul>
+    <p class="rotulo-preco">ingresso + gravação + materiais</p>
+    <p class="valor"><small>R$</small>97</p>
+    <a class="cta" href="https://pay.kiwify.com.br/1V9u3XO"><span class="ponto" aria-hidden="true"></span>Quero a gravação<span class="preco">R$97</span></a>
+  </div>
+</section>
+
+<section class="quem" aria-label="Quem é a Jade">
+  <div class="quem-wrap">
+    <div class="quem-foto"><img src="fotos/jade-vestido-branco-pintura.jpg" alt="Jade Torres"></div>
+    <div>
+      <p class="etiqueta">a sua mentora</p>
+      <h2>Quem é <em>Jade Torres</em></h2>
+      <p class="lead">Mentora especialista em Branding Editorial e Metodologia Autoral.</p>
+      <p>Antes do digital, passou <b>mais de 10 anos</b> à frente da sua cozinha industrial, no ramo de alimentação. Chegou a <b>40 funcionários</b>, 13 contratos em paralelo com construtoras de vários estados junto à Vale, <b>R$&nbsp;2,5 milhões de faturamento</b> no ano da ampliação do porto de Ponta da Madeira, no Maranhão, e mais de 30 mil refeições por mês saindo das suas unidades.</p>
+      <p>Em 2021, recomeçou do zero e se reinventou no digital. Em 2023, montou a primeira turma de mentoria para mentoras e construiu a Caverna das Guerreiras. Hoje tem um negócio com previsibilidade de vendas, <b>que não depende do Instagram para faturar</b>, e já acompanhou <b>mais de 200 mulheres</b>.</p>
+      <p class="frase">“Queimei os barcos no offline para construir a ponte no online.”</p>
+    </div>
+  </div>
+</section>
+
+<section class="garantia" aria-label="Garantia">
+  <div class="garantia-card">
+    <div class="escudo" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 8.3-7 10-4-1.7-7-5.5-7-10V6l7-3z"/><path d="M8.8 12.2l2.2 2.2 4.2-4.4"/></svg></div>
+    <h2>Garantia de <em>satisfação</em></h2>
+    <p>Se até o intervalo do almoço você comprovar que o workshop não está de acordo com a promessa desta página, basta enviar a sua reclamação: <b>devolvemos 100% do seu valor.</b> Sem burocracia, sem risco para você.</p>
+  </div>
+</section>
+
+<section class="faq" aria-label="Perguntas frequentes">
+  <h2>Perguntas <em>frequentes</em></h2>
+  <div class="faq-lista">
+    <details><summary>É online ou presencial?</summary><p>É <b>online e ao vivo</b>, pelo Zoom, no sábado, 21 de novembro, das 9h às 18h.</p></details>
+    <details><summary>R$&nbsp;27 é muito barato. Será que presta?</summary><p>O valor é um <b>ingresso de comprometimento</b>: um jeito de você honrar a sua presença e a minha entrega. O conteúdo é o passo a passo que eu uso na minha mentoria.</p></details>
+    <details><summary>Vai ficar gravado?</summary><p>Sim. A gravação fica disponível para quem escolher o <b>ingresso de R$&nbsp;97</b>, com acesso por 1 ano, os slides e a skill do Cubo Mágico com o aplicativo.</p></details>
+    <details><summary>Como sei se é para mim?</summary><p>Se você quer organizar um projeto no digital que <b>vende o seu conhecimento através de mentorias e infoprodutos</b>, com a sua própria metodologia, de forma autoral, este workshop é para você.</p></details>
+    <details><summary>Preciso ter muitos seguidores?</summary><p>Não. Você <b>nem precisa ter Instagram</b>. Pode abrir depois, com o seu projeto já desenhado.</p></details>
+    <details><summary>Preciso saber usar inteligência artificial?</summary><p>Não. Você recebe toda a orientação para fazer um cadastro simples e usar <b>prompts prontos</b>, mesmo que nunca tenha usado a ferramenta. Pode ser o ChatGPT ou o Claude. A versão gratuita pode travar antes do fim do dia, então o <b>plano pago é o mais indicado</b>.</p></details>
+    <details><summary>Tem certificado?</summary><p>Sim. Quem participar ao vivo recebe <b>certificado de participação de 7 horas</b>.</p></details>
+    <details><summary>E se eu não gostar?</summary><p>Você tem até o <b>intervalo do almoço</b>, ao meio-dia, para comprovar que a entrega não está de acordo com a promessa desta página. Basta enviar a sua reclamação e <b>devolvemos 100% do seu valor</b>.</p></details>
+  </div>
+</section>
+
+<section class="ultima" aria-label="Última chamada">
+  <svg class="claquete claquete-sep" viewBox="0 0 64 56" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M8 24 L57 12" />
+      <path d="M8 24 L6 16 L55 4 L57 12" />
+      <path d="M16 14 L20 20 M28 11 L32 17 M40 8 L44 14" />
+      <rect x="8" y="24" width="50" height="28" rx="2.5" />
+      <path d="M8 31 H58" />
+      <path d="M19 24 L15 31 M31 24 L27 31 M43 24 L39 31 M55 24 L51 31" />
+    </svg>
+  <h2>Vem comigo neste sábado tirar o seu projeto <span style="white-space:nowrap">do mundo das ideias</span> e <em>colocar no ar</em></h2>
+  <div class="ultima-botoes">
+    <a class="btn-ult" href="https://pay.kiwify.com.br/SeZuRuN"><span class="v">R$&nbsp;27</span><span class="o">ao vivo</span></a>
+    <a class="btn-ult destaque" href="https://pay.kiwify.com.br/1V9u3XO"><span class="v">R$&nbsp;97</span><span class="o">ao vivo + gravação</span></a>
+  </div>
+</section>
+
+<footer class="rodape">Workshop Despertando Mentoras · Caverna das Guerreiras · Jade Torres<br><a href="termos-de-uso.html" target="_blank" rel="noopener">Termos de uso</a> · <a href="https://jadettorress-caverna.github.io/politicadeprivacidade/" target="_blank" rel="noopener">Política de privacidade</a></footer>
+
+
+<script>
+(function(){
+  var el=document.querySelector('.ordem.errada'); if(!el) return;
+  if(!('IntersectionObserver' in window)){ el.classList.add('visivel'); return; }
+  var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ el.classList.add('visivel'); io.disconnect(); } }); },{threshold:.35});
+  io.observe(el);
+})();
+</script>
+<script>
+(function(){
+  var t=document.querySelector('.trilha-linha'); if(!t) return;
+  var fill=t.querySelector('.trilha-fill'), nos=[].slice.call(t.querySelectorAll('.parada .no'));
+  function upd(){
+    var r=t.getBoundingClientRect(), alvo=window.innerHeight*0.6;
+    var p=Math.max(0,Math.min(r.height, alvo-r.top));
+    fill.style.height=p+'px';
+    nos.forEach(function(n){ var nr=n.getBoundingClientRect(); var c=nr.top+nr.height/2-r.top; n.classList.toggle('acesa', c<=p); });
+  }
+  window.addEventListener('scroll',upd,{passive:true}); window.addEventListener('resize',upd); upd();
+})();
+</script>
+</body>
+</html>
