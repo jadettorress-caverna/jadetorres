@@ -348,6 +348,7 @@ html { scroll-behavior: smooth; }
 .rodape { background: var(--bg-base); color: rgba(245,240,232,.5); text-align: center; font-size: 13px; padding: 34px 20px 44px; line-height: 1.8; }
 .rodape a { color: rgba(245,240,232,.7); }
 @media (max-width: 600px) { .btn-ult { width: 100%; } }
+.halo-topo { position: absolute; inset: 0; mix-blend-mode: multiply; pointer-events: none; background: radial-gradient(ellipse 58% 62% at 50% 40%, #fff 0%, #fff 34%, #E3B65A 66%, #6B4A14 100%); }
 </style>
 </head>
 <body>
@@ -372,6 +373,7 @@ html { scroll-behavior: smooth; }
   </div>
   <div class="foto">
     <img id="foto-jade" src="fotos/jade-claquete-cadeira-limpa.webp" alt="Jade Torres">
+    <div class="halo-topo" aria-hidden="true"></div>
   </div>
 </header>
 
