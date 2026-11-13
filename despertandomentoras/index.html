@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Despertando Mentoras · Workshop com Jade Torres</title>
-<meta name="description" content="Um dia que vai valer por todo o seu 2027. Tire o seu projeto digital da bagunça de ideias e comece o ano com clareza e organização. Workshop online e ao vivo, 21 de novembro.">
+<title>Despertando Mentoras · Workshop gratuito com Jade Torres</title>
+<meta name="description" content="Um dia que vai valer por todo o seu 2027. Workshop online, ao vivo e gratuito, no sábado, 21 de novembro, para tirar o seu projeto digital da bagunça de ideias.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -370,19 +370,25 @@ h1 .dour-a { color: var(--gold); }
 .parada .cartao .qual { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; margin-bottom: 12px; }
 .presente { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; letter-spacing: .02em; text-transform: none; font-weight: 500; color: #0A0A08; background: linear-gradient(180deg, #EDD27A 0%, #E2C062 45%, #C9A84C 100%); border-radius: 999px; padding: 5px 12px 5px 9px; box-shadow: 0 2px 8px rgba(201,168,76,.45); }
 .presente svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linejoin: round; }
+.fecho-etapas { max-width: 640px; margin: 22px auto 0; text-align: center; font-family: var(--font-display); font-size: clamp(25px, 3vw, 32px); line-height: 1.2; font-weight: 500; color: var(--white); }
+.fecho-etapas b { color: var(--gold); font-weight: 500; font-style: italic; }
+.objecao-etapas { max-width: 600px; margin: 18px auto 0; text-align: center; font-size: 17px; line-height: 1.65; color: var(--white-dim); }
+.objecao-etapas b { color: var(--white); font-weight: 600; }
+.nota-grupo { margin: 14px auto 0; max-width: 380px; font-size: 13.5px; line-height: 1.5; color: var(--white-dim); }
+.oferta-card .valor:not(:has(small)) { font-size: 60px; }
 </style>
 <!-- Pixel da Meta (o mesmo do Raio-X) -->
 <script>
 !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
 fbq('init','1324461267723336');fbq('track','PageView');
-document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href*="pay.kiwify.com.br"]');if(a)fbq('track','InitiateCheckout');});
+document.addEventListener('click',function(e){if(!e.target.closest)return;if(e.target.closest('a[href*="pay.kiwify.com.br"]'))fbq('track','InitiateCheckout');if(e.target.closest('a[href*="chat.whatsapp.com"]'))fbq('track','Lead');});
 </script>
 </head>
 <body>
 
 <nav class="barra">
   <div class="marca">Despertando Mentoras<small>workshop online</small></div>
-  <a class="barra-btn" href="#oferta">Pegar meu ingresso</a>
+  <a class="barra-btn" href="#oferta">Quero participar</a>
 </nav>
 
 <header class="topo">
@@ -397,7 +403,7 @@ document.addEventListener('click',function(e){var a=e.target.closest&&e.target.c
       <li>com a <b>inteligência artificial</b> a seu favor</li>
       <li>sem depender de uma <b>equipe cara</b></li>
     </ul>
-    <a class="cta" href="#oferta"><span class="ponto" aria-hidden="true"></span>Pegar meu ingresso</a>
+    <a class="cta" href="#oferta"><span class="ponto" aria-hidden="true"></span>Quero participar de graça</a>
   </div>
   <div class="foto">
     <img id="foto-jade" src="fotos/jade-claquete-cadeira-limpa.webp" alt="Jade Torres">
@@ -470,6 +476,8 @@ document.addEventListener('click',function(e){var a=e.target.closest&&e.target.c
       <div class="parada chegada esq"><span class="no"></span><div class="cartao"><div class="qual">Chegada</div><h3>o seu projeto no ar, vendendo</h3><p>Uma metodologia distribuída em produtos autorais, conteúdo que conecta e um setor de vendas funcionando.</p></div></div>
     </div>
     <p class="fecho">Quando a base está firme, cada post tem direção e cada anúncio leva para uma oferta que faz sentido. <b>É essa ordem que eu vou abrir com você no sábado.</b></p>
+    <p class="fecho-etapas">São detalhes dessas etapas que eu vou revelar e te ensinar na prática, <b>sem esconder nada.</b></p>
+    <p class="objecao-etapas">E antes que você ache que é informação demais, saiba que você vai receber <b>12 atividades prontas para copiar e colar na sua inteligência artificial</b> e desenvolver o seu projeto sem quebrar a cabeça para organizar as ideias.</p>
   </div>
 </section>
 
@@ -527,7 +535,7 @@ document.addEventListener('click',function(e){var a=e.target.closest&&e.target.c
       <ul><li>a oferta</li><li>o funil de vendas</li><li>o comercial</li><li>o onboarding e a entrega</li></ul>
     </div>
   </div>
-  <div class="leva-oferta"><a class="cta" href="#oferta"><span class="ponto" aria-hidden="true"></span>Escolher meu ingresso</a></div>
+  <div class="leva-oferta"><a class="cta" href="#oferta"><span class="ponto" aria-hidden="true"></span>Quero participar de graça</a></div>
 </section>
 
 <section class="cronograma" aria-label="Cronograma">
@@ -569,7 +577,7 @@ document.addEventListener('click',function(e){var a=e.target.closest&&e.target.c
     <div class="slide"><img src="fotos/depoimentos/print-13.jpg" alt="Mensagem de mentorada para a Jade"><img src="fotos/depoimentos/print-jamille.jpg" alt="Mensagem de mentorada para a Jade"></div>
   </div>
   <p class="dica">arraste para o lado →</p>
-  <div class="leva-oferta"><a class="cta" href="#oferta"><span class="ponto" aria-hidden="true"></span>Escolher meu ingresso</a></div>
+  <div class="leva-oferta"><a class="cta" href="#oferta"><span class="ponto" aria-hidden="true"></span>Quero participar de graça</a></div>
 </section>
 
 <section class="oferta" id="oferta" aria-label="Oferta">
@@ -582,31 +590,32 @@ document.addEventListener('click',function(e){var a=e.target.closest&&e.target.c
       <path d="M19 24 L15 31 M31 24 L27 31 M43 24 L39 31 M55 24 L51 31" />
     </svg>
 
-  <div class="oferta-card">
-    <p class="nome">Workshop Despertando Mentoras</p>
-    <h2>Em apenas um sábado, o seu projeto digital <em>organizado, do posicionamento ao funil de vendas</em></h2>
+  <div class="oferta-card destaque">
+    <p class="nome">Workshop Despertando Mentoras · ao vivo</p>
+    <h2>Participe ao vivo, <em>de graça</em></h2>
     <ul class="checks">
-      <li><span><b>Workshop ao vivo</b> no sábado, 21/11, das 9h às 18h</span></li>
-      <li><span><b>Manual de preparação</b>, para você chegar pronta no sábado</span></li>
-      <li><span><b>Mapa do evento</b> com 12 atividades prontas, uma para cada etapa, para usar ao vivo com a inteligência artificial</span></li>
+      <li><span><b>Workshop ao vivo</b> no sábado, 21/11, das 9h às 18h, pelo Zoom</span></li>
+      <li><span><b>12 atividades práticas</b> para fazer ao vivo, junto com a inteligência artificial</span></li>
       <li><span><b>Momento hot seat</b>: dúvidas e orientações ao vivo</span></li>
+      <li><span><b>Certificado</b> de participação de 7 horas</span></li>
     </ul>
     <p class="rotulo-preco">ingresso ao vivo</p>
-    <p class="valor"><small>R$</small>27</p>
-    <a class="cta" href="https://pay.kiwify.com.br/SeZuRuN"><span class="ponto" aria-hidden="true"></span>Pegar meu ingresso<span class="preco">R$27</span></a>
+    <p class="valor">Gratuito</p>
+    <a class="cta" href="https://chat.whatsapp.com/F8rwQudPuN134vM6euhduO" target="_blank" rel="noopener"><span class="ponto" aria-hidden="true"></span>Quero participar de graça</a>
+    <p class="nota-grupo">O botão leva ao grupo do workshop no WhatsApp, por onde chegam o link do Zoom e os avisos.</p>
   </div>
-  <div class="oferta-card destaque">
-    <p class="nome">Ao vivo + gravação</p>
-    <h2>Participe no sábado e <em>leve tudo para aplicar <span style="white-space:nowrap">no seu tempo</span></em></h2>
+  <div class="oferta-card">
+    <p class="nome">Gravação + materiais</p>
+    <h2>Leve tudo para <em>aplicar <span style="white-space:nowrap">no seu tempo</span></em></h2>
     <ul class="checks">
-      <li><span><b>Tudo do ingresso ao vivo</b></span></li>
       <li><span><b>Gravação completa</b>, com acesso por 1 ano</span></li>
       <li><span><b>Os slides</b> do workshop</span></li>
+      <li><span><b>Mapa com as 12 atividades</b>, para refazer quando quiser</span></li>
       <li><span><b>Skill do Cubo Mágico + aplicativo</b>, para criar e organizar a sua linha editorial com a IA, com uma aula curta de como instalar e usar</span></li>
     </ul>
-    <p class="rotulo-preco">ingresso + gravação + materiais</p>
-    <p class="valor"><small>R$</small>97</p>
-    <a class="cta" href="https://pay.kiwify.com.br/1V9u3XO"><span class="ponto" aria-hidden="true"></span>Quero a gravação<span class="preco">R$97</span></a>
+    <p class="rotulo-preco">gravação + materiais</p>
+    <p class="valor"><small>R$</small>27</p>
+    <a class="cta" href="https://pay.kiwify.com.br/1V9u3XO"><span class="ponto" aria-hidden="true"></span>Quero a gravação<span class="preco">R$27</span></a>
   </div>
 </section>
 
@@ -628,7 +637,7 @@ document.addEventListener('click',function(e){var a=e.target.closest&&e.target.c
   <div class="garantia-card">
     <div class="escudo" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 8.3-7 10-4-1.7-7-5.5-7-10V6l7-3z"/><path d="M8.8 12.2l2.2 2.2 4.2-4.4"/></svg></div>
     <h2>Garantia de <em>satisfação</em></h2>
-    <p>Se até o intervalo do almoço você comprovar que o workshop não está de acordo com a promessa desta página, basta enviar a sua reclamação: <b>devolvemos 100% do seu valor.</b> Sem burocracia, sem risco para você.</p>
+    <p>O ao vivo é gratuito. Se você garantir a gravação e, até o intervalo do almoço, comprovar que o workshop não está de acordo com a promessa desta página, basta enviar a sua reclamação: <b>devolvemos 100% do seu valor.</b> Sem burocracia, sem risco para você.</p>
   </div>
 </section>
 
@@ -636,13 +645,13 @@ document.addEventListener('click',function(e){var a=e.target.closest&&e.target.c
   <h2>Perguntas <em>frequentes</em></h2>
   <div class="faq-lista">
     <details><summary>É online ou presencial?</summary><p>É <b>online e ao vivo</b>, pelo Zoom, no sábado, 21 de novembro, das 9h às 18h.</p></details>
-    <details><summary>R$&nbsp;27 é muito barato. Será que presta?</summary><p>O valor é um <b>ingresso de comprometimento</b>: um jeito de você honrar a sua presença e a minha entrega. O conteúdo é o passo a passo que eu uso na minha mentoria.</p></details>
-    <details><summary>Vai ficar gravado?</summary><p>Sim. A gravação fica disponível para quem escolher o <b>ingresso de R$&nbsp;97</b>, com acesso por 1 ano, os slides e a skill do Cubo Mágico com o aplicativo.</p></details>
+    <details><summary>É gratuito mesmo?</summary><p>Sim. <b>O ao vivo é gratuito.</b> Basta entrar no grupo do workshop no WhatsApp, que é por onde chegam o link do Zoom e os avisos. Se quiser rever tudo no seu tempo, a gravação com os materiais custa <b>R$&nbsp;27</b>.</p></details>
+    <details><summary>Vai ficar gravado?</summary><p>Sim. A gravação fica disponível para quem garantir a <b>gravação com os materiais, por R$&nbsp;27</b>: acesso por 1 ano, os slides, o mapa com as 12 atividades e a skill do Cubo Mágico com o aplicativo.</p></details>
     <details><summary>Como sei se é para mim?</summary><p>Se você quer organizar um projeto no digital que <b>vende o seu conhecimento através de mentorias e infoprodutos</b>, com a sua própria metodologia, de forma autoral, este workshop é para você.</p></details>
     <details><summary>Preciso ter muitos seguidores?</summary><p>Não. Você <b>nem precisa ter Instagram</b>. Pode abrir depois, com o seu projeto já desenhado.</p></details>
     <details><summary>Preciso saber usar inteligência artificial?</summary><p>Não. Você recebe toda a orientação para fazer um cadastro simples e usar <b>prompts prontos</b>, mesmo que nunca tenha usado a ferramenta. Pode ser o ChatGPT ou o Claude. A versão gratuita pode travar antes do fim do dia, então o <b>plano pago é o mais indicado</b>.</p></details>
     <details><summary>Tem certificado?</summary><p>Sim. Quem participar ao vivo recebe <b>certificado de participação de 7 horas</b>.</p></details>
-    <details><summary>E se eu não gostar?</summary><p>Você tem até o <b>intervalo do almoço</b>, ao meio-dia, para comprovar que a entrega não está de acordo com a promessa desta página. Basta enviar a sua reclamação e <b>devolvemos 100% do seu valor</b>.</p></details>
+    <details><summary>E se eu não gostar?</summary><p>O ao vivo é gratuito. Se você garantir a gravação e, até o <b>intervalo do almoço</b>, ao meio-dia, comprovar que a entrega não está de acordo com a promessa desta página, basta enviar a sua reclamação e <b>devolvemos 100% do valor</b>.</p></details>
   </div>
 </section>
 
@@ -657,8 +666,8 @@ document.addEventListener('click',function(e){var a=e.target.closest&&e.target.c
     </svg>
   <h2><span style="white-space:nowrap">Vem comigo neste sábado</span> <span style="white-space:nowrap">tirar o seu projeto</span> <span style="white-space:nowrap">do mundo das ideias</span> <span style="white-space:nowrap">e <em>colocar no ar</em></span></h2>
   <div class="ultima-botoes">
-    <a class="btn-ult" href="https://pay.kiwify.com.br/SeZuRuN"><span class="v">R$&nbsp;27</span><span class="o">ao vivo</span></a>
-    <a class="btn-ult destaque" href="https://pay.kiwify.com.br/1V9u3XO"><span class="v">R$&nbsp;97</span><span class="o">ao vivo + gravação</span></a>
+    <a class="btn-ult destaque" href="https://chat.whatsapp.com/F8rwQudPuN134vM6euhduO" target="_blank" rel="noopener"><span class="v">Gratuito</span><span class="o">ao vivo</span></a>
+    <a class="btn-ult" href="https://pay.kiwify.com.br/1V9u3XO"><span class="v">R$&nbsp;27</span><span class="o">gravação + materiais</span></a>
   </div>
 </section>
 
