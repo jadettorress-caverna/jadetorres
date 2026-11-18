@@ -283,7 +283,7 @@ body.ver-ebook .teste{display:none}
     <div class="preparo">
       <p>As instruções para você aproveitar o workshop ao máximo. Escolha como prefere:</p>
       <div class="prep-botoes"><button class="btn" onclick="prep('ouvir')">▶ Ouvir as instruções</button><button class="btn leve" onclick="prep('ler')">Ler as instruções</button></div>
-      <div id="prepOuvir" class="prep-caixa"><audio controls preload="none" src="instrucoes.mp3" style="width:100%"></audio><p class="dica" style="margin-top:8px">2 minutos e meio, com a Jade.</p></div>
+      <div id="prepOuvir" class="prep-caixa"><audio controls controlsList="nodownload noplaybackrate" oncontextmenu="return false" onplay="this.playbackRate=1.25" onratechange="if(this.playbackRate!==1.25)this.playbackRate=1.25" preload="none" src="instrucoes.mp3" style="width:100%"></audio><p class="dica" style="margin-top:8px">2 minutos, com a Jade.</p></div>
       <div id="prepLer" class="prep-caixa instrucoes">
         <h5>Antes de sábado</h5>
         <ol>
