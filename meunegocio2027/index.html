@@ -276,6 +276,38 @@ body.ver-ebook .teste{display:none}
   <div class="selo v-home">Workshop Despertando Mentoras · ao vivo, pelo Zoom</div>
   <h1 class="v-home">Seja bem-vinda ao seu negócio digital <em>2027</em>, <span class="nome">guerreira</span>.</h1>
   <p class="sub v-home">Hoje você vai desenhar o seu negócio digital, etapa por etapa. No fim, ele vira o seu planner.</p>
+  <!-- 2. Preparo (manual) -->
+  <section class="secao nao-imprime v-home" style="margin-top:32px">
+    <div class="selo">Seu preparo</div>
+    <h3>Antes de <em>sábado</em></h3>
+    <div class="preparo">
+      <p>As instruções para você aproveitar o workshop ao máximo. Escolha como prefere:</p>
+      <div class="prep-botoes"><button class="btn" onclick="prep('ouvir')">▶ Ouvir as instruções</button><button class="btn leve" onclick="prep('ler')">Ler as instruções</button></div>
+      <div id="prepOuvir" class="prep-caixa"><audio controls preload="none" src="instrucoes.mp3" style="width:100%"></audio><p class="dica" style="margin-top:8px">2 minutos e meio, com a Jade.</p></div>
+      <div id="prepLer" class="prep-caixa instrucoes">
+        <h5>Antes de sábado</h5>
+        <ol>
+          <li><b>Organize o seu ambiente de estudo.</b> Deixe o computador carregado, ou o carregador por perto. Pelo celular você consegue assistir à aula, mas vai ter muita dificuldade para fazer as atividades.</li>
+          <li><b>Tenha uma conta de inteligência artificial</b> (ChatGPT, Claude ou Gemini).
+            <div class="nota"><b>O meu chat precisa ser pago ou pode ser gratuito?</b> O plano pago é o mais indicado, porque o gratuito tem um limite de uso e pode travar antes do fim do dia. Se o seu for gratuito, você participa do mesmo jeito:
+              <ul>
+                <li>Não use o chat na manhã de sábado, antes do workshop.</li>
+                <li>Faça todas as atividades na mesma conversa, do começo ao fim.</li>
+                <li>Abra cada etapa com a senha na hora, mesmo que vá fazer depois. A senha só aparece ao vivo, e a etapa fica aberta para você.</li>
+                <li>Se o seu chat travar, você consegue terminar as atividades depois, na mesma conversa, quando o limite renovar.</li>
+                <li><b>O mais importante é não deixar de anotar as senhas e os insights da aula.</b></li>
+              </ul></div></li>
+          <li><b>Use o mesmo computador e o mesmo navegador o dia todo.</b> As suas respostas ficam guardadas nele.</li>
+          <li><b>Reserve o dia:</b> das 9h às 18h, com almoço das 12h às 14h.</li>
+          <li><b>Separe</b> caderno, água e lanchinhos saudáveis para consumir durante o dia.</li>
+        </ol>
+        <h5>No sábado, em cada atividade</h5>
+        <p>Eu explico a etapa e mostro a senha. Você responde as perguntas, digitando ou falando no microfone, e clica em "Gerar o meu prompt". Depois cola o prompt no seu chat, traz a resposta de volta e ganha o troféu.</p>
+        <h5>No fim do dia</h5>
+        <p>Clique em "Planner de Negócio 2027" e baixe o seu planner para imprimir, encadernar e usar em 2027.</p>
+      </div>
+    </div>
+  </section>
   <div class="menu nao-imprime v-home">
     <a href="#" class="m-zoom" onclick="avisoZoom();return false"><b>Entrar na sala do Zoom</b></a>
     <a href="#" onclick="irPara('etapas');return false"><b>Ir para as atividades</b></a>
@@ -305,38 +337,6 @@ body.ver-ebook .teste{display:none}
     <div class="compromisso" id="pjComp"></div>
   </section>
 
-  <!-- 2. Preparo (manual) -->
-  <section class="secao nao-imprime v-home">
-    <div class="selo">Seu preparo</div>
-    <h3>Antes de <em>sábado</em></h3>
-    <div class="preparo">
-      <p>As instruções para você aproveitar o workshop ao máximo. Escolha como prefere:</p>
-      <div class="prep-botoes"><button class="btn" onclick="prep('ouvir')">▶ Ouvir as instruções</button><button class="btn leve" onclick="prep('ler')">Ler as instruções</button></div>
-      <div id="prepOuvir" class="prep-caixa"><p class="dica">O áudio chega aqui até sexta. Volte neste mesmo link.</p></div>
-      <div id="prepLer" class="prep-caixa instrucoes">
-        <h5>Antes de sábado</h5>
-        <ol>
-          <li><b>Organize o seu ambiente de estudo.</b> Deixe o computador carregado, ou o carregador por perto. Pelo celular você consegue assistir à aula, mas vai ter muita dificuldade para fazer as atividades.</li>
-          <li><b>Tenha uma conta de inteligência artificial</b> (ChatGPT, Claude ou Gemini).
-            <div class="nota"><b>O meu chat precisa ser pago ou pode ser gratuito?</b> O plano pago é o mais indicado, porque o gratuito tem um limite de uso e pode travar antes do fim do dia. Se o seu for gratuito, você participa do mesmo jeito:
-              <ul>
-                <li>Não use o chat na manhã de sábado, antes do workshop.</li>
-                <li>Faça todas as atividades na mesma conversa, do começo ao fim.</li>
-                <li>Abra cada etapa com a senha na hora, mesmo que vá fazer depois. A senha só aparece ao vivo, e a etapa fica aberta para você.</li>
-                <li>Se o seu chat travar, você consegue terminar as atividades depois, na mesma conversa, quando o limite renovar.</li>
-                <li><b>O mais importante é não deixar de anotar as senhas e os insights da aula.</b></li>
-              </ul></div></li>
-          <li><b>Use o mesmo computador e o mesmo navegador o dia todo.</b> As suas respostas ficam guardadas nele.</li>
-          <li><b>Reserve o dia:</b> das 9h às 18h, com almoço das 12h às 14h.</li>
-          <li><b>Separe</b> caderno, água e lanchinhos saudáveis para consumir durante o dia.</li>
-        </ol>
-        <h5>No sábado, em cada atividade</h5>
-        <p>Eu explico a etapa e mostro a senha. Você responde as perguntas, digitando ou falando no microfone, e clica em "Gerar o meu prompt". Depois cola o prompt no seu chat, traz a resposta de volta e ganha o troféu.</p>
-        <h5>No fim do dia</h5>
-        <p>Clique em "Planner de Negócio 2027" e baixe o seu planner para imprimir, encadernar e usar em 2027.</p>
-      </div>
-    </div>
-  </section>
 
   <!-- 3. O desenho -->
   <section class="secao v-progresso" id="desenho">
@@ -646,7 +646,7 @@ const EXEMPLO={1:'Meu lugar de fala: a criança que aprende diferente\nMinha cau
 function exemplo(q){est.nome=est.nome||'Cláudia';est.resp={};est.abertas=[];est.check={0:true,2:true,3:true};
   ETAPAS.slice(0,q).forEach(e=>{est.resp[e.n]=EXEMPLO[e.n];est.abertas.push(e.n)});
   salvar();location.hash='projeto';location.reload()}
-function prep(q){['Ouvir','Ler'].forEach(k=>document.getElementById('prep'+k).classList.toggle('aberta',k.toLowerCase()===q))}
+function prep(q){['Ouvir','Ler'].forEach(k=>document.getElementById('prep'+k).classList.toggle('aberta',k.toLowerCase()===q));if(q==='ouvir'){const a=document.querySelector('#prepOuvir audio');try{a.play()}catch(e){}}}
 function limpar(){try{localStorage.removeItem('dm2027')}catch(e){} location.reload()}
 
 ler(); montarDesenho(); montarEtapas();
