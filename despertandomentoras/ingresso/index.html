@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Seu ingresso · Despertando Mentoras</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{--fundo:#F3F1EC;--tinta:#141414;--ouro:#C9A84C;--ouro-forte:#8A6410;--cinza:#6B6862;--linha:#DEDAD2;--cartao:#161616;--texto-claro:#EDEAE3}
+*{box-sizing:border-box}
+body{margin:0;background:var(--fundo);color:var(--tinta);font-family:"Instrument Sans",system-ui,sans-serif;font-size:18px;line-height:1.5}
+main{max-width:520px;margin:0 auto;padding:32px 16px 64px}
+.selo{font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--ouro-forte);font-weight:600}
+h1{font-family:"Instrument Serif",serif;font-weight:400;font-size:44px;line-height:1.05;margin:8px 0 12px}
+h1 em{color:var(--ouro-forte)}
+p.sub{color:var(--cinza);margin:0 0 28px}
+label{display:block;font-weight:600;margin:20px 0 8px}
+input[type=text]{width:100%;font:inherit;padding:14px 16px;border:1.5px solid var(--linha);border-radius:12px;background:#fff}
+input[type=text]:focus{outline:none;border-color:var(--ouro)}
+.foto{display:flex;align-items:center;gap:14px;padding:14px;border:1.5px dashed var(--linha);border-radius:12px;background:#fff;cursor:pointer}
+.foto img{width:56px;height:56px;border-radius:50%;object-fit:cover;background:var(--linha)}
+.foto input{display:none}
+button{width:100%;font:inherit;font-weight:700;padding:18px;border:0;border-radius:14px;cursor:pointer;margin-top:28px}
+.bt-ouro{background:var(--tinta);color:var(--texto-claro)}
+.bt-ouro:disabled{opacity:.4;cursor:default}
+.bt-dourado{background:var(--ouro);color:var(--tinta);display:block;text-align:center;text-decoration:none;padding:18px;border-radius:14px;font-weight:700;margin-top:28px}
+.teste{margin-top:14px;font-size:14px;color:var(--cinza);text-align:center}.teste button{width:auto;margin:6px 3px 0;padding:8px 12px;font-size:14px;font-weight:600;background:#fff;border:1.5px solid var(--linha);border-radius:999px}.teste button.on{border-color:var(--ouro-forte);color:var(--ouro-forte)}
+.bt-linha{background:transparent;border:1.5px solid var(--tinta);color:var(--tinta);margin-top:12px}
+#resultado{display:none;margin-top:36px}
+canvas{width:100%;height:auto;border-radius:18px;box-shadow:0 18px 40px rgba(0,0,0,.18)}
+.bonus{margin-top:36px;background:var(--cartao);color:var(--texto-claro);border-radius:18px;padding:28px 22px}
+.bonus h2{font-family:"Instrument Serif",serif;font-weight:400;font-size:32px;margin:0 0 6px}
+.bonus h2 em{color:var(--ouro)}
+.bonus p{color:#B9B5AC;margin:0 0 18px}
+.bonus a{display:block;padding:16px 18px;border:1px solid #333;border-radius:12px;color:var(--texto-claro);text-decoration:none;margin-top:10px}
+.bonus a span{color:var(--ouro);float:right}
+.aviso{font-size:14px;color:var(--cinza);text-align:center;margin-top:14px}
+</style>
+</head>
+<body>
+<main>
+  <div class="selo">Workshop · sábado 21/11</div>
+  <h1>Despertando <em>Mentoras</em></h1>
+  <p class="sub">Personalize seu ingresso e libere seus materiais e bônus.</p>
+
+  <div id="form">
+  <label for="nome">Seu nome</label>
+  <input type="text" id="nome" maxlength="28" placeholder="Como você quer aparecer">
+
+  <label for="esp">Sua profissão</label>
+  <input type="text" id="esp" maxlength="32" placeholder="Ex.: advogada, nutricionista, terapeuta">
+
+  <label>Sua foto</label>
+  <label class="foto" for="arquivo">
+    <img id="mini" alt="">
+    <span id="txtFoto">Toque para escolher uma foto</span>
+    <input type="file" id="arquivo" accept="image/*">
+  </label>
+
+  <button class="bt-ouro" id="gerar" disabled>Gerar meu ingresso</button>
+
+  </div>
+
+  <section id="resultado">
+    <canvas id="tela" width="1080" height="1920"></canvas>
+    <a class="bt-dourado" id="material" href="https://jadetorres.com/meunegocio2027" target="_blank" rel="noopener">Acessar o material</a>
+    <button class="bt-ouro" id="baixar" style="margin-top:12px">Baixar para postar</button>
+    <button class="bt-linha" id="refazer">Mudar nome ou foto</button>
+
+  </section>
+</main>
+<script>
+const $=id=>document.getElementById(id);
+let foto=null;
+function checar(){$('gerar').disabled=!($('nome').value.trim()&&$('esp').value.trim()&&foto)}
+$('nome').addEventListener('input',checar);
+$('esp').addEventListener('input',checar);
+$('arquivo').addEventListener('change',e=>{
+  const f=e.target.files[0]; if(!f) return;
+  const img=new Image();
+  img.onload=()=>{foto=img;$('mini').src=img.src;$('txtFoto').textContent='Foto escolhida ✓';checar()};
+  img.src=URL.createObjectURL(f);
+});
+
+function circulo(ctx,img,cx,cy,r){
+  ctx.save();ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.clip();
+  const s=Math.max(2*r/img.width,2*r/img.height),w=img.width*s,h=img.height*s;
+  ctx.drawImage(img,cx-w/2,cy-h/2,w,h);ctx.restore();
+}
+function ajustar(ctx,txt,max,tam,fonte){
+  let t=tam;do{ctx.font=`${fonte} ${t}px "Instrument Serif"`;t-=4}while(ctx.measureText(txt).width>max&&t>40);
+}
+
+let modelo='C';
+function mostrar(ing){$('form').style.display=ing?'none':'block';$('resultado').style.display=ing?'block':'none';window.scrollTo(0,0)}
+// claquete em traço dourado; (cx,cy)=centro, t=largura/2
+function claquete(ctx,cx,cy,t){
+  const w=t*2,h=t*1.3,x=cx-t,y=cy-h*0.35;
+  ctx.save();ctx.strokeStyle='#C9A84C';ctx.fillStyle='#C9A84C';ctx.lineWidth=Math.max(3,t/14);ctx.lineJoin='round';
+  ctx.strokeRect(x,y,w,h);
+  const hb=t*0.32;ctx.strokeRect(x,y-hb,w,hb);
+  ctx.beginPath();for(let i=0;i<4;i++){const a=x+w*0.08+i*w*0.24;ctx.moveTo(a,y);ctx.lineTo(a+w*0.14,y-hb)}ctx.stroke();
+  ctx.save();ctx.translate(x,y-hb);ctx.rotate(-0.28);ctx.strokeRect(0,-hb*1.05,w,hb);
+  ctx.beginPath();for(let i=0;i<4;i++){const a=w*0.08+i*w*0.24;ctx.moveTo(a+w*0.14,0);ctx.lineTo(a,-hb*1.05)}ctx.stroke();ctx.restore();
+  ctx.beginPath();ctx.moveTo(x+w*0.15,y+h*0.45);ctx.lineTo(x+w*0.85,y+h*0.45);ctx.moveTo(x+w*0.15,y+h*0.72);ctx.lineTo(x+w*0.6,y+h*0.72);ctx.stroke();
+  ctx.restore();
+}
+async function desenhar(){
+  await Promise.all([document.fonts.load('96px "Instrument Serif"'),document.fonts.load('italic 96px "Instrument Serif"'),document.fonts.load('600 30px "Instrument Sans"')]);
+  const c=$('tela'),ctx=c.getContext('2d'),W=1080,H=1920,ouro='#C9A84C';
+  ctx.fillStyle='#141414';ctx.fillRect(0,0,W,H);
+
+  // topo
+  ctx.textAlign='center';ctx.fillStyle=ouro;ctx.font='600 30px "Instrument Sans"';
+  ctx.letterSpacing='8px';ctx.fillText('#EUVOU AO WORKSHOP DA JADE',W/2,190);ctx.letterSpacing='0px';
+
+  // cartão do ingresso
+  const x=90,y=260,w=900,h=1460,r=36,corte=1180;
+  ctx.fillStyle='#F3F1EC';ctx.beginPath();ctx.roundRect(x,y,w,h,r);ctx.fill();
+  ctx.fillStyle='#141414';[x,x+w].forEach(px=>{ctx.beginPath();ctx.arc(px,corte,36,0,Math.PI*2);ctx.fill()});
+  ctx.strokeStyle='#C9C3B6';ctx.lineWidth=3;ctx.setLineDash([14,14]);
+  ctx.beginPath();ctx.moveTo(x+60,corte);ctx.lineTo(x+w-60,corte);ctx.stroke();ctx.setLineDash([]);
+
+  // foto
+  ctx.fillStyle=ouro;ctx.beginPath();ctx.arc(W/2,560,232,0,Math.PI*2);ctx.fill();
+  circulo(ctx,foto,W/2,560,220);
+
+  // nome
+  ctx.fillStyle='#6B6862';ctx.font='600 26px "Instrument Sans"';ctx.letterSpacing='6px';
+  ctx.fillText('INGRESSO DE',W/2,880);ctx.letterSpacing='0px';
+  const nome=$('nome').value.trim();
+  ctx.fillStyle='#141414';ajustar(ctx,nome,780,104,'');ctx.fillText(nome,W/2,990);
+
+  ctx.strokeStyle=ouro;ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(W/2-60,1050);ctx.lineTo(W/2+60,1050);ctx.stroke();
+  ctx.fillStyle='#6B6862';ctx.font='500 32px "Instrument Sans"';ctx.fillText($('esp').value.trim(),W/2,1110);
+
+  // evento (3 modelos de teste)
+  const fr=(t,y)=>{ctx.fillStyle='#8A6410';ctx.font='600 28px "Instrument Sans"';ctx.letterSpacing='6px';ctx.fillText(t,W/2,y);ctx.letterSpacing='0px'};
+  let yD,yM,yData;
+  if(modelo==='A'){claquete(ctx,W/2,1265,70);yD=1400;yM=1500;yData=1590}
+  else if(modelo==='B'){claquete(ctx,W/2,1250,60);yD=1375;yM=1470;fr('12 SEMANAS NO AR',1540);yData=1610}
+  else {yD=1310;yM=1415;ctx.font='600 28px "Instrument Sans"';ctx.letterSpacing='6px';
+    const t='12s NO AR',tw=ctx.measureText(t).width;ctx.letterSpacing='0px';
+    const x0=W/2+35;claquete(ctx,x0-tw/2-50,1478,30);ctx.fillStyle='#141414';ctx.font='600 28px "Instrument Sans"';ctx.letterSpacing='6px';ctx.fillText(t,x0,1495);ctx.letterSpacing='0px';yData=1580}
+  ctx.textAlign='center';
+  ctx.fillStyle='#141414';ctx.font='96px "Instrument Serif"';ctx.fillText('Despertando',W/2,yD);
+  ctx.fillStyle='#8A6410';ctx.font='italic 112px "Instrument Serif"';ctx.fillText('Mentoras',W/2,yM);
+  ctx.fillStyle='#141414';ctx.font='600 30px "Instrument Sans"';ctx.fillText('Sábado · 21 de novembro · ao vivo',W/2,yData);
+  ctx.fillStyle='#6B6862';ctx.font='500 26px "Instrument Sans"';ctx.fillText('com Jade Torres',W/2,yData+50);
+
+  // rodapé
+  ctx.fillStyle='#EDEAE3';ctx.font='italic 48px "Instrument Serif"';ctx.fillText('Nos vemos lá!',W/2,1820);
+}
+
+$('gerar').onclick=async()=>{await desenhar();salvar();mostrar(true);};
+$('refazer').onclick=()=>mostrar(false);
+$('baixar').onclick=()=>{
+  $('tela').toBlob(b=>{const a=document.createElement('a');a.href=URL.createObjectURL(b);
+  a.download='meu-ingresso-despertando-mentoras.png';a.click()},'image/png');
+};
+
+// guarda o ingresso neste celular para abrir pronto da próxima vez
+function salvar(){
+  try{
+    const c=document.createElement('canvas'),m=600,k=Math.min(1,m/Math.max(foto.width,foto.height));
+    c.width=foto.width*k;c.height=foto.height*k;c.getContext('2d').drawImage(foto,0,0,c.width,c.height);
+    localStorage.setItem('ingresso-dm',JSON.stringify({nome:$('nome').value,esp:$('esp').value,foto:c.toDataURL('image/jpeg',.85)}));
+  }catch(e){}
+}
+(function(){
+  let d=null;try{d=JSON.parse(localStorage.getItem('ingresso-dm'))}catch(e){}
+  if(!d) return;
+  const img=new Image();
+  img.onload=async()=>{foto=img;$('mini').src=img.src;$('txtFoto').textContent='Foto escolhida ✓';
+    $('nome').value=d.nome;$('esp').value=d.esp;checar();await desenhar();
+    mostrar(true);};
+  img.src=d.foto;
+})();
+</script>
+</body>
+</html>
