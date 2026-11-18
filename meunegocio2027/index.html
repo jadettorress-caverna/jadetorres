@@ -1,0 +1,664 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Despertando Mentoras · seu negócio 2027</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{
+  --fundo:#F3F1EC; --tinta:#141414; --cinza:#6B6862; --linha:#DEDAD2;
+  --cartao:#161616; --texto-claro:#EDEAE3; --cinza-claro:#9A968E;
+  --ouro:#C9A84C; --ouro-forte:#8A6410;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--fundo);color:var(--tinta);font-family:"Instrument Sans",system-ui,sans-serif;font-size:17px;line-height:1.5}
+button,input,textarea{font:inherit}
+.teste{position:sticky;top:0;z-index:20;background:#fff8e1;border-bottom:1px solid #e6d9a8;padding:8px 16px;text-align:center;font-size:14px}
+.teste button{padding:4px 12px;border-radius:999px;border:1px solid var(--tinta);background:#fff;cursor:pointer;margin-left:6px}
+.pagina{max-width:1080px;margin:0 auto;padding:40px 20px 80px}
+.selo{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--cinza)}
+h1{font-size:clamp(40px,7vw,76px);line-height:1;letter-spacing:-.035em;font-weight:700;margin:14px 0 18px}
+h1 em,h2 em,h3 em{font-family:"Instrument Serif",serif;font-weight:400;font-style:italic;letter-spacing:-.01em;color:var(--ouro-forte)}
+.sub{font-size:19px;color:var(--cinza);max-width:620px}
+.secao{margin-top:72px}
+body[class*="ver-"] .secao{margin-top:8px}
+.secao>h3{font-size:clamp(30px,4.5vw,46px);line-height:1.05;letter-spacing:-.03em;margin:8px 0 10px}
+.secao>.sub{margin-bottom:24px}
+
+/* entrada com o nome */
+#entrada{position:fixed;inset:0;z-index:30;background:var(--fundo);display:flex;align-items:center;justify-content:center;padding:20px}
+#entrada .caixa{max-width:520px;width:100%}
+#entrada h1{font-size:clamp(36px,6vw,56px)}
+.campo{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+.campo input{flex:1;min-width:200px;padding:14px 16px;border:1px solid var(--linha);border-radius:14px;background:#fff;font-size:18px}
+.btn{padding:14px 22px;border-radius:14px;border:0;background:var(--tinta);color:#fff;font-weight:600;cursor:pointer}
+.btn.ouro{background:var(--ouro);color:var(--tinta)}
+.btn.leve{background:#fff;color:var(--tinta);border:1px solid var(--linha)}
+
+/* atalhos do evento */
+.atalhos{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
+.atalhos a{padding:12px 18px;border-radius:999px;background:var(--tinta);color:#fff;text-decoration:none;font-weight:600;font-size:15px}
+.atalhos a.leve{background:#fff;color:var(--tinta);border:1px solid var(--linha)}
+
+/* desenho */
+.progresso{margin:28px 0 28px;display:flex;align-items:center;gap:14px;font-size:14px;color:var(--cinza)}
+.barra{flex:1;height:6px;background:var(--linha);border-radius:99px;overflow:hidden;max-width:420px}
+.barra i{display:block;height:100%;background:var(--ouro);width:0;transition:width .6s}
+.frase{background:var(--cartao);color:var(--texto-claro);border-radius:22px;padding:28px;margin-bottom:18px}
+.frase small{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--cinza-claro)}
+.frase p{font-family:"Instrument Serif",serif;font-size:clamp(24px,3.4vw,34px);line-height:1.2;margin-top:8px}
+.frase p.vazio{color:var(--cinza-claro);font-style:italic}
+.areas{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media(max-width:760px){.areas{grid-template-columns:1fr}}
+.area{background:#fff;border:1px solid var(--linha);border-radius:22px;padding:24px}
+.area header{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:6px}
+.area .num{font-family:"Instrument Serif",serif;font-size:44px;line-height:1;color:var(--ouro)}
+h2{font-size:28px;letter-spacing:-.02em;line-height:1.05}
+.area .pra{color:var(--cinza);font-size:15px;margin-bottom:12px}
+.sub-area{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--cinza);margin:14px 0 4px}
+.item{border-top:1px solid var(--linha);padding:12px 0}
+.item .rot{font-size:13px;font-weight:600;color:var(--ouro-forte)}
+.item .rot b{color:var(--tinta)}
+.item .txt{font-size:16px;margin-top:2px;white-space:pre-line}
+.item.vazio .txt{color:var(--cinza);font-style:italic}
+.item.novo{animation:brilho 1.6s}
+@keyframes brilho{0%{background:#f6e7b5}100%{background:transparent}}
+.ia{margin-top:14px;background:var(--cartao);color:var(--texto-claro);border-radius:14px;padding:12px 14px;font-size:14px}
+.ia b{color:var(--ouro)}
+
+/* etapas */
+.etapas{display:grid;gap:14px}
+.etapa{background:#fff;border:1px solid var(--linha);border-radius:22px;padding:22px}
+.etapa .topo{display:flex;gap:16px;align-items:flex-start}
+.etapa .n{font-family:"Instrument Serif",serif;font-size:40px;line-height:1;color:var(--ouro);min-width:44px}
+.etapa .quando{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--cinza)}
+.etapa h4{font-size:24px;letter-spacing:-.02em;line-height:1.15}
+.etapa .dor{font-family:"Instrument Serif",serif;font-style:italic;font-size:21px;line-height:1.3;margin-top:8px}
+.senha{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px;align-items:center}
+.senha input{width:200px;padding:12px 14px;border:1px solid var(--linha);border-radius:12px;background:var(--fundo);letter-spacing:.08em}
+.senha .aviso{font-size:14px;color:#b3261e;display:none}
+.cadeado{font-size:13px;color:var(--cinza)}
+.aberta .senha{display:none}
+.conteudo{display:none;margin-top:18px}
+.aberta .conteudo{display:block}
+.prompt{background:var(--cartao);color:var(--texto-claro);border-radius:16px;overflow:hidden}
+.prompt .barra-p{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid #2b2b2b;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--cinza-claro)}
+.prompt .barra-p button{background:#fff;color:var(--tinta);border:0;border-radius:10px;padding:8px 14px;font-weight:600;cursor:pointer;letter-spacing:0;text-transform:none;font-size:14px}
+.prompt pre{white-space:pre-wrap;font-family:ui-monospace,Consolas,monospace;font-size:14px;line-height:1.6;padding:18px 16px}
+.cola{margin-top:16px}
+.cola label{font-size:14px;font-weight:600;display:block;margin-bottom:6px}
+.cola textarea{width:100%;min-height:110px;padding:12px 14px;border:1px solid var(--linha);border-radius:14px;background:var(--fundo);resize:vertical}
+.etapa.concluida .cola,.etapa.concluida .prompt{display:none}
+.etapa.concluida.ver-prompt .prompt{display:block;margin-bottom:12px}
+.etapa.concluida .trofeu{display:flex}
+.refazer{margin-top:12px;display:flex;gap:8px;flex-wrap:wrap}
+.refazer button{font-size:14px;font-weight:600;padding:8px 16px;border-radius:999px;cursor:pointer;transition:transform .15s}
+.refazer button:hover{transform:translateY(-1px)}
+.refazer .r-ouro{background:var(--ouro);color:var(--tinta);border:1px solid var(--ouro)}
+.refazer .r-linha{background:transparent;color:var(--texto-claro);border:1px solid #5a5650}
+.investiga .inv-titulo{font-weight:600;margin-bottom:10px}
+.perg{margin-bottom:14px}
+.perg label{display:flex;gap:10px;font-size:16px;margin-bottom:6px;line-height:1.35}
+.perg label span{flex:none;width:24px;height:24px;border-radius:50%;background:var(--ouro);color:var(--tinta);font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.perg-campo{display:flex;gap:8px;align-items:flex-start}
+.perg-campo textarea{flex:1;min-height:70px;padding:10px 12px;border:1px solid var(--linha);border-radius:12px;background:var(--fundo);resize:vertical;font-size:16px}
+.mic{flex:none;width:46px;height:46px;border-radius:50%;border:1px solid var(--linha);background:#fff;font-size:20px;cursor:pointer}
+.mic.ouvindo{background:#b3261e;color:#fff;border-color:#b3261e;animation:pulsa 1s infinite}
+@keyframes pulsa{50%{box-shadow:0 0 0 8px rgba(179,38,30,.15)}}
+.dica{font-size:14px;color:var(--cinza);margin:-4px 0 12px}
+.aviso-inv{display:none;margin-left:10px;font-size:14px;color:#b3261e}
+.etapa:not(.gerado) .prompt,.etapa:not(.gerado) .cola{display:none}
+.etapa.gerado .prompt{margin-top:18px}
+.etapa.concluida .investiga{display:none}
+.trofeu{display:none;align-items:center;gap:14px;margin-top:14px;background:var(--cartao);color:var(--texto-claro);border-radius:16px;padding:14px 18px;animation:sobe .5s ease}
+.trofeu span{font-size:34px;line-height:1}
+.trofeu b{display:block;color:var(--ouro);font-size:18px}
+.trofeu small{font-size:14px;color:var(--cinza-claro)}
+@keyframes sobe{from{transform:translateY(8px);opacity:0}to{transform:none;opacity:1}}
+.etapa.final{background:var(--cartao);color:var(--texto-claro);border-color:var(--cartao)}
+.etapa.final .senha input{background:#222;color:#fff;border-color:#333}
+.etapa.final .cadeado{color:var(--cinza-claro)}
+
+/* pilares, um embaixo do outro */
+.pilares{display:grid;gap:12px}
+.pilar{background:#fff;border:1px solid var(--linha);border-radius:20px;padding:18px 20px}
+.pilar .linha1{display:flex;align-items:baseline;gap:14px}
+.pilar .num{font-family:"Instrument Serif",serif;font-size:34px;line-height:1;color:var(--ouro);min-width:36px}
+.pilar h2{flex:1;font-size:26px}
+.pilar .pct{font-weight:700;font-size:18px}
+.pilar .pct.cheio{color:var(--ouro-forte)}
+.pilar .barra{max-width:none;margin:12px 0 12px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font-size:14px;padding:6px 12px;border-radius:999px;border:1px solid var(--linha);color:var(--cinza);background:var(--fundo)}
+.chip.feito{background:var(--tinta);color:#fff;border-color:var(--tinta)}
+.chip.feito::before{content:"✓ ";color:var(--ouro)}
+.pilar.completo{border-color:var(--ouro);box-shadow:0 0 0 1px var(--ouro) inset}
+.dm{display:grid;grid-template-columns:200px 1fr;gap:18px;align-items:center}
+.dm svg{max-width:200px}
+.dm-textos{display:grid;gap:12px}
+.dm-linha{border-left:3px solid var(--ouro);padding:2px 0 2px 12px}
+.dm-linha b{display:block;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ouro-forte)}
+.dm-linha span{font-size:16px;font-weight:600;line-height:1.35}
+.dm-linha em{display:block;font-family:"Instrument Serif",serif;font-size:17px;color:var(--cinza)}
+.dm-linha.vazia{border-color:var(--linha)}.dm-linha.vazia b,.dm-linha.vazia span{color:#B8B4AB;font-weight:400}
+@media(max-width:560px){.dm{grid-template-columns:1fr}.dm svg{margin:0 auto}}
+.verifica{margin-top:16px;background:var(--fundo);border:1px solid var(--linha);border-radius:14px;padding:14px 16px}
+.verifica b{display:block;margin-bottom:8px}
+.verifica p{display:flex;gap:10px;align-items:flex-start;padding:5px 0;font-size:15px}
+.verifica .q{flex:none;width:16px;height:16px;border:1.5px solid #C9A84C;border-radius:4px;margin-top:4px}
+.verifica label{display:flex;gap:10px;align-items:flex-start;padding:6px 0;font-size:16px;cursor:pointer}
+.verifica input{width:20px;height:20px;margin-top:2px;accent-color:#8A6410;flex:none}
+.receita p{font-size:15px;line-height:1.35;margin-top:6px}
+.receita i{display:inline-block;font-style:normal;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--tinta);background:#F4E9C8;border-radius:6px;padding:1px 7px;margin-right:6px}
+.aprof{margin-top:14px;background:var(--fundo);border:1px dashed var(--ouro);border-radius:14px;padding:12px 14px}
+.aprof small{display:block;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ouro-forte);margin-bottom:4px}
+.aprof p{font-size:15px;margin-top:4px}
+.desenho{margin:6px 0 14px}
+.desenho svg{width:100%;max-width:380px;display:block;margin:0 auto}
+.desenho .causa{width:168px;height:168px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;color:#EDEAE3;padding:10px}
+.desenho .causa small{font-family:"Instrument Sans";font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#C9A84C;margin-bottom:4px}
+.desenho .causa span{font-family:"Instrument Serif",serif;font-style:italic;font-size:19px;line-height:1.15}
+.desenho .causa.vazia{color:#B8B4AB}.desenho .causa.vazia small{color:#B8B4AB}
+.legenda{display:flex;flex-wrap:wrap;gap:6px 14px;justify-content:center;font-size:12px;color:var(--cinza);margin-top:8px}
+.legenda i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px;vertical-align:-1px}
+#documento{display:none}
+.atalhos a.zoom{background:#2D8CFF;color:#fff}
+.atalhos a.ouro{background:var(--ouro);color:var(--tinta)}
+
+/* visão do projeto (ciclo) */
+#projeto{margin-top:0}
+.v-etapas,.v-progresso,.v-ebook{display:none}
+body.ver-etapas .v-home,body.ver-progresso .v-home,body.ver-ebook .v-home{display:none!important}
+body.ver-etapas .v-etapas,body.ver-progresso .v-progresso,body.ver-ebook .v-ebook{display:block}
+body.ver-ebook .teste{display:none}
+.menu{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:28px;max-width:640px}
+@media(max-width:620px){.menu{grid-template-columns:1fr}}
+.menu a{display:flex;align-items:center;justify-content:center;text-align:center;min-height:58px;text-decoration:none;color:var(--tinta);background:#fff;border:1px solid var(--linha);border-radius:999px;padding:14px 22px;transition:transform .15s,box-shadow .15s;box-shadow:0 2px 0 rgba(0,0,0,.06)}
+.menu a:hover{transform:translateY(-2px);box-shadow:0 6px 14px rgba(0,0,0,.08)}
+.menu b{font-size:17px;font-weight:700;letter-spacing:-.01em}
+.modal{position:fixed;inset:0;z-index:40;background:rgba(20,20,20,.55);display:none;align-items:center;justify-content:center;padding:16px}
+.modal.aberto{display:flex}
+.modal-caixa{background:var(--fundo);border-radius:22px;padding:28px;max-width:440px;width:100%;animation:sobe .3s ease}
+.modal-caixa h4{font-size:26px;line-height:1.15;letter-spacing:-.02em;margin:8px 0 10px}
+.modal-caixa h4 em{font-family:"Instrument Serif",serif;font-weight:400;color:var(--ouro-forte)}
+.modal-caixa p{color:var(--cinza);margin-bottom:18px}
+.menu a.m-zoom{background:#2D8CFF;border-color:#2D8CFF;color:#fff}.menu a.m-zoom small{color:#DCEBFF}
+.menu a.m-ouro{background:var(--ouro);border-color:var(--ouro);color:var(--tinta)}.menu a.m-ouro small{color:#5c4a14}
+.menu a.m-preto{background:var(--cartao);border-color:var(--cartao);color:var(--texto-claro)}.menu a.m-preto small{color:var(--cinza-claro)}
+.ciclo{position:relative;display:grid;grid-template-columns:1fr 70px 1fr;grid-template-rows:auto 72px auto;gap:0;margin-top:24px}
+.pj{background:#fff;border:1px solid var(--linha);border-radius:22px;padding:20px}
+.pj-marca{grid-column:1;grid-row:1}.pj-mkt{grid-column:3;grid-row:1}
+.pj-vendas{grid-column:3;grid-row:3}.pj-produto{grid-column:1;grid-row:3}
+.seta{display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;color:var(--ouro-forte);text-align:center}
+.s1{grid-column:2;grid-row:1;writing-mode:horizontal-tb}
+.s2{grid-column:3;grid-row:2;justify-content:flex-end;padding-right:24px}.s3{grid-column:2;grid-row:3}.s4{grid-column:1;grid-row:2;justify-content:flex-start;padding-left:24px}
+.centro{grid-column:1/4;grid-row:2;justify-self:center;align-self:center;z-index:2;background:var(--fundo);color:var(--tinta);padding:4px 18px;font-size:clamp(30px,4.6vw,44px);font-weight:700;letter-spacing:-.02em;text-align:center;line-height:1.1}
+.centro b{font-family:"Instrument Serif",serif;font-style:italic;font-weight:400;font-size:1.3em;color:var(--ouro-forte);margin-left:8px}
+.pj-prog{margin:4px 0 18px}.pj-prog .barra{height:3px;max-width:260px}
+.pj h5{font-size:22px;letter-spacing:-.02em;line-height:1.1;margin-bottom:4px}
+.pj h5 em{font-family:"Instrument Serif",serif;font-weight:400;font-style:italic;color:var(--ouro-forte)}
+.pj .papel{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--cinza);margin-bottom:12px}
+.kv{padding:8px 0;border-top:1px solid var(--linha)}
+.kv small{display:block;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--cinza)}
+.kv span{font-size:16px;font-weight:600}
+.kv span.falta{font-weight:400;color:#B8B4AB;font-style:italic}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+.tag{font-size:13px;padding:4px 10px;border-radius:999px;background:var(--tinta);color:#fff}
+.tag.off{background:var(--fundo);color:#B8B4AB;border:1px solid var(--linha)}
+.fases{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px;counter-reset:f}
+.fases .tag{background:var(--ouro);color:var(--tinta)}
+.meta{background:var(--cartao);color:var(--texto-claro);border-radius:16px;padding:14px 16px;margin-top:10px}
+.meta small{color:var(--cinza-claro)}
+.meta strong{display:block;font-family:"Instrument Serif",serif;font-weight:400;font-size:36px;line-height:1.1;color:var(--ouro)}
+.compromisso{margin-top:28px;background:var(--cartao);color:var(--texto-claro);border-radius:22px;padding:26px;text-align:center}
+.compromisso p{font-family:"Instrument Serif",serif;font-size:clamp(22px,3vw,30px);line-height:1.25}
+.compromisso .ass{margin:22px auto 0;max-width:340px;border-top:1px solid #555;padding-top:8px;font-size:13px;color:var(--cinza-claro)}
+@media(max-width:760px){
+  .ciclo{grid-template-columns:1fr;grid-template-rows:none}
+  .pj,.seta,.centro{grid-column:1!important;grid-row:auto!important}
+  .ciclo>*{order:0}
+  .centro{order:-1;justify-self:center;margin-bottom:14px}
+  .seta{padding:8px 0}
+  .s4{order:9}
+}
+
+.preparo{background:#fff;border:1px solid var(--linha);border-radius:22px;padding:22px}
+.prep-botoes{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.prep-caixa{display:none;margin-top:16px}
+.instrucoes h5{font-size:20px;letter-spacing:-.01em;margin:18px 0 8px}
+.instrucoes ol{padding-left:22px}.instrucoes li{margin-bottom:10px}
+.instrucoes ul{padding-left:20px;margin-top:6px}.instrucoes ul li{margin-bottom:4px}
+.instrucoes .nota{background:var(--fundo);border-left:3px solid var(--ouro);border-radius:10px;padding:12px 14px;margin-top:8px;font-size:16px}.prep-caixa.aberta{display:block}
+.rodape{margin-top:56px;text-align:center;color:var(--cinza);font-size:13px}
+
+@media print{
+  .teste,#entrada,.atalhos,.nao-imprime{display:none!important}
+  body{background:#fff}
+  .pagina>*:not(#documento):not(#projeto){display:none!important}
+  #documento,#projeto{display:block}
+  .so-tela{display:none!important}
+  .so-papel{display:flex!important}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  #projeto{break-after:page}
+  #documento .area{break-inside:avoid;margin-bottom:16px}
+}
+</style>
+</head>
+<body>
+
+
+<div id="modalZoom" class="modal nao-imprime" onclick="if(event.target===this)fecharModal()">
+  <div class="modal-caixa" role="dialog" aria-labelledby="mzTit">
+    <div class="selo">Sala do Zoom</div>
+    <h4 id="mzTit">O link da sala será liberado no <em>sábado, 21/11, às 9h09</em>.</h4>
+    <p>Volte aqui neste botão no dia. Até lá, aproveite para ouvir as instruções do seu preparo.</p>
+    <button class="btn" onclick="fecharModal()">Entendi</button>
+  </div>
+</div>
+
+<!-- 1. Entrada com o nome -->
+<div id="entrada">
+  <div class="caixa">
+    <div class="selo">Workshop Despertando Mentoras</div>
+    <h1>Antes de começar, como você <em>se chama?</em></h1>
+    <p class="sub">É com esse nome que o seu negócio 2027 vai ser montado hoje.</p>
+    <div class="campo">
+      <input id="nomeInput" placeholder="Seu primeiro nome" autocomplete="given-name">
+      <button class="btn" onclick="entrar()">Entrar</button>
+    </div>
+  </div>
+</div>
+
+<div class="pagina">
+  <div class="selo v-home">Workshop Despertando Mentoras · ao vivo, pelo Zoom</div>
+  <h1 class="v-home">Seja bem-vinda ao seu negócio digital <em>2027</em>, <span class="nome">guerreira</span>.</h1>
+  <p class="sub v-home">Hoje você vai desenhar o seu negócio digital, etapa por etapa. No fim, ele vira o seu planner.</p>
+  <div class="menu nao-imprime v-home">
+    <a href="#" class="m-zoom" onclick="avisoZoom();return false"><b>Entrar na sala do Zoom</b></a>
+    <a href="#" onclick="irPara('etapas');return false"><b>Ir para as atividades</b></a>
+    <a href="#" class="m-preto" onclick="irPara('progresso');return false"><b>Acompanhe o seu progresso</b></a>
+    <a href="#" class="m-ouro" onclick="irPara('ebook');return false"><b>🎁 Planner de Negócio 2027</b></a>
+  </div>
+
+  <!-- A visão do projeto: o negócio funcionando -->
+  <section id="projeto" class="secao v-ebook">
+    <div class="atalhos nao-imprime" style="margin:0 0 28px"><a href="#" class="leve" onclick="irPara('');return false">← Início</a>
+      <a href="#" class="ouro" onclick="baixarEbook();return false">🎁 Baixar o meu planner</a></div>
+    <div class="selo">🎁 Planner de Negócio 2027</div>
+    <h1 id="pjTitulo" style="font-size:clamp(36px,6vw,64px)">Parabéns!</h1>
+    <div class="progresso pj-prog" id="pjProgresso"></div>
+    <p class="sub" id="pjFrase">Cada etapa do dia acende uma parte deste desenho.</p>
+    <div class="ciclo">
+      <div class="pj pj-marca" id="pjMarca"></div>
+      <div class="seta s1">→ atrai</div>
+      <div class="pj pj-mkt" id="pjMkt"></div>
+      <div class="seta s2">↓ converte</div>
+      <div class="pj pj-vendas" id="pjVendas"></div>
+      <div class="seta s3">← entrega</div>
+      <div class="pj pj-produto" id="pjProduto"></div>
+      <div class="seta s4">↑ depoimentos</div>
+      <div class="centro" id="pjCentro"></div>
+    </div>
+    <div class="compromisso" id="pjComp"></div>
+  </section>
+
+  <!-- 2. Preparo (manual) -->
+  <section class="secao nao-imprime v-home">
+    <div class="selo">Seu preparo</div>
+    <h3>Antes de <em>sábado</em></h3>
+    <div class="preparo">
+      <p>As instruções para você aproveitar o workshop ao máximo. Escolha como prefere:</p>
+      <div class="prep-botoes"><button class="btn" onclick="prep('ouvir')">▶ Ouvir as instruções</button><button class="btn leve" onclick="prep('ler')">Ler as instruções</button></div>
+      <div id="prepOuvir" class="prep-caixa"><p class="dica">O áudio chega aqui até sexta. Volte neste mesmo link.</p></div>
+      <div id="prepLer" class="prep-caixa instrucoes">
+        <h5>Antes de sábado</h5>
+        <ol>
+          <li><b>Organize o seu ambiente de estudo.</b> Deixe o computador carregado, ou o carregador por perto. Pelo celular você consegue assistir à aula, mas vai ter muita dificuldade para fazer as atividades.</li>
+          <li><b>Tenha uma conta de inteligência artificial</b> (ChatGPT, Claude ou Gemini). O plano pago é o mais indicado, porque o gratuito pode travar antes do fim do dia.
+            <div class="nota"><b>E se o meu chat for gratuito?</b> Você consegue usar o limite gratuito do seu chat, mas eu não consigo garantir que ele vai até o fim do dia. Isso não atrapalha o mais importante: você assiste a todo o conteúdo do workshop, recebe as senhas das atividades e usa o que o seu chat liberar.
+              <ul>
+                <li>Não use o chat na manhã de sábado, antes do workshop.</li>
+                <li>Faça todas as atividades na mesma conversa, do começo ao fim.</li>
+                <li>Abra cada etapa com a senha na hora, mesmo que vá fazer depois. A senha só aparece ao vivo, e a etapa fica aberta para você.</li>
+                <li>Quando o seu limite renovar, depois de algumas horas, volte aqui e faça as atividades que faltaram, na mesma conversa. Só não vai ser ao vivo, comigo.</li>
+              </ul></div></li>
+          <li><b>Use o mesmo computador e o mesmo navegador o dia todo.</b> As suas respostas ficam guardadas nele.</li>
+          <li><b>Reserve o dia:</b> das 9h às 18h, com almoço das 12h às 14h.</li>
+          <li><b>Separe</b> caderno, água e lanchinhos saudáveis para consumir durante o dia.</li>
+        </ol>
+        <h5>No sábado, em cada atividade</h5>
+        <p>Eu explico a etapa e mostro a senha. Você responde as perguntas, digitando ou falando no microfone, e clica em "Gerar o meu prompt". Depois cola o prompt no seu chat, traz a resposta de volta e ganha o troféu.</p>
+        <h5>No fim do dia</h5>
+        <p>Clique em "Planner de Negócio 2027" e baixe o seu planner para imprimir, encadernar e usar em 2027.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. O desenho -->
+  <section class="secao v-progresso" id="desenho">
+    <div class="atalhos nao-imprime" style="margin:0 0 28px"><a href="#" class="leve" onclick="irPara('');return false">← Início</a></div>
+    <div class="selo">Acompanhe o seu progresso</div>
+    <h3>As 4 áreas do seu negócio, <em>etapa por etapa</em></h3>
+    <div class="progresso"><div class="barra"><i id="barra"></i></div><span id="contador">0 de 12 etapas</span></div>
+    <p id="frase" hidden></p>
+    <div class="pilares" id="pilares"></div>
+  </section>
+
+  <!-- documento que sai no PDF (só aparece na impressão) -->
+  <section id="documento"></section>
+
+  <!-- 4. As 12 etapas -->
+  <section class="secao nao-imprime v-etapas" id="etapas">
+    <div class="atalhos nao-imprime" style="margin:0 0 28px"><a href="#" class="leve" onclick="irPara('');return false">← Início</a><a href="#" class="leve" onclick="irPara('progresso');return false">Acompanhe o seu progresso</a></div>
+    <div class="selo">As 12 etapas</div>
+    <h3>Cada etapa abre com a <em>senha</em> que eu mostrar ao vivo</h3>
+    <p class="sub">Copie o prompt, cole no seu chat e traga a resposta para cá. O seu desenho se preenche na hora.</p>
+    <div class="etapas" id="listaEtapas"></div>
+  </section>
+
+
+
+  <p class="rodape">Construído com Jade Torres no Workshop Despertando Mentoras · 21 de novembro de 2026<br>Conteúdo exclusivo das participantes. Não compartilhe.</p>
+</div>
+
+<script>
+const AREAS=[
+ {id:'marca',nome:'Marca <em>pessoal</em>',pra:'Quem você é e por que alguém aprende com você.',ia:'te entrevista e encontra as suas palavras.'},
+ {id:'produto',nome:'Produto <em>autoral</em>',pra:'O que você ensina e como a aluna recebe.',ia:'organiza o método em módulos e aulas.'},
+ {id:'marketing',nome:'Marketing <em>orgânico e pago</em>',pra:'Como as pessoas certas chegam até você.',ia:'cria roteiros e anúncios no seu tom.'},
+ {id:'vendas',nome:'Sistema <em>de vendas</em>',pra:'O caminho de quem te conhece até quem compra.',ia:'escreve a página e as mensagens de venda.'}
+];
+// ordem do dia; area e subárea onde a resposta aparece no desenho
+const ETAPAS=[
+ {n:1,nome:'Lugar de Fala',area:'marca',quando:'manhã',dor:'Você sabe muito, mas trava quando precisa dizer por que alguém deveria aprender com você.'},
+ {n:2,nome:'Posicionamento',area:'marca',quando:'manhã',dor:'Você fala para todo mundo e, por isso, ninguém se sente chamada.'},
+ {n:3,nome:'Método Autoral',area:'produto',quando:'manhã',dor:'Você ensina tudo de cabeça, e cada atendimento sai de um jeito.'},
+ {n:4,nome:'Produtos',area:'produto',quando:'manhã',dor:'Você tem conhecimento para dez cursos e não sabe qual vender primeiro.'},
+ {n:5,nome:'Linha Editorial',area:'marketing',sub:'Gratuito',quando:'manhã',dor:'Você abre o Instagram e não sabe o que postar hoje.'},
+ {n:6,nome:'Redes Sociais',area:'marketing',sub:'Gratuito',quando:'manhã',dor:'Quem chega ao seu perfil não entende em 5 segundos o que você faz.'},
+ {n:7,nome:'Oferta',area:'vendas',quando:'tarde',dor:'Você tem vergonha de dizer o preço, ou nem sabe qual é.'},
+ {n:8,nome:'Funil',area:'vendas',quando:'tarde',dor:'Você posta e fica esperando alguém pedir para comprar.'},
+ {n:9,nome:'Tráfego',area:'marketing',sub:'Pago',quando:'tarde',dor:'Só quem já te conhece vê o que você faz.'},
+ {n:10,nome:'Comercial',area:'vendas',quando:'tarde',dor:'A pessoa pergunta o preço, some, e você não sabe o que responder.'},
+ {n:11,nome:'Onboarding',area:'produto',quando:'tarde',dor:'A aluna compra e fica perdida nos primeiros dias.'},
+ {n:12,nome:'Entrega',area:'produto',quando:'tarde',dor:'A aluna termina e você não tem nenhum depoimento para mostrar.'}
+];
+const SENHAS={};
+window.COFRE={"1": "PMMS5e0yhN4iu2Fr/MIffT0Z6qG1xNE0hdsya8SlPAgpCiMTb4Ivs0AR+/vVxz7eLdgEE1bTQGeuefYWd6RSB4E0lqqcdobowkuEgTX2G/GiNFCUkS3poBaasrd1UYiBAWofXM9ENcaU/6Hfu0S75N9K5456Dqba5P4vNfMJ97OvupEZzpaAmCI42DsnKBq6KezOnUX5VI++JaeDUe7a1e6QcUJBsNKpluxR1pJGBGXjup+XQT9PxrCkwjIlLqoW2zJQksBr57ebnNPTr+Gev0rZV46G8RdWmms05ispAfunu+v160M+bPNPPCsNaD2cdVNmWozOJ8QiC1mJe6mHk504KwFnP2/xUdkQ1mhE4Bsy8rJWiB5FSAlDerEh5NzmC7IWUzBEEJpZBulAHIfp0NvPJ8OOZUzpECFQL051qPJ0FcnyZwPkohVvCbu3RWxt31QPkh/mgTQopE0V5fN8CzcnEzJLg4Bm3WFiR+ZsVUwImzkIkB4+Bi0pWkibzhTkG98yLfx8MMraI8JlzOhOK/oDGIrRmQbnWggwy5s9DVX4km62gRgs+qqjdM5q+OXDtf34ikTmEdvWP2kSlt/B8ypvvS8z9pC5V01iWr3vx1cf6Q4ERCfj6q1APIb8aNNhPfI8ObmU/5bV+UPmrsCkAev/S5qUHtlRW72N/WG2s94ByLSyP09ieEMKLnX/qCuYV1D+xd5YHUpUmPfNq5/0AMdQwmLicZghrOg9Q8Kw4uc/h6VkSDpk2jaoImi4XDPc63foTHt0wHePeuivREKQ9a5akoJTRwjE4Qx1htAB24S0IDBhFVkm2CDwyuUTPXvDarecMb0PyXPZnbmqqxyobak5oeW78UwsSVJD07tXkKnv/s1hNgtObgDfXERuB1x+W4/dmZCbOk8xznoUlmkqm+OmunN29BeTkP2faZnrXoZecy6PN+YgPrn6/4jM3aTUdfCEm0CrGgCFxABmj54V2ttZoQ1dLW/cjFkT7fVYcXMYOZmBapse/vMOUFdl+9bebQFRiCE1wdE7IhWAmA/6iIviIDxNDgfWJy0Q8FAm949ysR/2/H+4CAhPSsEJvYZZ+w5+88FlkgfwtpF0Su03dObzY2zmxGEe0iBVIR52Bc8A6cZBtbdCSHcmMknOlt6gZa+/whFmO7OGOiBQ9zrAz3TKalCPRb+X0o3BgpTkz7GzgeR7l0m/oyhQ6O0RRnc5q1CLqPWno/+vjIs4PuXgu6zTgrY82JRWACqAIWkVxKO1FvZTUHiZ41aWWUKrYAWjc8Qe1mmZhChsALI0CPkANS64gP+sYclGtGn6EI99+gRevAP88r2ksEWQ6w/w0A0pHSMme+RKX/eqfVfZesB69Y2TEoiKDndS9xjHasaWg+CbWFTG5FuFO04HB4nOAx3RDHpMIm5O60x68BV5/22JoJwrJpbWxwYz1Di4OXypxjJfCQ0+rNsi7giTNSD7uKfgyzjtrZxcLFVoKL/HZBFA0ZO55S6H427Et+PzAzXnemld7Q2hGo82y/h/d1o+QUt0lfcADwOUTAK/uGErssNaGXp3ui1YbMVr0KuUKhyXaLRDbH/dxvZEx5VEAZUrYgp/JPvpG8KRMSZxDsN8SK/HgKhTk9vM+zUh3RVMpQxj9o5SM8C2PnIRMtXLHJVZ24fXMKR0XzAjXSnHBtSQc97o6B9TvzmzGKYSwhFDimCRa1Y0aNDUvJDwGrXY+S4pld/PJxAOjzJRQRhrCahwikWlDMn8ylSsHiKJXiFh4dqoFSxXOzlC4U7AWJlyYHQW2nRwmpFTFrI9olarzuuu1dNb4kMJXsI8SOs77ZtOOGQSBtzG9uQNdSZaOCNsBOgV7pQxOQ4UnyU0Sd4BBSwvcnSEL4Gdry1feE+Z6SHuMaZVK8UY1jGvqtFakpMKNT6Nt21oeBi1hNr9Kr5ggRuSO1pcSwMXS4G4KLEuZiiS8RdjR5QYNNIYjyNIcsskzQwltDq3mgZCuFQo", "2": "CfS37olb/KaL9OeVZIafMUzPDI2ZEZV+ubEcGyH6tgYhb/tKPTiMywoTVsrEz01319AK/H9NtOu3zZGHXnJWEdMdaNfMnTJV+fYSvBlwrYEm1MB1xCupCXSoBjZkyWb/mmaRaUyOt0eanAG2cH7Y3luk00xM1Gey1A0w1+B4yt38qzlwmG9SccODX3sRYl64BJjQGS4wQmZYcQgsV9zPg4dGK9ckO+4x4IYddOvgUu/4Fn02EgLBPgYrJUG6dSfODZWqfa4B/22Wa4+OXC+hly1XO6AsRorzeR7DwVdOaKAAH5zqW01ADeWdF0h3f0V13+kTRia2/+6qBKJ3aZUGqAUSiQ7gxrb5yeHdTVrqEt8TqeVbFtdEFjx+c/xkgMYqNFsTkRDkqFb35udhgOdKMreV9+smFnB7TG2nNG8W2tF+xr3TBPAsm28coBRlkeH1IIWysaMRIcxJ01pYKGm5qn9IrkFEvP1IFU3MirBFTI5kTNkm8RWIW1M6cNObNsBxfojD+CRsgi2hy3NzwbqM6Ap5+rcpGmYX3Bq41bGSR75yzily+PMkDXhmvoLvzMCbpdp6tGyE7ecafIPKIvWMsRlruySXQkMRUfsOcKwZZUZbWhIsq6x8KkDGMED/Rs0h38x6s55UQ6WVuEEZckyci64I+0CL9Qer5xW+igKN9x8SVNNL0rcBvUx8W8C54je3vXrv8allbI4H4IocQuRypIIKM8webEA2EsHn9i57KPeai4/HHe1vLmM6jiZYjH/LWg3K9B40+MqHV0sroqMnBxzMxuR0VVwoGa0KYfQAEgArxguIKm2kPR4+AGqb3MrKOUNGbDosH2vRlWfpdb1ETP3TLday2TkJr7YYG7CEzXURIqO4TlUHR+MEpEPtykvuN/Qyb96nWPWpNu4=", "3": "OEVZI00Gqab6e8FOZprhUtOp7lti8J6BfqJTJRHKC1mrUP58ZYshaa7rT6GuuJrcl38D3evB+OzyoHOIISXp5XdoD71ktcEgWDeoITfXEuM+c8U4GQ==", "4": "42M3t93OIUwU+ntzfYWXG58v7ktxwvm8iD3/eQYZMpvxO7kStSnznkL9bjI905ii4otLfVAuWb/vjFeHpA0u2yjxgIrbDu5ToLVB4QXH0sfna5qpow==", "5": "x0SUVLUTcyGQWK/2YQvD0ggl/MxcOwXMmu5d0HZ2pDrEN8ug+vZw/kEH+eEQ35xOHzeCWRITE/SgY2DL9iDJv4Uj+XOg/xKK73MYLBha6ipDSAwWKw==", "6": "Y54EfoKbgrE5g/J7xesf8DGMW6Txb3zwHjFHPBcWydYujztS6BEkk1jqTQkzaR8QxseJizt2qvbb8A0w/9KO5yzLTrsNKqJlLCELoWMB838fSRd2Rw==", "7": "hNA8UvIDDkESESNAkFqCf9jieBAA8JoVaAnTA60ND8hzYvZuIjJNdbM6NIEJITeIu0ICleRw4g8exv1xs5Gnua6vXXu0/P0uJL9bulpfftBj2dqHjg==", "8": "A94k/7yClVevoixePntN/U29y+3+am6mbYgCzdsfV6CfjQYQO8F2T5FUowbuSwN/avMIdkRrdoOzga83ruN8RA5Fit0NoojjYsGuxDlfOBMmg/KK2A==", "9": "/EdN5eX0unyBWt7bQr2G9SkUFrSdzj70GramDDhC3KlB11kRpF4B/kO71sa1mJZMWtj/v/AwPCOr/MZsQPXWnAi1O5vklxTEaAT1OfibATvnK8OI9Q==", "10": "bqoEgol6xYXIgUx8TtbxQkufPn7npwjzdDtRoO25951rW7ARZ+6akqXaMgerlUMmevxryuDXCl7I723qqoxyy4ynxmPBkihNVgkE9XyLBSb18eIGlQ==", "11": "XaxhhneUXc3xpk5Y59dwIxq+GXmfDuu4NJjOtGzcZUnJRNHbmdWf7OBf3QdFCB8orrdbfUadOfJplCzlqiUAgENnopxFeyHtzgPzXsQZ+FcdAWFWaw==", "12": "x4Zdvediw0AVGoO+nKulvq/+kHEgPPuuYqWZunlI5V2NkyeRKFUWEdrXXXxAPsCKE525MEnLmHiy1ZpZdiXnuPcFA4J+eMZ1C0L/8SMeTyMuAb0hug==", "final": "BHEe1Luhgxw96Uyz99bg2q4KIBnl3/24Gu0jUA4U/dK81DsKJ+cMTU+1aNjGAd+DNrDBUZWdrp/iVA1fczgbxdRSkZDE+Jmcaig+E0QcIcHj/w=="};
+// campos curtos que cada etapa devolve para a visão do projeto
+const CAMPOS={
+ 1:['Meu lugar de fala','Minha causa','História','Conhecimento','Experiência','Dom','Habilidade'],
+ 2:['Para quem','Minha fatia','Frase do negócio'],
+ 3:['Nome do método','Fases'],
+ 4:['Produto principal','Formato'],
+ 5:['Assuntos do Cubo Mágico'],
+ 6:['Redes','Bio'],
+ 7:['Preço','Vendas por mês'],
+ 8:['Porta de entrada'],
+ 9:['Anúncio'],
+ 10:['Conversa de venda'],
+ 11:['Boas-vindas'],
+ 12:['Como entrego','Depoimento']
+};
+const PERGUNTAS={};
+const PROMPTS={};
+const PROMPT_TESTE=n=>''||`[Prompt da etapa ${n}: vamos escrever juntas.]\n\nNo fim da resposta, escreva exatamente este bloco, preenchido com respostas curtas:\n\nPARA O MEU DESENHO\n${CAMPOS[n].map(c=>c+': ').join('\n')}`;
+Object.keys(CAMPOS).forEach(k=>{if(k!=='1')CAMPOS[k].push('Para aprofundar')});
+function campos(n){const r={},t=est.resp[n]||'';
+  t.split('\n').forEach(l=>{const i=l.indexOf(':');if(i>0){const k=l.slice(0,i).trim().toLowerCase(),v=l.slice(i+1).trim();
+    CAMPOS[n].forEach(c=>{if(c.toLowerCase()===k&&v)r[c]=v})}});
+  return r}
+function kv(n,c){const v=campos(n)[c];return `<div class="kv"><small>${c}</small>${v?`<span>${esc(v)}</span>`:`<span class="falta">etapa ${n}</span>`}</div>`}
+function lista(n,c,cls){const v=campos(n)[c];if(!v)return `<div class="kv"><small>${c}</small><span class="falta">etapa ${n}</span></div>`;
+  return `<div class="kv"><small>${c}</small><div class="${cls}">${v.split(/[,;·]/).map(x=>x.trim()).filter(Boolean).map(x=>`<span class="tag">${esc(x)}</span>`).join('')}</div></div>`}
+function redes(){const v=(campos(6)['Redes']||'').toLowerCase();
+  const todas=['Instagram','YouTube','TikTok','LinkedIn','Facebook','WhatsApp'];
+  return `<div class="kv"><small>Redes</small><div class="tags">${todas.map(r=>`<span class="tag${v.includes(r.toLowerCase())?'':' off'}">${r}</span>`).join('')}</div></div>`}
+function numero(t){if(!t)return 0;const m=t.replace(/\./g,'').replace(',','.').match(/\d+(\.\d+)?/);return m?parseFloat(m[0]):0}
+function reais(x){return 'R$ '+Math.round(x).toLocaleString('pt-BR')}
+function aprofundar(ns){const it=ns.map(n=>[n,campos(n)['Para aprofundar']]).filter(x=>x[1]);
+  if(ns.includes(1)&&est.resp[1]){const c=est.check||{};const falta=VERIFICA.filter((t,i)=>!c[i]);
+    if(falta.length) it.unshift([1,'verificar se '+falta.map(t=>t.replace('?','').replace(/^Ele /,'ele ').replace(/^Os /,'os ').replace(/^A /,'a ').replace(/^O /,'o ').replace(/^Eu /,'eu ')).join('; ')+'.'])}
+  if(!it.length)return '';
+  return `<div class="aprof"><small>Para aprofundar</small>${it.map(([n,v])=>`<p><b>${ETAPAS.find(e=>e.n===n).nome}:</b> ${esc(v)}</p>`).join('')}</div>`}
+function montarProjeto(){
+  const nome=est.nome||'guerreira', c2=campos(2), c4=campos(4), c7=campos(7);
+  const q=Object.keys(est.resp).length;
+  const pct=Math.round(q/12*100);
+  document.getElementById('pjTitulo').innerHTML = q===12
+    ? `Parabéns, ${esc(nome)}! O seu negócio digital <em>2027</em> está desenhado e planejado.`
+    : `Parabéns, ${esc(nome)}! O seu negócio digital <em>2027</em> está sendo desenhado.`;
+  document.getElementById('pjProgresso').innerHTML = `<div class="barra"><i style="width:${pct}%"></i></div><span>${pct}% concluído · ${q} de 12 etapas${q<12?' · continue nas atividades':''}</span>`;
+  document.getElementById('pjFrase').textContent = c2['Frase do negócio'] || 'Cada etapa do dia acende uma parte deste desenho.';
+  document.getElementById('pjMarca').innerHTML=`<h5>Marca <em>pessoal</em></h5><div class="papel">a base de tudo</div>${desenhoMarca()}${est.resp[1]?verificaHTML():''}${aprofundar([2])}`;
+  document.getElementById('pjMkt').innerHTML=`<h5>Marketing <em>orgânico e pago</em></h5><div class="papel">atrai as pessoas certas</div>${lista(5,'Assuntos do Cubo Mágico','tags')}${redes()}${kv(9,'Anúncio')}${aprofundar([5,6,9])}`;
+  const preco=numero(c7['Preço']), vendas=numero(c7['Vendas por mês']);
+  const meta = preco&&vendas ? `<div class="meta"><small>Meta de faturamento 2027</small><strong>${reais(preco*vendas*12)}</strong><small>${reais(preco)} × ${vendas} vendas por mês × 12 meses</small></div>`
+                             : `<div class="meta"><small>Meta de faturamento 2027</small><strong style="color:#666">aparece na etapa 7</strong></div>`;
+  document.getElementById('pjVendas').innerHTML=`<h5>Sistema <em>de vendas</em></h5><div class="papel">transforma interesse em venda</div>${kv(7,'Preço')}${kv(8,'Porta de entrada')}${kv(10,'Conversa de venda')}${meta}${aprofundar([7,8,10])}`;
+  document.getElementById('pjProduto').innerHTML=`<h5>Produto <em>autoral</em></h5><div class="papel">entrega a transformação</div>${kv(3,'Nome do método')}${lista(3,'Fases','fases')}${kv(4,'Produto principal')}${kv(11,'Boas-vindas')}${kv(12,'Depoimento')}${aprofundar([3,4,11,12])}`;
+  const metodo=campos(3)['Nome do método'];
+  document.getElementById('pjCentro').innerHTML= metodo ? `Projeto <b>${esc(metodo)}</b>` : `Projeto <span style="color:#9A968E">· o nome aparece na etapa 3</span>`;
+  document.getElementById('pjComp').innerHTML=`<p>Eu, ${esc(nome)}, me comprometo a colocar este negócio no ar em 2027.</p><div class="ass">assinatura · 21 de novembro de 2026</div>`;
+}
+
+// DESENHO 1 · Marca pessoal: a causa no centro, para quem no anel, a frase do negócio na borda
+function anel(id,r,texto,cor){
+  const C=2*Math.PI*r, fs=Math.max(9,Math.min(15,0.9*C/(Math.max(texto.length,1)*0.56)));
+  return `<path id="${id}" d="M ${200-r},200 a ${r},${r} 0 1,1 ${2*r},0 a ${r},${r} 0 1,1 ${-2*r},0" fill="none"/>
+    <text font-size="${fs}" fill="${cor}" font-family="Instrument Sans" font-weight="600" letter-spacing=".02em"><textPath href="#${id}" startOffset="25%" text-anchor="middle">${esc(texto)}</textPath></text>`}
+function desenhoMarcaAneis(){
+  const c1=campos(1), c2=campos(2), causa=c1['Minha causa'], quem=c2['Para quem'], frase=c2['Frase do negócio'];
+  const ouro='#C9A84C', apag='#CFCAC0';
+  return `<div class="desenho"><svg viewBox="0 0 400 400" role="img" aria-label="Desenho da marca pessoal">
+    <circle cx="200" cy="200" r="194" fill="${frase?'#FBF6E8':'none'}" stroke="${frase?ouro:apag}" stroke-width="1.5" ${frase?'':'stroke-dasharray="4 6"'}/>
+    ${anel('aFrase',172,frase||'a frase do seu negócio · etapa 2',frase?'#8A6410':'#B8B4AB')}
+    <circle cx="200" cy="200" r="150" fill="${quem?'#F4E9C8':'none'}" stroke="${quem?ouro:apag}" stroke-width="1.5" ${quem?'':'stroke-dasharray="4 6"'}/>
+    ${anel('aQuem',130,quem?('para '+quem):'para quem você fala · etapa 2',quem?'#141414':'#B8B4AB')}
+    <circle cx="200" cy="200" r="104" fill="${causa?'#161616':'none'}" stroke="${causa?'#161616':apag}" stroke-width="1.5" ${causa?'':'stroke-dasharray="4 6"'}/>
+    <foreignObject x="116" y="116" width="168" height="168"><div xmlns="http://www.w3.org/1999/xhtml" class="causa${causa?'':' vazia'}">
+      <small>${causa?'minha causa':'etapa 1'}</small><span>${causa?esc(causa):'a sua causa'}</span></div></foreignObject>
+  </svg>
+  <div class="legenda"><span><i style="background:#161616"></i>centro: a causa</span><span><i style="background:#F4E9C8;border:1px solid ${ouro}"></i>anel: para quem</span><span><i style="background:#FBF6E8;border:1px solid ${ouro}"></i>borda: a frase do negócio</span></div></div>`}
+
+// DESENHO 1 · Marca pessoal (círculo dourado): por quê no centro, como no meio, o quê por fora
+function desenhoMarca(){
+  const c1=campos(1), c2=campos(2);
+  const porque=c1['Minha causa'], oque=c1['Meu lugar de fala'], quem=c2['Para quem'], fatia=c2['Minha fatia'];
+  const ING=['História','Conhecimento','Experiência','Dom','Habilidade'], como=ING.some(k=>c1[k]);
+  const ouro='#C9A84C', apag='#CFCAC0';
+  const circ=(cy,r,ok,fill)=>`<circle cx="120" cy="${cy}" r="${r}" fill="${ok?fill:'#fff'}" stroke="${ok?ouro:apag}" stroke-width="2" ${ok?'':'stroke-dasharray="5 6"'}/>`;
+  const rot=(y,t,ok,claro)=>`<text x="120" y="${y}" text-anchor="middle" font-family="Instrument Serif" font-style="italic" font-size="26" fill="${ok?(claro?'#EDEAE3':'#8A6410'):'#B8B4AB'}">${t}</text>`;
+  const linha=(n,titulo,txt,etapa,extra)=>`<div class="dm-linha${txt?'':' vazia'}"><b>${titulo}</b><span>${txt?esc(txt):'aparece na etapa '+etapa}</span>${extra||''}</div>`;
+  return `<div class="desenho dm">
+    <svg viewBox="0 0 240 240" aria-label="Círculo da marca pessoal">
+      ${circ(120,116,oque,'#FBF6E8')}${circ(154,82,como,'#F4E9C8')}${circ(184,52,porque,'#161616')}
+      ${rot(46,'o quê?',oque)}${rot(104,'como?',como)}${rot(192,'por quê?',porque,true)}
+    </svg>
+    <div class="dm-textos">
+      ${linha(3,'O quê · o meu lugar de fala',oque,1,(quem?`<em>para ${esc(quem)}</em>`:'')+(fatia?`<em>a minha fatia: ${esc(fatia)}</em>`:''))}
+      ${como?`<div class="dm-linha"><b>Como · a minha receita</b><div class="receita">${ING.map(k=>c1[k]?`<p><i>${k}</i>${esc(c1[k])}</p>`:'').join('')}</div></div>`:linha(2,'Como · a minha receita','',1)}
+      ${linha(1,'Por quê · a minha causa',porque,1)}
+    </div></div>`}
+function avisoZoom(){document.getElementById('modalZoom').classList.add('aberto')}
+function fecharModal(){document.getElementById('modalZoom').classList.remove('aberto')}
+function irPara(v){document.body.classList.remove('ver-etapas','ver-progresso','ver-ebook');if(v)document.body.classList.add('ver-'+v);if(v==='ebook')montarProjeto();window.scrollTo(0,0)}
+function abrirProjeto(){irPara('ebook')}
+function fecharProjeto(){irPara('etapas')}
+function baixarEbook(){montarDocumento();montarProjeto();window.print()}
+
+// verificação do lugar de fala (método da Jade, igual para todas)
+const VERIFICA=['Ele aparece na minha história?','Ele é maior do que a minha profissão? (certificado não é lugar de fala)','Os meus conhecimentos apontam para ele?','A minha experiência aponta para ele?','O meu dom e a minha habilidade aparecem nele?','Eu defenderia isso pelos próximos 10 anos?'];
+function verificaHTML(){
+  return `<div class="verifica"><b>Para ter certeza do seu lugar de fala, verifique:</b>${VERIFICA.map(t=>`<p><span class="q"></span> ${t}</p>`).join('')}</div>`}
+function marcar(i,v){est.check=est.check||{};est.check[i]=v;salvar()}
+// memória no aparelho (com proteção)
+let est={nome:'',abertas:[],resp:{}};
+function ler(){try{const s=localStorage.getItem('dm2027');if(s)est=JSON.parse(s)}catch(e){}}
+function salvar(){try{localStorage.setItem('dm2027',JSON.stringify(est))}catch(e){}}
+
+// na tela: os 4 pilares, um embaixo do outro, com a porcentagem
+function montarDesenho(){
+  const box=document.getElementById('pilares'); box.innerHTML='';
+  AREAS.forEach((a,i)=>{
+    const es=ETAPAS.filter(e=>e.area===a.id).sort((x,y)=>x.n-y.n);
+    const feitas=es.filter(e=>est.resp[e.n]).length, pct=Math.round(feitas/es.length*100);
+    const s=document.createElement('section'); s.className='pilar'+(pct===100?' completo':'');
+    s.innerHTML=`<div class="linha1"><span class="num">0${i+1}</span><h2>${a.nome}</h2><span class="pct${pct===100?' cheio':''}">${pct}%</span></div>
+      <div class="barra"><i style="width:${pct}%"></i></div>
+      <div class="chips">${es.map(e=>`<span class="chip${est.resp[e.n]?' feito':''}">${e.n} · ${e.nome}</span>`).join('')}</div>`;
+    box.appendChild(s);
+  });
+}
+// no PDF: o documento completo, com as respostas dela
+function montarDocumento(){
+  const d=document.getElementById('documento');
+  let h=`<div class="selo">Workshop Despertando Mentoras · 21 de novembro de 2026</div>
+    <h1>O meu negócio digital <em>2027</em></h1><p class="sub">${est.nome||''}</p>`;
+  const fr2=campos(2)['Frase do negócio']||est.resp[2]; if(fr2) h+=`<div class="frase" style="margin-top:20px"><small>O meu negócio em uma frase</small><p>${esc(fr2)}</p></div>`;
+  AREAS.forEach((a,i)=>{
+    h+=`<section class="area"><header><h2>${a.nome}</h2><span class="num">0${i+1}</span></header><p class="pra">${a.pra}</p>`;
+    ETAPAS.filter(e=>e.area===a.id).sort((x,y)=>x.n-y.n).forEach(e=>{
+      h+=`<div class="item${est.resp[e.n]?'':' vazio'}"><div class="rot">Etapa ${e.n} · <b>${e.nome}</b></div><div class="txt">${est.resp[e.n]?esc(est.resp[e.n]):'Ainda em branco.'}</div></div>`;
+    });
+    h+=`<div class="ia"><b>A IA te ajuda aqui:</b> ${a.ia}</div></section>`;
+  });
+  h+=`<p class="rodape">Construído com Jade Torres · metodologia 12 Semanas no Ar</p>`;
+  d.innerHTML=h;
+}
+function esc(t){return t.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]))}
+window.addEventListener('beforeprint',()=>{montarDocumento();montarProjeto()});
+function montarEtapas(){
+  const box=document.getElementById('listaEtapas'); box.innerHTML='';
+  ETAPAS.forEach(e=>{
+    const d=document.createElement('article'); d.className='etapa'; d.id='etapa'+e.n;
+    d.innerHTML=`<div class="topo"><span class="n">${String(e.n).padStart(2,'0')}</span><div>
+      <div class="quando">${e.quando}</div><h4>${e.nome}</h4><p class="dor">“${e.dor}”</p></div></div>
+      <div class="senha"><input placeholder="Senha" aria-label="Senha da etapa ${e.n}" onkeydown="if(event.key==='Enter')abrir(${e.n})">
+        <button class="btn" onclick="abrir(${e.n})">Abrir</button><span class="cadeado">🔒 A senha aparece no meu slide, ao vivo.</span><span class="aviso">Senha errada. Confira no slide.</span></div>
+      <div class="conteudo">
+        <div class="investiga" id="inv${e.n}"></div>
+        <div class="prompt"><div class="barra-p">Prompt da etapa ${e.n}<button onclick="copiar(${e.n},this)">Copiar prompt</button></div><pre id="p${e.n}">${PROMPT_TESTE(e.n)}</pre></div>
+        <div class="cola"><label for="r${e.n}">Cole aqui o resumo "Para o meu desenho"</label>
+          <textarea id="r${e.n}"></textarea>
+          <button class="btn ouro" style="margin-top:10px" onclick="guardar(${e.n})">Colocar no meu desenho</button></div>
+        <div class="trofeu" id="ok${e.n}"><span>🏆</span><div><b>Etapa ${e.n} concluída!</b><small>Ela já está no seu negócio digital 2027.</small>
+          <div class="refazer"><button class="r-ouro" onclick="colarDeNovo(${e.n})">↺ Colar de novo</button><button class="r-linha" onclick="verPrompt(${e.n})">Ver o prompt</button></div></div></div>
+      </div>`;
+    box.appendChild(d);
+  });
+  const f=document.createElement('article'); f.className='etapa final'; f.id='etapaFinal';
+  f.innerHTML=`<div class="topo"><span class="n">✦</span><div><div class="quando" style="color:var(--cinza-claro)">fim do dia</div><h4>O próximo passo</h4>
+    <p class="dor">“E agora, como eu tiro esse desenho do papel?”</p></div></div>
+    <div class="senha"><input placeholder="Senha" onkeydown="if(event.key==='Enter')abrir('final')"><button class="btn ouro" onclick="abrir('final')">Abrir</button>
+      <span class="cadeado">🔒 Abre no encerramento.</span><span class="aviso">Senha errada. Confira no slide.</span></div>
+    <div class="conteudo"></div>`;
+  box.appendChild(f);
+}
+// investigação: as perguntas da etapa, com microfone; as respostas entram no prompt
+const CONT={};
+function montarInvestigacao(n,c){
+  CONT[n]=c; const box=document.getElementById('inv'+n), card=document.getElementById('etapa'+n);
+  const resp=(est.inv||{})[n]||[];
+  if(!c.q.length){box.innerHTML='';document.getElementById('p'+n).textContent=c.p;card.classList.add('gerado');return}
+  box.innerHTML=`<div class="inv-titulo">Responda com as suas palavras. Pode digitar ou falar.</div>`+
+    c.q.map((q,i)=>`<div class="perg"><label for="q${n}_${i}"><span>${i+1}</span>${esc(q)}</label>
+      <div class="perg-campo"><textarea id="q${n}_${i}" oninput="guardarInv(${n})">${esc(resp[i]||'')}</textarea>
+      ${MIC?`<button class="mic" type="button" onclick="falar(${n},${i},this)" aria-label="Responder falando">🎤</button>`:''}</div></div>`).join('')+
+    (MIC?'':`<p class="dica">Dica: no celular, toque no microfone do teclado para responder falando.</p>`)+
+    `<button class="btn" onclick="gerarPrompt(${n})">Gerar o meu prompt</button><span class="aviso-inv" id="avInv${n}">Responda pelo menos uma pergunta.</span>`;
+  if(card.classList.contains('gerado')) gerarPrompt(n,true);
+}
+function guardarInv(n){const c=CONT[n];est.inv=est.inv||{};est.inv[n]=c.q.map((q,i)=>document.getElementById('q'+n+'_'+i).value);salvar()}
+function gerarPrompt(n,quieto){
+  guardarInv(n); const c=CONT[n], r=est.inv[n];
+  if(!r.some(x=>x.trim())){if(!quieto)document.getElementById('avInv'+n).style.display='inline';return}
+  const bloco='MINHAS RESPOSTAS\n'+c.q.map((q,i)=>`${i+1}. ${q}\n${(r[i]||'').trim()||'(sem resposta)'}`).join('\n\n');
+  document.getElementById('p'+n).textContent=c.p.replace('{{RESPOSTAS}}',bloco);
+  const card=document.getElementById('etapa'+n); card.classList.add('gerado');
+  est.gerados=est.gerados||{}; est.gerados[n]=true; salvar();
+  if(!quieto) card.querySelector('.prompt').scrollIntoView({behavior:'smooth',block:'start'});
+}
+const MIC=window.SpeechRecognition||window.webkitSpeechRecognition; let ouvindo=null;
+function falar(n,i,b){
+  if(ouvindo){ouvindo.stop();return}
+  const t=document.getElementById('q'+n+'_'+i), rec=new MIC(); rec.lang='pt-BR'; rec.continuous=true; rec.interimResults=false;
+  const antes=t.value;
+  rec.onresult=e=>{let txt='';for(const r of e.results)txt+=r[0].transcript+' ';t.value=(antes?antes+' ':'')+txt.trim();guardarInv(n)};
+  rec.onend=()=>{ouvindo=null;b.classList.remove('ouvindo');b.textContent='🎤'};
+  rec.onerror=()=>{};
+  ouvindo=rec; b.classList.add('ouvindo'); b.textContent='■'; rec.start();
+}
+// cofre: na versão publicada, cada prompt vem trancado com a senha da etapa (window.COFRE)
+async function sha(t){return new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(t)))}
+async function destrancar(n,senha){
+  const b=Uint8Array.from(atob(window.COFRE[n]),c=>c.charCodeAt(0)), out=new Uint8Array(b.length);
+  for(let i=0;i*32<b.length;i++){const h=await sha(senha+':'+n+':'+i);for(let k=0;k<32&&i*32+k<b.length;k++)out[i*32+k]=b[i*32+k]^h[k]}
+  const t=new TextDecoder().decode(out); return t.startsWith('OK|')?t.slice(3):null}
+function conteudoEtapa(n){return {q:PERGUNTAS[n]||[],p:PROMPTS[n]||PROMPT_TESTE(n)}}
+function mostrarConteudo(n,txt){
+  if(n!=='final'){let c; try{c=JSON.parse(txt)}catch(e){c={q:[],p:txt}} montarInvestigacao(n,c); return}
+  if(n==='final'){document.querySelector('#etapaFinal .conteudo').innerHTML=txt}
+  else{document.getElementById('p'+n).textContent=txt}}
+async function abrir(n){
+  const card=n==='final'?document.getElementById('etapaFinal'):document.getElementById('etapa'+n);
+  const inp=card.querySelector('.senha input'), av=card.querySelector('.aviso'), senha=inp.value.normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/\s+/g,'').toLowerCase();
+  let ok=false;
+  if(window.COFRE){const txt=await destrancar(n,senha); if(txt!==null){ok=true;est.senhas=est.senhas||{};est.senhas[n]=senha;mostrarConteudo(n,txt)}}
+  else {ok = senha===SENHAS[n]; if(ok&&n!=='final') montarInvestigacao(n,conteudoEtapa(n))}
+  if(ok){card.classList.add('aberta');if(!est.abertas.includes(n))est.abertas.push(n);salvar()}
+  else{av.style.display='inline'}
+}
+function copiar(n,b){const t=document.getElementById('p'+n).textContent;
+  (navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(()=>{b.textContent='Copiado!';setTimeout(()=>b.textContent='Copiar prompt',1800)}).catch(()=>{b.textContent='Selecione e copie'})}
+function guardar(n){const v=document.getElementById('r'+n).value.trim(); if(!v)return;
+  est.resp[n]=v; salvar(); pintar(n,true); concluir(n);}
+function concluir(n){const c=document.getElementById('etapa'+n);c.classList.add('concluida');c.classList.remove('ver-prompt')}
+function verPrompt(n){document.getElementById('etapa'+n).classList.toggle('ver-prompt')}
+function colarDeNovo(n){const c=document.getElementById('etapa'+n);c.classList.remove('concluida','ver-prompt');const t=document.getElementById('r'+n);t.focus();t.select()}
+function pintar(n,novo){
+  montarDesenho();
+  const q=Object.keys(est.resp).length;
+  document.getElementById('barra').style.width=(q/12*100)+'%';
+  document.getElementById('contador').textContent=q+' de 12 etapas';
+  const mp=document.getElementById('menuProg'); if(mp) mp.textContent=q+' de 12 etapas concluídas';
+  const f=document.getElementById('frase');
+  const fr=campos(2)['Frase do negócio']||est.resp[2]; if(fr){f.classList.remove('vazio');f.textContent=fr}
+}
+function entrar(){const v=document.getElementById('nomeInput').value.trim(); if(!v)return; est.nome=v; salvar(); mostrarNome()}
+function mostrarNome(){document.querySelectorAll('.nome').forEach(s=>s.textContent=est.nome);document.getElementById('entrada').style.display='none'}
+const EXEMPLO={1:'Meu lugar de fala: a criança que aprende diferente\nMinha causa: nenhuma criança chamada de preguiçosa por aprender de outro jeito\nHistória: fui a criança que demorou a ler e cresci ouvindo que era preguiçosa\nConhecimento: pedagogia e pós em psicopedagogia\nExperiência: 12 anos atendendo crianças com dificuldade na escola\nDom: acalmar quem está nervoso\nHabilidade: transformar a lição de casa em brincadeira',
+ 2:'Para quem: mães de crianças de 6 a 10 anos com dificuldade na escola\nMinha fatia: dificuldade de leitura sem diagnóstico fechado\nFrase do negócio: Eu ajudo mães a verem que o filho não é preguiçoso: ele aprende de outro jeito.\nPara aprofundar: o que essas mães já tentaram antes de chegar até mim',
+ 3:'Nome do método: Ler Sem Medo\nFases: Entender, Acolher, Treinar, Celebrar',
+ 4:'Produto principal: Programa Ler Sem Medo\nFormato: grupo de 8 semanas, aulas gravadas e encontros ao vivo',
+ 5:'Assuntos do Cubo Mágico: sinais de dificuldade, rotina de estudo, a mãe que se culpa',
+ 6:'Redes: Instagram, YouTube\nBio: Ajudo o seu filho a aprender sem brigas na hora da lição',
+ 7:'Preço: R$ 997\nVendas por mês: 8',
+ 8:'Porta de entrada: teste "Dificuldade ou falta de rotina?"',
+ 9:'Anúncio: mães de 30 a 45 anos, levando para o teste',
+ 10:'Conversa de venda: WhatsApp com cada mãe que fez o teste',
+ 11:'Boas-vindas: vídeo, avaliação da criança e grupo das mães',
+ 12:'Como entrego: um encontro a cada 15 dias\nDepoimento: vídeo da mãe na semana 8'};
+function exemplo(q){est.nome=est.nome||'Cláudia';est.resp={};est.abertas=[];est.check={0:true,2:true,3:true};
+  ETAPAS.slice(0,q).forEach(e=>{est.resp[e.n]=EXEMPLO[e.n];est.abertas.push(e.n)});
+  salvar();location.hash='projeto';location.reload()}
+function prep(q){['Ouvir','Ler'].forEach(k=>document.getElementById('prep'+k).classList.toggle('aberta',k.toLowerCase()===q))}
+function limpar(){try{localStorage.removeItem('dm2027')}catch(e){} location.reload()}
+
+ler(); montarDesenho(); montarEtapas();
+if(est.nome) mostrarNome();
+est.abertas.forEach(n=>{const c=n==='final'?document.getElementById('etapaFinal'):document.getElementById('etapa'+n); if(!c)return;
+  if(window.COFRE){const s=(est.senhas||{})[n]; if(s==null)return;
+    if((est.gerados||{})[n])c.classList.add('gerado'); destrancar(n,s).then(t=>{if(t!==null){mostrarConteudo(n,t);c.classList.add('aberta')}}); return}
+  if(n!=='final'){if((est.gerados||{})[n])c.classList.add('gerado'); montarInvestigacao(n,conteudoEtapa(n))}
+  c.classList.add('aberta')});
+Object.keys(est.resp).forEach(n=>{pintar(n);const t=document.getElementById('r'+n);if(t)t.value=est.resp[n];concluir(n)});
+pintar(0);
+if(location.hash==='#projeto') setTimeout(abrirProjeto,100);
+if(location.hash==='#etapas') irPara('etapas');
+</script>
+</body>
+</html>
