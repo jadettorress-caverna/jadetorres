@@ -184,6 +184,27 @@ h2{font-size:28px;letter-spacing:-.02em;line-height:1.05}
 .data-linha .data i{display:inline-block;width:34px;border-bottom:1.5px solid var(--tinta);margin:0 2px}
 .msg-tit{font-weight:600}
 .linhas i{display:block;height:34px;border-bottom:1px solid #B8B4AB}
+.pz{margin-top:44px;padding-top:30px;border-top:1px solid var(--linha)}
+.pz-grade{display:grid;grid-template-columns:1fr 210px;gap:22px;align-items:center}
+@media(max-width:620px){.pz-grade{grid-template-columns:1fr}.pz-pizza{max-width:220px;margin:0 auto}}
+.escada{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.escada li{display:grid;grid-template-columns:34px 1fr;gap:12px;align-items:center;border:1px solid var(--linha);border-radius:14px;padding:10px 14px;background:#fff}
+.escada li:nth-child(2){margin-left:10px}.escada li:nth-child(3){margin-left:20px}.escada li:nth-child(4){margin-left:30px}.escada li:nth-child(5){margin-left:40px}
+@media(max-width:620px){.escada li{margin-left:0!important}}
+.escada .n{width:34px;height:34px;border-radius:50%;border:1.5px solid var(--ouro);color:#8A6410;display:grid;place-items:center;font-family:"Instrument Serif",serif;font-size:20px}
+.escada small,.pz-quem small{display:block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ouro-forte);font-weight:700}
+.escada b{display:block;font-family:"Instrument Serif",serif;font-weight:400;font-size:20px;line-height:1.15}
+.escada li.fatia{border:1.5px solid var(--ouro);background:#FBF6E8}
+.escada li.vazio b{color:#B8B4AB;font-size:16px}
+.pz-pizza svg{width:100%}
+.pz-leg{text-align:center;font-family:"Instrument Serif",serif;font-style:italic;font-size:17px;color:var(--cinza);margin-top:4px}
+.pz-leg b{font-style:normal;color:#8A6410;font-weight:400;font-size:20px}
+.pz-quem{margin-top:22px;display:grid;gap:14px}
+.pz-quem p{font-family:"Instrument Serif",serif;font-size:20px;line-height:1.25;margin:2px 0 0}
+.pz-ad{display:grid;grid-template-columns:1fr auto 1fr;gap:12px;align-items:start;border:1px solid var(--linha);border-radius:14px;padding:14px 16px}
+@media(max-width:560px){.pz-ad{grid-template-columns:1fr}.pz-ad .seta{transform:rotate(90deg);justify-self:center}}
+.pz-ad .seta{color:var(--ouro);font-size:26px;align-self:center}
+.pz-quem.vazio p{color:#B8B4AB;font-size:16px}
 .desenho{margin:6px 0 14px}
 .desenho svg{width:100%;max-width:380px;display:block;margin:0 auto}
 .desenho .causa{width:168px;height:168px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;color:#EDEAE3;padding:10px}
@@ -433,11 +454,11 @@ const ETAPAS=[
  {n:12,nome:'Entrega',area:'produto',quando:'tarde',dor:'A aluna termina e você não tem nenhum depoimento para mostrar.'}
 ];
 const SENHAS={};
-window.COFRE={"1": "PMMS5e0yhN4iu2Fr/MIffT0Z6qG1xNE0hdsya8SlPAgpCiMTb4Ivs0AR+/vVxz7eLdgEE1bTQGeuefYWd6RSB4E0lqqcdobowkuEgTX2G/GiNFCUkS3poBaasrd1UYiBAWofXM9ENcaU/6Hfu0S75N9K5456Dqba5P4vNfMJ97OvupEZzpaAmCI42DsnKBq6KezOnUX5VI++JaeDUe7a1e6QcUJBsNKpluxR1pJGBGXjup+XQT9PxrCkwjIlLqoW2zJQksBr57ebnNPTr+Gev0rZV46G8RdWmms05ispAfunu+v160M+bPNPPCsNaD2cdVNmWozOJ8QiC1mJe6mHk504KwFnP2/xUdkQ1mhE4Bsy8rJWiB5FSAlDerEh5NzmC7IWUzBEEJpZBulAHIfp0NvPJ8OOZUzpECFQL051qPJ0FcnyZwPkohVvCbu3RWxt31QPkh/mgTQopE0V5fN8CzcnEzJLg4Bm3WFiR+ZsVUwImzkIkB4+Bi0pWkibzhTkG98yLfx8MMraI8JlzOhOK/oDGIrRmQbnWggwy5s9DVX4km62gRgs+qqjdM5q+OXDtf34ikTmEdvWP2kSlt/B8ypvvS8z9pC5V01iWr3vx1cf6Q4ERCfj6q1APIb8aNNhPfI8ObmU/5bV+UPmrsCkAev/S5qUHtlRW72N/WG2s94ByLSyP09ieEMKLnX/qCuYV1D+xd5YHUpUmPfNq5/0AMdQwmLicZghrOg9Q8Kw4uc/h6VkSDpk2jaoImi4XDPc63foTHt0wHePeuivREKQ9a5akoJTRwjE4Qx1htAB24S0IDBhFVkm2CDwyuUTPXvDarecMb0PyXPZnbmqqxyobak5oeW78UwsSVJD07tXkKnv/s1hNgtObgDfXERuB1x+W4/dmZCbOk8xznoUlmkqm+OmunN29BeTkP2faZnrXoZecy6PN+YgPrn6/4jM3aTUdfCEm0CrGgCFxABmj54V2ttZoQ1dLW/cjFkT7fVYcXMYOZmBapse/vMOUFdl+9bebQFRiCE1wdE7IhWAmA/6iIviIDxNDgfWJy0Q8FAm949ysR/2/H+4CAhPSsEJvYZZ+w5+88FlkgfwtpF0Su03dObzY2zmxGEe0iBVIR52Bc8A6cZBtbdCSHcmMknOlt6gZa+/whFmO7OGOiBQ9zrAz3TKalCPRb+X0o3BgpTkz7GzgeR7l0m/oyhQ6O0RRnc5q1CLqPWno/+vjIs4PuXgu6zTgrY82JRWACqAIWkVxKO1FvZTUHiZ41aWWUKrYAWjc8Qe1mmZhChsALI0CPkANS64gP+sYclGtGn6EI99+gRevAP88r2ksEWQ6w/w0A0pHSMme+RKX/eqfVfZesB69Y2TEoiKDndS9xjHasaWg+CbWFTG5FuFO04HB4nOAx3RDHpMIm5O60x68BV5/22JoJwrJpbWxwYz1Di4OXypxjJfCQ0+rNsi7giTNSD7uKfgyzjtrZxcLFVoKL/HZBFA0ZO55S6H427Et+PzAzXnemld7Q2hGo82y/h/d1o+QUt0lfcADwOUTAK/uGErssNaGXp3ui1YbMVr0KuUKhyXaLRDbH/dxvZEx5VEAZUrYgp/JPvpG8KRMSZxDsN8SK/HgKhTk9vM+zUh3RVMpQxj9o5SM8C2PnIRMtXLHJVZ24fXMKR0XzAjXSnHBtSQc97o6B9TvzmzGKYSwhFDimCRa1Y0aNDUvJDwGrXY+S4pld/PJxAOjzJRQRhrCahwikWlDMn8ylSsHiKJXiFh4dqoFSxXOzlC4U7AWJlyYHQW2nRwmpFTFrI9olarzuuu1dNb4kMJXsI8SOs77ZtOOGQSBtzG9uQNdSZaOCNsBOgV7pQxOQ4UnyU0Sd4BBSwvcnSEL4Gdry1feE+Z6SHuMaZVK8UY1jGvqtFakpMKNT6Nt21oeBi1hNr9Kr5ggRuSO1pcSwMXS4G4KLEuZiiS8RdjR5QYNNIYjyNIcsskzQwltDq3mgZCuFQo", "2": "CfS37olb/KaL9OeVZIafMUzPDI2ZEZV+ubEcGyH6tgYhb/tKPTiMywoTVsrEz01319AK/H9NtOu3zZGHXnJWEdMdaNfMnTJV+fYSvBlwrYEm1MB1xCupCXSoBjZkyWb/mmaRaUyOt0eanAG2cH7Y3luk00xM1Gey1A0w1+B4yt38qzlwmG9SccODX3sRYl64BJjQGS4wQmZYcQgsV9zPg4dGK9ckO+4x4IYddOvgUu/4Fn02EgLBPgYrJUG6dSfODZWqfa4B/22Wa4+OXC+hly1XO6AsRorzeR7DwVdOaKAAH5zqW01ADeWdF0h3f0V13+kTRia2/+6qBKJ3aZUGqAUSiQ7gxrb5yeHdTVrqEt8TqeVbFtdEFjx+c/xkgMYqNFsTkRDkqFb35udhgOdKMreV9+smFnB7TG2nNG8W2tF+xr3TBPAsm28coBRlkeH1IIWysaMRIcxJ01pYKGm5qn9IrkFEvP1IFU3MirBFTI5kTNkm8RWIW1M6cNObNsBxfojD+CRsgi2hy3NzwbqM6Ap5+rcpGmYX3Bq41bGSR75yzily+PMkDXhmvoLvzMCbpdp6tGyE7ecafIPKIvWMsRlruySXQkMRUfsOcKwZZUZbWhIsq6x8KkDGMED/Rs0h38x6s55UQ6WVuEEZckyci64I+0CL9Qer5xW+igKN9x8SVNNL0rcBvUx8W8C54je3vXrv8allbI4H4IocQuRypIIKM8webEA2EsHn9i57KPeai4/HHe1vLmM6jiZYjH/LWg3K9B40+MqHV0sroqMnBxzMxuR0VVwoGa0KYfQAEgArxguIKm2kPR4+AGqb3MrKOUNGbDosH2vRlWfpdb1ETP3TLday2TkJr7YYG7CEzXURIqO4TlUHR+MEpEPtykvuN/Qyb96nWPWpNu4=", "3": "OEVZI00Gqab6e8FOZprhUtOp7lti8J6BfqJTJRHKC1mrUP58ZYshaa7rT6GuuJrcl38D3evB+OzyoHOIISXp5XdoD71ktcEgWDeoITfXEuM+c8U4GQ==", "4": "42M3t93OIUwU+ntzfYWXG58v7ktxwvm8iD3/eQYZMpvxO7kStSnznkL9bjI905ii4otLfVAuWb/vjFeHpA0u2yjxgIrbDu5ToLVB4QXH0sfna5qpow==", "5": "x0SUVLUTcyGQWK/2YQvD0ggl/MxcOwXMmu5d0HZ2pDrEN8ug+vZw/kEH+eEQ35xOHzeCWRITE/SgY2DL9iDJv4Uj+XOg/xKK73MYLBha6ipDSAwWKw==", "6": "Y54EfoKbgrE5g/J7xesf8DGMW6Txb3zwHjFHPBcWydYujztS6BEkk1jqTQkzaR8QxseJizt2qvbb8A0w/9KO5yzLTrsNKqJlLCELoWMB838fSRd2Rw==", "7": "hNA8UvIDDkESESNAkFqCf9jieBAA8JoVaAnTA60ND8hzYvZuIjJNdbM6NIEJITeIu0ICleRw4g8exv1xs5Gnua6vXXu0/P0uJL9bulpfftBj2dqHjg==", "8": "A94k/7yClVevoixePntN/U29y+3+am6mbYgCzdsfV6CfjQYQO8F2T5FUowbuSwN/avMIdkRrdoOzga83ruN8RA5Fit0NoojjYsGuxDlfOBMmg/KK2A==", "9": "/EdN5eX0unyBWt7bQr2G9SkUFrSdzj70GramDDhC3KlB11kRpF4B/kO71sa1mJZMWtj/v/AwPCOr/MZsQPXWnAi1O5vklxTEaAT1OfibATvnK8OI9Q==", "10": "bqoEgol6xYXIgUx8TtbxQkufPn7npwjzdDtRoO25951rW7ARZ+6akqXaMgerlUMmevxryuDXCl7I723qqoxyy4ynxmPBkihNVgkE9XyLBSb18eIGlQ==", "11": "XaxhhneUXc3xpk5Y59dwIxq+GXmfDuu4NJjOtGzcZUnJRNHbmdWf7OBf3QdFCB8orrdbfUadOfJplCzlqiUAgENnopxFeyHtzgPzXsQZ+FcdAWFWaw==", "12": "x4Zdvediw0AVGoO+nKulvq/+kHEgPPuuYqWZunlI5V2NkyeRKFUWEdrXXXxAPsCKE525MEnLmHiy1ZpZdiXnuPcFA4J+eMZ1C0L/8SMeTyMuAb0hug==", "final": "BHEe1Luhgxw96Uyz99bg2q4KIBnl3/24Gu0jUA4U/dK81DsKJ+cMTU+1aNjGAd+DNrDBUZWdrp/iVA1fczgbxdRSkZDE+Jmcaig+E0QcIcHj/w=="};
+window.COFRE={"1": "PMMS5e0yhN4iu2Fr/MIffT0Z6qG1xNE0hdsya8SlPAgpCiMTb4Ivs0AR+/vVxz7eLdgEE1bTQGeuefYWd6RSB4E0lqqcdobowkuEgTX2G/GiNFCUkS3poBaasrd1UYiBAWofXM9ENcaU/6Hfu0S75N9K5456Dqba5P4vNfMJ97OvupEZzpaAmCI42DsnKBq6KezOnUX5VI++JaeDUe7a1e6QcUJBsNKpluxR1pJGBGXjup+XQT9PxrCkwjIlLqoW2zJQksBr57ebnNPTr+Gev0rZV46G8RdWmms05ispAfunu+v160M+bPNPPCsNaD2cdVNmWozOJ8QiC1mJe6mHk504KwFnP2/xUdkQ1mhE4Bsy8rJWiB5FSAlDerEh5NzmC7IWUzBEEJpZBulAHIfp0NvPJ8OOZUzpECFQL051qPJ0FcnyZwPkohVvCbu3RWxt31QPkh/mgTQopE0V5fN8CzcnEzJLg4Bm3WFiR+ZsVUwImzkIkB4+Bi0pWkibzhTkG98yLfx8MMraI8JlzOhOK/oDGIrRmQbnWggwy5s9DVX4km62gRgs+qqjdM5q+OXDtf34ikTmEdvWP2kSlt/B8ypvvS8z9pC5V01iWr3vx1cf6Q4ERCfj6q1APIb8aNNhPfI8ObmU/5bV+UPmrsCkAev/S5qUHtlRW72N/WG2s94ByLSyP09ieEMKLnX/qCuYV1D+xd5YHUpUmPfNq5/0AMdQwmLicZghrOg9Q8Kw4uc/h6VkSDpk2jaoImi4XDPc63foTHt0wHePeuivREKQ9a5akoJTRwjE4Qx1htAB24S0IDBhFVkm2CDwyuUTPXvDarecMb0PyXPZnbmqqxyobak5oeW78UwsSVJD07tXkKnv/s1hNgtObgDfXERuB1x+W4/dmZCbOk8xznoUlmkqm+OmunN29BeTkP2faZnrXoZecy6PN+YgPrn6/4jM3aTUdfCEm0CrGgCFxABmj54V2ttZoQ1dLW/cjFkT7fVYcXMYOZmBapse/vMOUFdl+9bebQFRiCE1wdE7IhWAmA/6iIviIDxNDgfWJy0Q8FAm949ysR/2/H+4CAhPSsEJvYZZ+w5+88FlkgfwtpF0Su03dObzY2zmxGEe0iBVIR52Bc8A6cZBtbdCSHcmMknOlt6gZa+/whFmO7OGOiBQ9zrAz3TKalCPRb+X0o3BgpTkz7GzgeR7l0m/oyhQ6O0RRnc5q1CLqPWno/+vjIs4PuXgu6zTgrY82JRWACqAIWkVxKO1FvZTUHiZ41aWWUKrYAWjc8Qe1mmZhChsALI0CPkANS64gP+sYclGtGn6EI99+gRevAP88r2ksEWQ6w/w0A0pHSMme+RKX/eqfVfZesB69Y2TEoiKDndS9xjHasaWg+CbWFTG5FuFO04HB4nOAx3RDHpMIm5O60x68BV5/22JoJwrJpbWxwYz1Di4OXypxjJfCQ0+rNsi7giTNSD7uKfgyzjtrZxcLFVoKL/HZBFA0ZO55S6H427Et+PzAzXnemld7Q2hGo82y/h/d1o+QUt0lfcADwOUTAK/uGErssNaGXp3ui1YbMVr0KuUKhyXaLRDbH/dxvZEx5VEAZUrYgp/JPvpG8KRMSZxDsN8SK/HgKhTk9vM+zUh3RVMpQxj9o5SM8C2PnIRMtXLHJVZ24fXMKR0XzAjXSnHBtSQc97o6B9TvzmzGKYSwhFDimCRa1Y0aNDUvJDwGrXY+S4pld/PJxAOjzJRQRhrCahwikWlDMn8ylSsHiKJXiFh4dqoFSxXOzlC4U7AWJlyYHQW2nRwmpFTFrI9olarzuuu1dNb4kMJXsI8SOs77ZtOOGQSBtzG9uQNdSZaOCNsBOgV7pQxOQ4UnyU0Sd4BBSwvcnSEL4Gdry1feE+Z6SHuMaZVK8UY1jGvqtFakpMKNT6Nt21oeBi1hNr9Kr5ggRuSO1pcSwMXS4G4KLEuZiiS8RdjR5QYNNIYjyNIcsskzQwltDq3mgZCuFQo", "2": "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", "3": "OEVZI00Gqab6e8FOZprhUtOp7lti8J6BfqJTJRHKC1mrUP58ZYshaa7rT6GuuJrcl38D3evB+OzyoHOIISXp5XdoD71ktcEgWDeoITfXEuM+c8U4GQ==", "4": "42M3t93OIUwU+ntzfYWXG58v7ktxwvm8iD3/eQYZMpvxO7kStSnznkL9bjI905ii4otLfVAuWb/vjFeHpA0u2yjxgIrbDu5ToLVB4QXH0sfna5qpow==", "5": "x0SUVLUTcyGQWK/2YQvD0ggl/MxcOwXMmu5d0HZ2pDrEN8ug+vZw/kEH+eEQ35xOHzeCWRITE/SgY2DL9iDJv4Uj+XOg/xKK73MYLBha6ipDSAwWKw==", "6": "Y54EfoKbgrE5g/J7xesf8DGMW6Txb3zwHjFHPBcWydYujztS6BEkk1jqTQkzaR8QxseJizt2qvbb8A0w/9KO5yzLTrsNKqJlLCELoWMB838fSRd2Rw==", "7": "hNA8UvIDDkESESNAkFqCf9jieBAA8JoVaAnTA60ND8hzYvZuIjJNdbM6NIEJITeIu0ICleRw4g8exv1xs5Gnua6vXXu0/P0uJL9bulpfftBj2dqHjg==", "8": "A94k/7yClVevoixePntN/U29y+3+am6mbYgCzdsfV6CfjQYQO8F2T5FUowbuSwN/avMIdkRrdoOzga83ruN8RA5Fit0NoojjYsGuxDlfOBMmg/KK2A==", "9": "/EdN5eX0unyBWt7bQr2G9SkUFrSdzj70GramDDhC3KlB11kRpF4B/kO71sa1mJZMWtj/v/AwPCOr/MZsQPXWnAi1O5vklxTEaAT1OfibATvnK8OI9Q==", "10": "bqoEgol6xYXIgUx8TtbxQkufPn7npwjzdDtRoO25951rW7ARZ+6akqXaMgerlUMmevxryuDXCl7I723qqoxyy4ynxmPBkihNVgkE9XyLBSb18eIGlQ==", "11": "XaxhhneUXc3xpk5Y59dwIxq+GXmfDuu4NJjOtGzcZUnJRNHbmdWf7OBf3QdFCB8orrdbfUadOfJplCzlqiUAgENnopxFeyHtzgPzXsQZ+FcdAWFWaw==", "12": "x4Zdvediw0AVGoO+nKulvq/+kHEgPPuuYqWZunlI5V2NkyeRKFUWEdrXXXxAPsCKE525MEnLmHiy1ZpZdiXnuPcFA4J+eMZ1C0L/8SMeTyMuAb0hug==", "final": "BHEe1Luhgxw96Uyz99bg2q4KIBnl3/24Gu0jUA4U/dK81DsKJ+cMTU+1aNjGAd+DNrDBUZWdrp/iVA1fczgbxdRSkZDE+Jmcaig+E0QcIcHj/w=="};
 // campos curtos que cada etapa devolve para a visão do projeto
 const CAMPOS={
  1:['Meu lugar de fala','Minha causa','História','Conhecimento','Experiência','Dom','Habilidade'],
- 2:['Para quem','Minha fatia','Frase do negócio'],
+ 2:['Área de atuação','Nicho','Subnicho','Ingredientes','Para quem','Problema','Transformação','Minha fatia'],
  3:['Nome do método','Fases'],
  4:['Produto principal','Formato'],
  5:['Assuntos do Cubo Mágico'],
@@ -481,7 +502,7 @@ function montarProjeto(){
     : `Parabéns, ${esc(nome)}! O seu negócio digital <em>2027</em> está sendo desenhado.`;
   document.getElementById('pjProgresso').innerHTML = `<div class="barra"><i style="width:${pct}%"></i></div><span>${pct}% concluído · ${q} de 12 etapas${q<12?' · continue nas atividades':''}</span>`;
   document.getElementById('pjFrase').textContent = 'Use este planner para garantir que cada etapa do seu negócio digital esteja desenhada, planejada e datada.';
-  document.getElementById('pjMarca').innerHTML=`<h5>Marca <em>pessoal</em></h5><div class="papel">a base de tudo</div>${desenhoMarca()}${est.resp[1]?verificaHTML()+concluirMarca():''}`;
+  document.getElementById('pjMarca').innerHTML=`<h5>Marca <em>pessoal</em></h5><div class="papel">a base de tudo</div>${desenhoMarca()}${est.resp[1]?verificaHTML()+concluirMarca():''}${desenhoPizza()}`;
   document.getElementById('pjMkt').innerHTML=`<h5>Marketing <em>orgânico e pago</em></h5><div class="papel">atrai as pessoas certas</div>${lista(5,'Assuntos do Cubo Mágico','tags')}${redes()}${kv(9,'Anúncio')}`;
   const preco=numero(c7['Preço']), vendas=numero(c7['Vendas por mês']);
   const meta = preco&&vendas ? `<div class="meta"><small>Meta de faturamento 2027</small><strong>${reais(preco*vendas*12)}</strong><small>${reais(preco)} × ${vendas} vendas por mês × 12 meses</small></div>`
@@ -512,6 +533,37 @@ function desenhoMarcaAneis(){
   </svg>
   <div class="legenda"><span><i style="background:#161616"></i>centro: a causa</span><span><i style="background:#F4E9C8;border:1px solid ${ouro}"></i>anel: para quem</span><span><i style="background:#FBF6E8;border:1px solid ${ouro}"></i>borda: a frase do negócio</span></div></div>`}
 
+// DESENHO 2 · Posicionamento: a receita da pizza (escada + pizza com a fatia)
+function desenhoPizza(){
+  const c=campos(2), tem=!!est.resp[2];
+  const v=(k)=>c[k]?esc(c[k]):'';
+  const deg=[['Área de atuação','Área de atuação'],['Nicho','Nicho'],['Ingredientes','Ingredientes de marca'],['Subnicho','Subnicho'],['Minha fatia','Fatia']];
+  const cx=110,cy=110,r=92,a1=-80,a2=-35,rad=a=>a*Math.PI/180,pt=(a,rr)=>[(cx+rr*Math.cos(rad(a))).toFixed(1),(cy+rr*Math.sin(rad(a))).toFixed(1)];
+  const [x1,y1]=pt(a1,r),[x2,y2]=pt(a2,r),mid=rad((a1+a2)/2),dx=(20*Math.cos(mid)).toFixed(1),dy=(20*Math.sin(mid)).toFixed(1);
+  const ouro=tem?'#C9A84C':'#CFCAC0', fatiaCor=tem?'#F1DC9A':'#fff';
+  const cortes=[-125,-170,145,100,55,10].map(a=>{const[x,y]=pt(a,r-6);return `<line x1="${cx}" y1="${cy}" x2="${x}" y2="${y}"/>`}).join('');
+  const bol=[[70,80],[150,150],[85,150],[60,118],[120,170],[150,108],[100,58],[48,150]].map(([x,y])=>`<circle cx="${x}" cy="${y}" r="5"/>`).join('');
+  const svg=`<svg viewBox="0 0 240 230" aria-label="Pizza com a fatia">
+    <g fill="#fff" stroke="${ouro}" stroke-width="2" ${tem?'':'stroke-dasharray="5 6"'}>
+      <path d="M${cx},${cy} L${x2},${y2} A${r},${r} 0 1,1 ${x1},${y1} Z"/>
+      <path d="M${cx},${cy} L${x2},${y2} A${r-10},${r-10} 0 1,1 ${x1},${y1} Z" fill="none" stroke-width="1" transform="translate(0 0) scale(1)" opacity="0"/>
+      <circle cx="${cx}" cy="${cy}" r="${r-11}" fill="none" stroke-width="1"/>
+    </g>
+    <g stroke="${ouro}" stroke-width="1">${cortes}</g>
+    <g fill="none" stroke="${ouro}" stroke-width="1.2">${bol}</g>
+    <path d="M${cx},${cy} L${x1},${y1} A${r},${r} 0 0,1 ${x2},${y2} Z" transform="translate(${dx} ${dy})" fill="${fatiaCor}" stroke="${tem?'#8A6410':'#CFCAC0'}" stroke-width="2"/>
+  </svg>`;
+  return `<div class="desenho pz">
+    <div class="mp-tit">Onde · o meu posicionamento</div>
+    <div class="pz-grade">
+      <ol class="escada">${deg.map(([k,rot],i)=>`<li class="${i===4?'fatia':''}${v(k)?'':' vazio'}"><span class="n">${i+1}</span><div><small>${rot}</small><b>${v(k)||'aparece na etapa 2'}</b></div></li>`).join('')}</ol>
+      <div class="pz-pizza">${svg}<div class="pz-leg">${v('Minha fatia')?`a minha fatia:<br><b>${v('Minha fatia')}</b>`:'a sua fatia'}</div></div>
+    </div>
+    <div class="pz-quem${tem?'':' vazio'}">
+      <div><small>Para quem</small><p>${v('Para quem')||'etapa 2'}</p></div>
+      <div class="pz-ad"><div><small>Antes · o problema</small><p>${v('Problema')||'etapa 2'}</p></div><span class="seta">→</span><div><small>Depois · a transformação</small><p>${v('Transformação')||'etapa 2'}</p></div></div>
+    </div>
+  </div>`}
 // DESENHO 1 · Marca pessoal (círculo dourado): por quê no centro, como no meio, o quê por fora
 function desenhoMarca(){
   const c1=campos(1), c2=campos(2);
@@ -580,7 +632,7 @@ function montarDocumento(){
   const d=document.getElementById('documento');
   let h=`<div class="selo">Workshop Despertando Mentoras · 21 de novembro de 2026</div>
     <h1>O meu negócio digital <em>2027</em></h1><p class="sub">${est.nome||''}</p>`;
-  const fr2=campos(2)['Frase do negócio']||est.resp[2]; if(fr2) h+=`<div class="frase" style="margin-top:20px"><small>O meu negócio em uma frase</small><p>${esc(fr2)}</p></div>`;
+  const fr2=campos(2)['Frase do negócio']; if(fr2) h+=`<div class="frase" style="margin-top:20px"><small>O meu negócio em uma frase</small><p>${esc(fr2)}</p></div>`;
   AREAS.forEach((a,i)=>{
     h+=`<section class="area"><header><h2>${a.nome}</h2><span class="num">0${i+1}</span></header><p class="pra">${a.pra}</p>`;
     ETAPAS.filter(e=>e.area===a.id).sort((x,y)=>x.n-y.n).forEach(e=>{
@@ -689,12 +741,12 @@ function pintar(n,novo){
   document.getElementById('contador').textContent=q+' de 12 etapas';
   const mp=document.getElementById('menuProg'); if(mp) mp.textContent=q+' de 12 etapas concluídas';
   const f=document.getElementById('frase');
-  const fr=campos(2)['Frase do negócio']||est.resp[2]; if(fr){f.classList.remove('vazio');f.textContent=fr}
+  const fr=campos(2)['Frase do negócio']; if(fr){f.classList.remove('vazio');f.textContent=fr}
 }
 function entrar(){const v=document.getElementById('nomeInput').value.trim(); if(!v)return; est.nome=v; salvar(); mostrarNome()}
 function mostrarNome(){document.querySelectorAll('.nome').forEach(s=>s.textContent=est.nome);document.getElementById('entrada').style.display='none'}
 const EXEMPLO={1:'Meu lugar de fala: a criança que aprende diferente\nMinha causa: nenhuma criança chamada de preguiçosa por aprender de outro jeito\nHistória: fui a criança que demorou a ler e cresci ouvindo que era preguiçosa\nConhecimento: pedagogia e pós em psicopedagogia\nExperiência: 12 anos atendendo crianças com dificuldade na escola\nDom: acalmar quem está nervoso\nHabilidade: transformar a lição de casa em brincadeira',
- 2:'Para quem: mães de crianças de 6 a 10 anos com dificuldade na escola\nMinha fatia: dificuldade de leitura sem diagnóstico fechado\nFrase do negócio: Eu ajudo mães a verem que o filho não é preguiçoso: ele aprende de outro jeito.\nPara aprofundar: o que essas mães já tentaram antes de chegar até mim',
+ 2:'Área de atuação: Educação\nNicho: Psicopedagogia\nSubnicho: crianças de 6 a 10 anos com dificuldade de leitura\nIngredientes: criança que demorou a ler, psicopedagogia, 12 anos de consultório, acalmar, brincadeira\nPara quem: mães de crianças de 6 a 10 anos que ouvem da escola que o filho é preguiçoso\nProblema: o filho não lê, chora na lição e ela não sabe mais o que fazer\nTransformação: o filho lê com gosto e ela volta a confiar nele\nMinha fatia: a criança que não é preguiçosa: aprende de outro jeito',
  3:'Nome do método: Ler Sem Medo\nFases: Entender, Acolher, Treinar, Celebrar',
  4:'Produto principal: Programa Ler Sem Medo\nFormato: grupo de 8 semanas, aulas gravadas e encontros ao vivo',
  5:'Assuntos do Cubo Mágico: sinais de dificuldade, rotina de estudo, a mãe que se culpa',
