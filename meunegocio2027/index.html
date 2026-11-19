@@ -17,6 +17,7 @@
 body{background:var(--fundo);color:var(--tinta);font-family:"Instrument Sans",system-ui,sans-serif;font-size:17px;line-height:1.5}
 button,input,textarea{font:inherit}
 .teste{position:sticky;top:0;z-index:20;background:#fff8e1;border-bottom:1px solid #e6d9a8;padding:8px 16px;text-align:center;font-size:14px}
+#listaSenhas{display:none;width:100%;margin-top:6px;font-weight:600}#listaSenhas.aberto{display:block}
 .teste button{padding:4px 12px;border-radius:999px;border:1px solid var(--tinta);background:#fff;cursor:pointer;margin-left:6px}
 .pagina{max-width:1080px;margin:0 auto;padding:40px 20px 80px}
 .selo{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--cinza)}
@@ -228,6 +229,13 @@ body.ver-ebook .teste{display:none}
 .preparo{background:#fff;border:1px solid var(--linha);border-radius:22px;padding:22px}
 .prep-botoes{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
 .prep-caixa{display:none;margin-top:16px}
+.pj-aguarda{display:none;text-align:center;margin:40px auto 20px;max-width:560px;padding:56px 28px;border:1px solid var(--ouro);border-radius:22px;background:#fff}
+.pj-aguarda .pj-joia{color:var(--ouro);font-size:34px;margin-bottom:10px}
+.pj-aguarda h2{font-size:clamp(28px,5vw,40px);margin:0 0 12px}
+.pj-aguarda p{font-size:18px;margin:0 0 26px}
+.pj-aguarda .btn{display:inline-block;text-decoration:none}
+#projeto.vazio .pj-aguarda{display:block}
+#projeto.vazio .pj-so-cheio{display:none!important}
 .instrucoes h5{font-size:20px;letter-spacing:-.01em;margin:18px 0 8px}
 .instrucoes ol{padding-left:22px}.instrucoes li{margin-bottom:10px}
 .instrucoes ul{padding-left:20px;margin-top:6px}.instrucoes ul li{margin-bottom:4px}
@@ -318,8 +326,15 @@ body.ver-ebook .teste{display:none}
   <!-- A visão do projeto: o negócio funcionando -->
   <section id="projeto" class="secao v-ebook">
     <div class="atalhos nao-imprime" style="margin:0 0 28px"><a href="#" class="leve" onclick="irPara('');return false">← Início</a>
-      <a href="#" class="ouro" onclick="baixarEbook();return false">🎁 Baixar o meu planner</a></div>
+      <a href="#" class="ouro pj-so-cheio" onclick="baixarEbook();return false">🎁 Baixar o meu planner</a></div>
     <div class="selo">🎁 Planner de Negócio 2027</div>
+    <div class="pj-aguarda" id="pjAguarda">
+      <div class="pj-joia">✦</div>
+      <h2 id="pjAguardaTit">Seu planner aguarda você.</h2>
+      <p>Ele começa a ganhar vida na primeira atividade.</p>
+      <a href="#" class="btn" onclick="irPara('etapas');return false">Ir para as atividades</a>
+    </div>
+    <div class="pj-so-cheio">
     <h1 id="pjTitulo" style="font-size:clamp(36px,6vw,64px)">Parabéns!</h1>
     <div class="progresso pj-prog" id="pjProgresso"></div>
     <p class="sub" id="pjFrase">Cada etapa do dia acende uma parte deste desenho.</p>
@@ -335,6 +350,7 @@ body.ver-ebook .teste{display:none}
       <div class="centro" id="pjCentro"></div>
     </div>
     <div class="compromisso" id="pjComp"></div>
+    </div>
   </section>
 
 
@@ -429,6 +445,8 @@ function montarProjeto(){
   const nome=est.nome||'guerreira', c2=campos(2), c4=campos(4), c7=campos(7);
   const q=Object.keys(est.resp).length;
   const pct=Math.round(q/12*100);
+  document.getElementById('projeto').classList.toggle('vazio',q===0);
+  document.getElementById('pjAguardaTit').innerHTML=`Seu planner aguarda você${est.nome?', <em>'+esc(est.nome)+'</em>':''}.`;
   document.getElementById('pjTitulo').innerHTML = q===12
     ? `Parabéns, ${esc(nome)}! O seu negócio digital <em>2027</em> está desenhado e planejado.`
     : `Parabéns, ${esc(nome)}! O seu negócio digital <em>2027</em> está sendo desenhado.`;
@@ -590,7 +608,8 @@ function falar(n,i,b){
   const antes=t.value;
   rec.onresult=e=>{let txt='';for(const r of e.results)txt+=r[0].transcript+' ';t.value=(antes?antes+' ':'')+txt.trim();guardarInv(n)};
   rec.onend=()=>{ouvindo=null;b.classList.remove('ouvindo');b.textContent='🎤'};
-  rec.onerror=()=>{};
+  rec.onerror=e=>{const msg=(e.error==='not-allowed'||e.error==='service-not-allowed')?'O navegador não deixou usar o microfone. Clique no cadeado ao lado do endereço do site, permita o microfone e tente de novo. Ou digite a resposta.':'O microfone não funcionou neste navegador. Use o Google Chrome no computador, o microfone do teclado no celular, ou digite a resposta.';
+    let d=b.parentElement.parentElement.querySelector('.mic-erro'); if(!d){d=document.createElement('p');d.className='dica mic-erro';b.parentElement.parentElement.appendChild(d)} d.textContent=msg};
   ouvindo=rec; b.classList.add('ouvindo'); b.textContent='■'; rec.start();
 }
 // cofre: na versão publicada, cada prompt vem trancado com a senha da etapa (window.COFRE)
@@ -609,7 +628,7 @@ async function abrir(n){
   const inp=card.querySelector('.senha input'), av=card.querySelector('.aviso'), senha=inp.value.normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/\s+/g,'').toLowerCase();
   let ok=false;
   if(window.COFRE){const txt=await destrancar(n,senha); if(txt!==null){ok=true;est.senhas=est.senhas||{};est.senhas[n]=senha;mostrarConteudo(n,txt)}}
-  else {ok = senha===SENHAS[n]; if(ok&&n!=='final') montarInvestigacao(n,conteudoEtapa(n))}
+  else {ok = senha===SENHAS[n] || senha===SENHAS_REAIS[n]; if(ok&&n!=='final') montarInvestigacao(n,conteudoEtapa(n))}
   if(ok){card.classList.add('aberta');if(!est.abertas.includes(n))est.abertas.push(n);salvar()}
   else{av.style.display='inline'}
 }
@@ -647,7 +666,7 @@ function exemplo(q){est.nome=est.nome||'Cláudia';est.resp={};est.abertas=[];est
   ETAPAS.slice(0,q).forEach(e=>{est.resp[e.n]=EXEMPLO[e.n];est.abertas.push(e.n)});
   salvar();location.hash='projeto';location.reload()}
 function prep(q){['Ouvir','Ler'].forEach(k=>document.getElementById('prep'+k).classList.toggle('aberta',k.toLowerCase()===q));if(q==='ouvir'){const a=document.querySelector('#prepOuvir audio');try{a.play()}catch(e){}}}
-function limpar(){try{localStorage.removeItem('dm2027')}catch(e){} location.reload()}
+function limpar(){try{localStorage.removeItem('dm2027')}catch(e){} location.href=location.pathname}
 
 ler(); montarDesenho(); montarEtapas();
 if(est.nome) mostrarNome();
