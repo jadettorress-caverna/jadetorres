@@ -480,7 +480,7 @@ function montarProjeto(){
     ? `Parabéns, ${esc(nome)}! O seu negócio digital <em>2027</em> está desenhado e planejado.`
     : `Parabéns, ${esc(nome)}! O seu negócio digital <em>2027</em> está sendo desenhado.`;
   document.getElementById('pjProgresso').innerHTML = `<div class="barra"><i style="width:${pct}%"></i></div><span>${pct}% concluído · ${q} de 12 etapas${q<12?' · continue nas atividades':''}</span>`;
-  document.getElementById('pjFrase').textContent = c2['Frase do negócio'] || 'Cada etapa do dia acende uma parte deste desenho.';
+  document.getElementById('pjFrase').textContent = 'Use este planner para garantir que cada etapa do seu negócio digital esteja desenhada, planejada e datada.';
   document.getElementById('pjMarca').innerHTML=`<h5>Marca <em>pessoal</em></h5><div class="papel">a base de tudo</div>${desenhoMarca()}${est.resp[1]?verificaHTML()+concluirMarca():''}`;
   document.getElementById('pjMkt').innerHTML=`<h5>Marketing <em>orgânico e pago</em></h5><div class="papel">atrai as pessoas certas</div>${lista(5,'Assuntos do Cubo Mágico','tags')}${redes()}${kv(9,'Anúncio')}`;
   const preco=numero(c7['Preço']), vendas=numero(c7['Vendas por mês']);
