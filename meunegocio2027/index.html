@@ -170,10 +170,10 @@ h2{font-size:28px;letter-spacing:-.02em;line-height:1.05}
 .postit .fita{position:absolute;top:-10px;left:50%;transform:translateX(-50%) rotate(-2deg);padding:3px 12px;background:linear-gradient(90deg,#E7CF84,#C9A84C,#E7CF84);border-radius:2px;font-style:normal;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#141414;white-space:nowrap}
 .postit b{display:block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px;color:#3b3526}
 .postit.vazio{border:1.5px dashed var(--linha);box-shadow:none;color:#B8B4AB;background:#fff}.postit.vazio b{color:#B8B4AB}
-.causa-box{margin-top:22px;border-radius:16px;overflow:hidden;border:1px solid var(--linha)}
-.causa-tit{background:var(--cartao);color:var(--texto-claro);padding:10px 16px;font-size:13px;letter-spacing:.12em;text-transform:uppercase}
-.causa-tit em{font-family:"Instrument Serif",serif;font-style:italic;text-transform:none;letter-spacing:0;font-size:22px;color:var(--ouro)}
-.causa-box p{background:#fff;padding:16px 20px;font-family:"Instrument Serif",serif;font-size:clamp(20px,2.8vw,26px);line-height:1.25;text-align:center}
+.causa-box{margin-top:26px;border-radius:16px;border:1.5px solid var(--ouro);background:#fff;padding:16px 20px 6px}
+.causa-tit{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ouro-forte);text-align:center}
+.causa-tit em{font-style:normal}
+.causa-box p{padding:10px 8px 14px;font-family:"Instrument Serif",serif;font-size:clamp(20px,2.8vw,26px);line-height:1.25;text-align:center}
 .causa-box .aspas{color:var(--ouro);font-size:1.8em;line-height:0;vertical-align:-.35em;margin:0 4px}
 .causa-box.vazia p{color:#B8B4AB;font-size:18px}
 .desenho{margin:6px 0 14px}
@@ -233,9 +233,9 @@ body.ver-ebook .teste{display:none}
 .meta{background:var(--cartao);color:var(--texto-claro);border-radius:16px;padding:14px 16px;margin-top:10px}
 .meta small{color:var(--cinza-claro)}
 .meta strong{display:block;font-family:"Instrument Serif",serif;font-weight:400;font-size:36px;line-height:1.1;color:var(--ouro)}
-.compromisso{margin-top:28px;background:var(--cartao);color:var(--texto-claro);border-radius:22px;padding:26px;text-align:center}
+.compromisso{margin-top:28px;background:#fff;color:var(--tinta);border:1.5px solid var(--ouro);border-radius:22px;padding:26px;text-align:center}
 .compromisso p{font-family:"Instrument Serif",serif;font-size:clamp(22px,3vw,30px);line-height:1.25}
-.compromisso .ass{margin:22px auto 0;max-width:340px;border-top:1px solid #555;padding-top:8px;font-size:13px;color:var(--cinza-claro)}
+.compromisso .ass{margin:30px auto 0;max-width:340px;border-top:1px solid var(--tinta);padding-top:8px;font-size:13px;color:var(--cinza)}
 /* planner em páginas: um pilar embaixo do outro */
 .ciclo{grid-template-columns:1fr;grid-template-rows:none;max-width:760px;margin-left:auto;margin-right:auto}
 .pj,.seta,.centro{grid-column:1!important;grid-row:auto!important}
@@ -267,6 +267,8 @@ body.ver-ebook .teste{display:none}
   .pagina>*:not(#documento):not(#projeto){display:none!important}
   #documento,#projeto{display:block}
   .so-tela{display:none!important}
+  .frase,.ia{background:#fff!important;color:var(--tinta)!important;border:1.5px solid var(--ouro)}
+  .frase small{color:var(--ouro-forte)!important}
   .so-papel{display:flex!important}
   *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
   #projeto{break-after:page}
