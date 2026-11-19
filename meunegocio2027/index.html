@@ -176,6 +176,14 @@ h2{font-size:28px;letter-spacing:-.02em;line-height:1.05}
 .causa-box p{padding:10px 8px 14px;font-family:"Instrument Serif",serif;font-size:clamp(20px,2.8vw,26px);line-height:1.25;text-align:center}
 .causa-box .aspas{color:var(--ouro);font-size:1.8em;line-height:0;vertical-align:-.35em;margin:0 4px}
 .causa-box.vazia p{color:#B8B4AB;font-size:18px}
+.concluir{margin-top:26px;border-top:1.5px solid var(--ouro);padding-top:20px}
+.concluir-tit{font-family:"Instrument Serif",serif;font-style:italic;font-size:28px;color:var(--ouro-forte);margin-bottom:8px}
+.concluir p{font-size:16px;line-height:1.5;margin-bottom:14px}
+.data-linha{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:baseline;margin:6px 0 22px;font-weight:600}
+.data-linha .data{font-family:"Instrument Serif",serif;font-weight:400;font-size:22px;white-space:nowrap}
+.data-linha .data i{display:inline-block;width:34px;border-bottom:1.5px solid var(--tinta);margin:0 2px}
+.msg-tit{font-weight:600}
+.linhas i{display:block;height:34px;border-bottom:1px solid #B8B4AB}
 .desenho{margin:6px 0 14px}
 .desenho svg{width:100%;max-width:380px;display:block;margin:0 auto}
 .desenho .causa{width:168px;height:168px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;color:#EDEAE3;padding:10px}
@@ -444,7 +452,7 @@ const CAMPOS={
 const PERGUNTAS={};
 const PROMPTS={};
 const PROMPT_TESTE=n=>''||`[Prompt da etapa ${n}: vamos escrever juntas.]\n\nNo fim da resposta, escreva exatamente este bloco, preenchido com respostas curtas:\n\nPARA O MEU DESENHO\n${CAMPOS[n].map(c=>c+': ').join('\n')}`;
-Object.keys(CAMPOS).forEach(k=>{if(k!=='1')CAMPOS[k].push('Para aprofundar')});
+
 function campos(n){const r={},t=est.resp[n]||'';
   t.split('\n').forEach(l=>{const i=l.indexOf(':');if(i>0){const k=l.slice(0,i).trim().toLowerCase(),v=l.slice(i+1).trim();
     CAMPOS[n].forEach(c=>{if(c.toLowerCase()===k&&v)r[c]=v})}});
@@ -473,13 +481,13 @@ function montarProjeto(){
     : `Parabéns, ${esc(nome)}! O seu negócio digital <em>2027</em> está sendo desenhado.`;
   document.getElementById('pjProgresso').innerHTML = `<div class="barra"><i style="width:${pct}%"></i></div><span>${pct}% concluído · ${q} de 12 etapas${q<12?' · continue nas atividades':''}</span>`;
   document.getElementById('pjFrase').textContent = c2['Frase do negócio'] || 'Cada etapa do dia acende uma parte deste desenho.';
-  document.getElementById('pjMarca').innerHTML=`<h5>Marca <em>pessoal</em></h5><div class="papel">a base de tudo</div>${desenhoMarca()}${est.resp[1]?verificaHTML():''}${aprofundar([2])}`;
-  document.getElementById('pjMkt').innerHTML=`<h5>Marketing <em>orgânico e pago</em></h5><div class="papel">atrai as pessoas certas</div>${lista(5,'Assuntos do Cubo Mágico','tags')}${redes()}${kv(9,'Anúncio')}${aprofundar([5,6,9])}`;
+  document.getElementById('pjMarca').innerHTML=`<h5>Marca <em>pessoal</em></h5><div class="papel">a base de tudo</div>${desenhoMarca()}${est.resp[1]?verificaHTML()+concluirMarca():''}`;
+  document.getElementById('pjMkt').innerHTML=`<h5>Marketing <em>orgânico e pago</em></h5><div class="papel">atrai as pessoas certas</div>${lista(5,'Assuntos do Cubo Mágico','tags')}${redes()}${kv(9,'Anúncio')}`;
   const preco=numero(c7['Preço']), vendas=numero(c7['Vendas por mês']);
   const meta = preco&&vendas ? `<div class="meta"><small>Meta de faturamento 2027</small><strong>${reais(preco*vendas*12)}</strong><small>${reais(preco)} × ${vendas} vendas por mês × 12 meses</small></div>`
                              : `<div class="meta"><small>Meta de faturamento 2027</small><strong style="color:#666">aparece na etapa 7</strong></div>`;
-  document.getElementById('pjVendas').innerHTML=`<h5>Sistema <em>de vendas</em></h5><div class="papel">transforma interesse em venda</div>${kv(7,'Preço')}${kv(8,'Porta de entrada')}${kv(10,'Conversa de venda')}${meta}${aprofundar([7,8,10])}`;
-  document.getElementById('pjProduto').innerHTML=`<h5>Produto <em>autoral</em></h5><div class="papel">entrega a transformação</div>${kv(3,'Nome do método')}${lista(3,'Fases','fases')}${kv(4,'Produto principal')}${kv(11,'Boas-vindas')}${kv(12,'Depoimento')}${aprofundar([3,4,11,12])}`;
+  document.getElementById('pjVendas').innerHTML=`<h5>Sistema <em>de vendas</em></h5><div class="papel">transforma interesse em venda</div>${kv(7,'Preço')}${kv(8,'Porta de entrada')}${kv(10,'Conversa de venda')}${meta}`;
+  document.getElementById('pjProduto').innerHTML=`<h5>Produto <em>autoral</em></h5><div class="papel">entrega a transformação</div>${kv(3,'Nome do método')}${lista(3,'Fases','fases')}${kv(4,'Produto principal')}${kv(11,'Boas-vindas')}${kv(12,'Depoimento')}`;
   const metodo=campos(3)['Nome do método'];
   document.getElementById('pjCentro').innerHTML= metodo ? `Projeto <b>${esc(metodo)}</b>` : `Projeto <span style="color:#9A968E">· o nome aparece na etapa 3</span>`;
   document.getElementById('pjComp').innerHTML=`<p>Eu, ${esc(nome)}, me comprometo a colocar este negócio no ar em 2027.</p><div class="ass">assinatura · 21 de novembro de 2026</div>`;
@@ -533,6 +541,13 @@ function desenhoMarca(){
 function avisoZoom(){document.getElementById('modalZoom').classList.add('aberto')}
 function fecharModal(){document.getElementById('modalZoom').classList.remove('aberto')}
 function irPara(v){document.body.classList.remove('ver-etapas','ver-progresso','ver-ebook');if(v)document.body.classList.add('ver-'+v);if(v==='ebook')montarProjeto();window.scrollTo(0,0)}
+function concluirMarca(){
+  return `<div class="concluir"><div class="concluir-tit">Para concluir</div>
+    <p>O lugar de fala é uma descoberta que pode acontecer agora ou levar alguns dias de reflexão para que você tenha certeza. Quando encontrar, volte aqui para registrar.</p>
+    <div class="data-linha"><span>Este foi o dia em que eu assumi o meu lugar de fala:</span><span class="data"><i></i>/<i></i>/2027</span></div>
+    <p class="msg-tit">Agora, use este espaço para deixar a mensagem que representa a sua causa e que poderá ser lembrada pelas próximas gerações:</p>
+    <div class="linhas"><i></i><i></i><i></i><i></i></div>
+  </div>`}
 function abrirProjeto(){irPara('ebook')}
 function fecharProjeto(){irPara('etapas')}
 function baixarEbook(){montarDocumento();montarProjeto();window.print()}
