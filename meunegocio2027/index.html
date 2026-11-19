@@ -157,6 +157,25 @@ h2{font-size:28px;letter-spacing:-.02em;line-height:1.05}
 .aprof{margin-top:14px;background:var(--fundo);border:1px dashed var(--ouro);border-radius:14px;padding:12px 14px}
 .aprof small{display:block;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ouro-forte);margin-bottom:4px}
 .aprof p{font-size:15px;margin-top:4px}
+.mp-topo{display:grid;grid-template-columns:150px 1fr;gap:20px;align-items:center}
+.mp-topo svg{width:100%;max-width:150px}
+@media(max-width:560px){.mp-topo{grid-template-columns:1fr;text-align:center}.mp-topo svg{margin:0 auto}}
+.mp-nome small,.mp-tit{display:block;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ouro-forte);font-weight:700}
+.mp-nome strong{display:block;font-family:"Instrument Serif",serif;font-weight:400;font-size:clamp(26px,3.6vw,34px);line-height:1.1;margin:4px 0 6px}
+.mp-nome em{display:block;font-family:"Instrument Serif",serif;font-size:18px;color:var(--cinza)}
+.mp-nome.vazia strong{color:#B8B4AB;font-size:20px}
+.mp-tit{margin:22px 0 12px}
+.postits{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:18px 14px}
+.postit{position:relative;padding:22px 14px 14px;border-radius:3px;box-shadow:0 6px 12px rgba(0,0,0,.08);font-size:15px;line-height:1.35}
+.postit .fita{position:absolute;top:-10px;left:50%;transform:translateX(-50%) rotate(-2deg);padding:3px 12px;background:linear-gradient(90deg,#E7CF84,#C9A84C,#E7CF84);border-radius:2px;font-style:normal;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#141414;white-space:nowrap}
+.postit b{display:block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px;color:#3b3526}
+.postit.vazio{border:1.5px dashed var(--linha);box-shadow:none;color:#B8B4AB;background:#fff}.postit.vazio b{color:#B8B4AB}
+.causa-box{margin-top:22px;border-radius:16px;overflow:hidden;border:1px solid var(--linha)}
+.causa-tit{background:var(--cartao);color:var(--texto-claro);padding:10px 16px;font-size:13px;letter-spacing:.12em;text-transform:uppercase}
+.causa-tit em{font-family:"Instrument Serif",serif;font-style:italic;text-transform:none;letter-spacing:0;font-size:22px;color:var(--ouro)}
+.causa-box p{background:#fff;padding:16px 20px;font-family:"Instrument Serif",serif;font-size:clamp(20px,2.8vw,26px);line-height:1.25;text-align:center}
+.causa-box .aspas{color:var(--ouro);font-size:1.8em;line-height:0;vertical-align:-.35em;margin:0 4px}
+.causa-box.vazia p{color:#B8B4AB;font-size:18px}
 .desenho{margin:6px 0 14px}
 .desenho svg{width:100%;max-width:380px;display:block;margin:0 auto}
 .desenho .causa{width:168px;height:168px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;color:#EDEAE3;padding:10px}
@@ -340,13 +359,13 @@ body.ver-ebook .teste{display:none}
     <p class="sub" id="pjFrase">Cada etapa do dia acende uma parte deste desenho.</p>
     <div class="ciclo">
       <div class="pj pj-marca" id="pjMarca"></div>
-      <div class="seta s1">↓ atrai</div>
-      <div class="pj pj-mkt" id="pjMkt"></div>
-      <div class="seta s2">↓ converte</div>
-      <div class="pj pj-vendas" id="pjVendas"></div>
-      <div class="seta s3">↓ entrega</div>
+      <div class="seta s1">↓</div>
       <div class="pj pj-produto" id="pjProduto"></div>
-      <div class="seta s4">↺ os depoimentos voltam para o marketing</div>
+      <div class="seta s2">↓</div>
+      <div class="pj pj-mkt" id="pjMkt"></div>
+      <div class="seta s3">↓</div>
+      <div class="pj pj-vendas" id="pjVendas"></div>
+      <div class="seta s4">↺ os depoimentos das suas alunas alimentam o seu marketing, e o ciclo recomeça</div>
       <div class="centro" id="pjCentro"></div>
     </div>
     <div class="compromisso" id="pjComp"></div>
@@ -487,21 +506,28 @@ function desenhoMarcaAneis(){
 function desenhoMarca(){
   const c1=campos(1), c2=campos(2);
   const porque=c1['Minha causa'], oque=c1['Meu lugar de fala'], quem=c2['Para quem'], fatia=c2['Minha fatia'];
-  const ING=['História','Conhecimento','Experiência','Dom','Habilidade'], como=ING.some(k=>c1[k]);
-  const ouro='#C9A84C', apag='#CFCAC0';
-  const circ=(cy,r,ok,fill)=>`<circle cx="120" cy="${cy}" r="${r}" fill="${ok?fill:'#fff'}" stroke="${ok?ouro:apag}" stroke-width="2" ${ok?'':'stroke-dasharray="5 6"'}/>`;
+  const ING=[['História','#FFF1A8',-1.6],['Conhecimento','#CFE3FF',1.2],['Experiência','#E3D7FF',-0.8],['Dom','#FFD3DC',1.5],['Habilidade','#D3F2D0',-1.2]];
+  const ouro='#C9A84C', apag='#CFCAC0', tem=k=>!!c1[k];
+  const circ=(cy,r,ok,fill)=>`<circle cx="120" cy="${cy}" r="${r}" fill="${ok?fill:'#fff'}" stroke="${ok?ouro:apag}" stroke-width="2.5" ${ok?'':'stroke-dasharray="5 6"'}/>`;
   const rot=(y,t,ok,claro)=>`<text x="120" y="${y}" text-anchor="middle" font-family="Instrument Serif" font-style="italic" font-size="26" fill="${ok?(claro?'#EDEAE3':'#8A6410'):'#B8B4AB'}">${t}</text>`;
-  const linha=(n,titulo,txt,etapa,extra)=>`<div class="dm-linha${txt?'':' vazia'}"><b>${titulo}</b><span>${txt?esc(txt):'aparece na etapa '+etapa}</span>${extra||''}</div>`;
-  return `<div class="desenho dm">
-    <svg viewBox="0 0 240 240" aria-label="Círculo da marca pessoal">
-      ${circ(120,116,oque,'#FBF6E8')}${circ(154,82,como,'#F4E9C8')}${circ(184,52,porque,'#161616')}
-      ${rot(46,'o quê?',oque)}${rot(104,'como?',como)}${rot(192,'por quê?',porque,true)}
-    </svg>
-    <div class="dm-textos">
-      ${linha(3,'O quê · o meu lugar de fala',oque,1,(quem?`<em>para ${esc(quem)}</em>`:'')+(fatia?`<em>a minha fatia: ${esc(fatia)}</em>`:''))}
-      ${como?`<div class="dm-linha"><b>Como · a minha receita</b><div class="receita">${ING.map(k=>c1[k]?`<p><i>${k}</i>${esc(c1[k])}</p>`:'').join('')}</div></div>`:linha(2,'Como · a minha receita','',1)}
-      ${linha(1,'Por quê · a minha causa',porque,1)}
-    </div></div>`}
+  const como=ING.some(([k])=>tem(k));
+  return `<div class="desenho mp">
+    <div class="mp-topo">
+      <svg viewBox="0 0 240 240" aria-label="Círculo da marca pessoal">
+        ${circ(120,116,oque,'#FBF6E8')}${circ(154,82,como,'#F4E9C8')}${circ(184,52,porque,'#161616')}
+        ${rot(46,'o quê?',oque)}${rot(104,'como?',como)}${rot(192,'por quê?',porque,true)}
+      </svg>
+      <div class="mp-nome${oque?'':' vazia'}"><small>O quê · o meu lugar de fala</small>
+        <strong>${oque?esc(oque):'aparece na etapa 1'}</strong>
+        ${quem?`<em>para ${esc(quem)}</em>`:''}${fatia?`<em>a minha fatia: ${esc(fatia)}</em>`:''}</div>
+    </div>
+    <div class="mp-tit">Como · a minha receita</div>
+    <div class="postits">${ING.map(([k,cor,g])=>tem(k)
+      ? `<div class="postit" style="background:${cor};transform:rotate(${g}deg)"><i class="fita">${k}</i><span>${esc(c1[k])}</span></div>`
+      : `<div class="postit vazio"><b>${k}</b><span>etapa 1</span></div>`).join('')}</div>
+    <div class="causa-box${porque?'':' vazia'}"><div class="causa-tit">Por quê · <em>a minha causa</em></div>
+      <p><span class="aspas">“</span>${porque?esc(porque):'aparece na etapa 1'}<span class="aspas">”</span></p></div>
+  </div>`}
 function avisoZoom(){document.getElementById('modalZoom').classList.add('aberto')}
 function fecharModal(){document.getElementById('modalZoom').classList.remove('aberto')}
 function irPara(v){document.body.classList.remove('ver-etapas','ver-progresso','ver-ebook');if(v)document.body.classList.add('ver-'+v);if(v==='ebook')montarProjeto();window.scrollTo(0,0)}
