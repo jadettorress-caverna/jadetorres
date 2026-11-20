@@ -183,6 +183,7 @@ h2{font-size:28px;letter-spacing:-.02em;line-height:1.05}
 .data-linha .data{font-family:"Instrument Serif",serif;font-weight:400;font-size:22px;white-space:nowrap}
 .data-linha .data i{display:inline-block;width:34px;border-bottom:1.5px solid var(--tinta);margin:0 2px}
 .msg-tit{font-weight:600}
+.pitch{font-size:18px!important;line-height:2.6!important}.pitch i{display:inline-block;width:min(210px,60%);border-bottom:1.5px solid var(--tinta);margin:0 6px;vertical-align:-4px}
 .linhas i{display:block;height:34px;border-bottom:1px solid #B8B4AB}
 .pz{margin-top:44px;padding-top:30px;border-top:1px solid var(--linha)}
 .pz-grade{display:grid;grid-template-columns:1fr 210px;gap:22px;align-items:center}
@@ -202,9 +203,9 @@ h2{font-size:28px;letter-spacing:-.02em;line-height:1.05}
 .pz-leg b{font-family:"Instrument Sans",sans-serif;font-style:normal;color:#8A6410;font-weight:600;font-size:16px}
 .pz-quem{margin-top:22px;display:grid;gap:14px}
 .pz-quem p{font-size:17px;font-weight:600;line-height:1.35;margin:2px 0 0}
-.pz-ad{display:grid;grid-template-columns:1fr auto 1fr;gap:12px;align-items:start;border:1px solid var(--linha);border-radius:14px;padding:14px 16px}
-@media(max-width:560px){.pz-ad{grid-template-columns:1fr}.pz-ad .seta{transform:rotate(90deg);justify-self:center}}
-.pz-ad .seta{color:var(--ouro);font-size:26px;align-self:center}
+.pz-ad{display:grid;grid-template-columns:1fr auto 1fr;gap:12px;align-items:center;margin-top:10px}
+@media(max-width:560px){.pz-ad{grid-template-columns:1fr}.pz-ad .pz-seta{transform:rotate(90deg);justify-self:center}}
+.pz-ad .pz-seta{color:var(--ouro);font-size:26px;align-self:center}
 .pz-quem.vazio p{color:#B8B4AB;font-size:16px}
 .desenho{margin:6px 0 14px}
 .desenho svg{width:100%;max-width:380px;display:block;margin:0 auto}
@@ -503,7 +504,7 @@ function montarProjeto(){
     : `Parabéns, ${esc(nome)}! O seu negócio digital <em>2027</em> está sendo desenhado.`;
   document.getElementById('pjProgresso').innerHTML = `<div class="barra"><i style="width:${pct}%"></i></div><span>${pct}% concluído · ${q} de 12 etapas${q<12?' · continue nas atividades':''}</span>`;
   document.getElementById('pjFrase').textContent = 'Use este planner para garantir que cada etapa do seu negócio digital esteja desenhada, planejada e datada.';
-  document.getElementById('pjMarca').innerHTML=`<h5>Marca <em>pessoal</em></h5><div class="papel">a base de tudo</div>${desenhoMarca()}${est.resp[1]?verificaHTML()+concluirMarca():''}${desenhoPizza()}`;
+  document.getElementById('pjMarca').innerHTML=`<h5>Marca <em>pessoal</em></h5><div class="papel">a base de tudo</div>${desenhoMarca()}${est.resp[1]?verificaHTML()+concluirMarca():''}${desenhoPizza()}${est.resp[2]?verificaHTML(VERIFICA2,'Para ter certeza do seu posicionamento, verifique:')+concluirPizza():''}`;
   document.getElementById('pjMkt').innerHTML=`<h5>Marketing <em>orgânico e pago</em></h5><div class="papel">atrai as pessoas certas</div>${lista(5,'Assuntos do Cubo Mágico','tags')}${redes()}${kv(9,'Anúncio')}`;
   const preco=numero(c7['Preço']), vendas=numero(c7['Vendas por mês']);
   const meta = preco&&vendas ? `<div class="meta"><small>Meta de faturamento 2027</small><strong>${reais(preco*vendas*12)}</strong><small>${reais(preco)} × ${vendas} vendas por mês × 12 meses</small></div>`
@@ -564,7 +565,7 @@ function desenhoPizza(){
     </div>
     <div class="pz-quem${tem?'':' vazio'}">
       <div><small>Para quem</small><p>${v('Para quem')||'etapa 2'}</p></div>
-      <div class="pz-ad"><div><small>Antes · o problema</small><p>${v('Problema')||'etapa 2'}</p></div><span class="seta">→</span><div><small>Depois · a transformação</small><p>${v('Transformação')||'etapa 2'}</p></div></div>
+      <div class="pz-ad"><div class="postit${v('Problema')?'':' vazio'}" style="${v('Problema')?'background:#FFD3DC;transform:rotate(-1.2deg)':''}"><i class="fita"></i><b>Antes · o problema</b><span>${v('Problema')||'etapa 2'}</span></div><span class="pz-seta">→</span><div class="postit${v('Transformação')?'':' vazio'}" style="${v('Transformação')?'background:#D3F2D0;transform:rotate(1.2deg)':''}"><i class="fita"></i><b>Depois · a transformação</b><span>${v('Transformação')||'etapa 2'}</span></div></div>
     </div>
   </div>`}
 // DESENHO 1 · Marca pessoal (círculo dourado): por quê no centro, como no meio, o quê por fora
@@ -603,14 +604,22 @@ function concluirMarca(){
     <p class="msg-tit">Agora, use este espaço para deixar a mensagem que representa a sua causa e que poderá ser lembrada pelas próximas gerações:</p>
     <div class="linhas"><i></i><i></i><i></i><i></i></div>
   </div>`}
+function concluirPizza(){
+  return `<div class="concluir"><div class="concluir-tit">Para concluir</div>
+    <p>Posicionar-se é escolher. Quando você serve uma fatia, abre mão do resto da pizza, e é isso que faz você ser lembrada.</p>
+    <div class="data-linha"><span>Este foi o dia em que eu escolhi a minha fatia:</span><span class="data"><i></i>/<i></i>/2027</span></div>
+    <p class="msg-tit">A minha frase:</p>
+    <p class="pitch">Eu ajudo <i></i> a <i></i> através de <i></i>.</p>
+  </div>`}
 function abrirProjeto(){irPara('ebook')}
 function fecharProjeto(){irPara('etapas')}
 function baixarEbook(){montarDocumento();montarProjeto();window.print()}
 
 // verificação do lugar de fala (método da Jade, igual para todas)
 const VERIFICA=['Ele aparece na minha história?','Ele é maior do que a minha profissão? (certificado não é lugar de fala)','Os meus conhecimentos apontam para ele?','A minha experiência aponta para ele?','O meu dom e a minha habilidade aparecem nele?','Eu defenderia isso pelos próximos 10 anos?'];
-function verificaHTML(){
-  return `<div class="verifica"><b>Para ter certeza do seu lugar de fala, verifique:</b>${VERIFICA.map(t=>`<p><span class="q"></span> ${t}</p>`).join('')}</div>`}
+const VERIFICA2=['Consigo dizer a minha área, o meu nicho, o meu subnicho e a minha fatia em uma frase só.','O meu subnicho é um tema, não um público.','A minha fatia nasce da minha causa.','Eu falaria da minha fatia todos os dias, durante um ano, sem me cansar.','A minha fatia é pequena o bastante para eu ser lembrada por ela.','Não estou servindo a pizza inteira: o meu conteúdo não é um currículo.'];
+function verificaHTML(lista=VERIFICA,tit='Para ter certeza do seu lugar de fala, verifique:'){
+  return `<div class="verifica"><b>${tit}</b>${lista.map(t=>`<p><span class="q"></span> ${t}</p>`).join('')}</div>`}
 function marcar(i,v){est.check=est.check||{};est.check[i]=v;salvar()}
 // memória no aparelho (com proteção)
 let est={nome:'',abertas:[],resp:{}};
