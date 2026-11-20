@@ -119,9 +119,9 @@ h2{font-size:28px;letter-spacing:-.02em;line-height:1.05}
 .trofeu b{display:block;color:var(--ouro);font-size:18px}
 .trofeu small{font-size:14px;color:var(--cinza-claro)}
 @keyframes sobe{from{transform:translateY(8px);opacity:0}to{transform:none;opacity:1}}
-.etapa.final{background:var(--cartao);color:var(--texto-claro);border-color:var(--cartao)}
-.etapa.final .senha input{background:#222;color:#fff;border-color:#333}
-.etapa.final .cadeado{color:var(--cinza-claro)}
+.etapa.final.aberta{background:var(--cartao);color:var(--texto-claro);border-color:var(--cartao)}
+.etapa.final.aberta .senha input{background:#222;color:#fff;border-color:#333}
+.etapa.final.aberta .cadeado{color:var(--cinza-claro)}
 
 /* pilares, um embaixo do outro */
 .pilares{display:grid;gap:12px}
@@ -592,7 +592,7 @@ const ETAPAS=[
  {n:6,nome:'Redes Sociais',area:'marketing',sub:'Gratuito',quando:'manhã',dor:'Quem chega ao seu perfil não entende em 5 segundos o que você faz.'},
  {n:7,nome:'Oferta',area:'vendas',quando:'tarde',dor:'Você tem vergonha de dizer o preço, ou nem sabe qual é.'},
  {n:8,nome:'Funil',area:'vendas',quando:'tarde',dor:'Você posta e fica esperando alguém pedir para comprar.'},
- {n:9,nome:'Tráfego',area:'marketing',sub:'Pago',quando:'tarde',dor:'Só quem já te conhece vê o que você faz.'},
+ {n:9,nome:'Tráfego',area:'vendas',quando:'tarde',dor:'Só quem já te conhece vê o que você faz.'},
  {n:10,nome:'Comercial',area:'vendas',quando:'tarde',dor:'A pessoa pergunta o preço, some, e você não sabe o que responder.'},
  {n:11,nome:'Onboarding',area:'produto',quando:'tarde',dor:'A aluna compra e fica perdida nos primeiros dias.'},
  {n:12,nome:'Entrega',area:'produto',quando:'tarde',dor:'A aluna termina e você não tem nenhum depoimento para mostrar.'}
@@ -647,11 +647,11 @@ function montarProjeto(){
   document.getElementById('pjProgresso').innerHTML = `<div class="barra"><i style="width:${pct}%"></i></div><span>${pct}% concluído · ${q} de 12 etapas${q<12?' · continue nas atividades':''}</span>`;
   document.getElementById('pjFrase').textContent = 'Use este planner para garantir que cada etapa do seu negócio digital esteja desenhada, planejada e datada.';
   document.getElementById('pjMarca').innerHTML=`<h5>Marca <em>pessoal</em></h5><div class="papel">a base de tudo</div>${etapaTit(1,'O meu lugar de fala')}${desenhoMarca()}${est.resp[1]?verificaHTML()+concluirMarca():''}${etapaTit(2,'O meu posicionamento')}${desenhoPizza()}${est.resp[2]?verificaHTML(VERIFICA2,'Para ter certeza do seu posicionamento, verifique:')+concluirPizza():''}`;
-  document.getElementById('pjMkt').innerHTML=`<h5>Marketing <em>orgânico e pago</em></h5><div class="papel">atrai as pessoas certas</div>${lista(5,'Assuntos do Cubo Mágico','tags')}${redes()}${kv(9,'Anúncio')}`;
+  document.getElementById('pjMkt').innerHTML=`<h5>Marketing <em>orgânico e pago</em></h5><div class="papel">atrai as pessoas certas</div>${lista(5,'Assuntos do Cubo Mágico','tags')}${redes()}`;
   const preco=numero(c7['Preço']), vendas=numero(c7['Vendas por mês']);
   const meta = preco&&vendas ? `<div class="meta"><small>Meta de faturamento 2027</small><strong>${reais(preco*vendas*12)}</strong><small>${reais(preco)} × ${vendas} vendas por mês × 12 meses</small></div>`
                              : `<div class="meta"><small>Meta de faturamento 2027</small><strong style="color:#666">aparece na etapa 7</strong></div>`;
-  document.getElementById('pjVendas').innerHTML=`<h5>Sistema <em>de vendas</em></h5><div class="papel">transforma interesse em venda</div>${kv(7,'Preço')}${kv(8,'Porta de entrada')}${kv(10,'Conversa de venda')}${meta}`;
+  document.getElementById('pjVendas').innerHTML=`<h5>Sistema <em>de vendas</em></h5><div class="papel">transforma interesse em venda</div>${kv(7,'Preço')}${kv(8,'Porta de entrada')}${kv(9,'Anúncio')}${kv(10,'Conversa de venda')}${meta}`;
   document.getElementById('pjProduto').innerHTML=`<h5>Metodologia <em>autoral</em></h5><div class="papel">do método à entrega</div>${etapaTit(3,'O meu método')}${desenhoMetodo()}${est.resp[3]?verificaHTML(VERIFICA3,'Para ter certeza do seu método, verifique:')+concluirMetodo():''}${etapaTit(4,'Os meus produtos')}${desenhoProdutos()}${est.resp[4]?verificaHTML(VERIFICA4,'Para ter certeza dos seus produtos, verifique:')+concluirProdutos():''}${etapaTit(11,'O meu onboarding')}${desenhoOnb()}${est.resp[11]?verificaHTML(VERIFICA11,'Para ter certeza do seu onboarding, verifique:')+concluirOnb():''}${etapaTit(12,'A minha entrega')}${desenhoEnt()}${est.resp[12]?verificaHTML(VERIFICA12,'Para ter certeza da sua entrega, verifique:')+concluirEnt():''}`;
   const metodo=campos(3)['Nome do método'];
   document.getElementById('pjNav').innerHTML=ETAPAS.slice().sort((a,b)=>a.n-b.n).map(e=>`<a href="#" class="${est.resp[e.n]?'feito':''}" title="Etapa ${e.n} · ${esc(e.nome)}" onclick="irEtapa(${e.n});return false">${e.n}</a>`).join('');
