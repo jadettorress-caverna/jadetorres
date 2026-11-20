@@ -34,6 +34,7 @@ button{font:inherit;font-weight:700;font-size:17px;padding:15px 20px;border:0;bo
   <div class="cx">
     <label>O seu nome<input id="apNome"></label>
     <label>A sua área de atuação<input id="apArea"></label>
+    <label>A sua rede social <span style="font-weight:400;color:var(--cinza)">(opcional)</span><input id="apRede" placeholder="@seuperfil"></label>
     <label>O que te fez perceber que o Programa 12 Semanas no Ar pode te ajudar?<textarea id="apPorque"></textarea></label>
     <p class="q">O quanto você acredita que é possível viver do digital?</p>
     <div class="pct"><label><input type="radio" name="apCre" value="25%"> 25%</label><label><input type="radio" name="apCre" value="50%"> 50%</label><label><input type="radio" name="apCre" value="75%"> 75%</label><label><input type="radio" name="apCre" value="100%"> 100%</label></div>
@@ -62,7 +63,8 @@ try{const e=JSON.parse(localStorage.getItem('dm2027')||'{}');
 function enviar(){
   const v=id=>document.getElementById(id).value.trim(), rd=n=>(document.querySelector('input[name='+n+']:checked')||{}).value||'—';
   const ops=[...document.querySelectorAll('.ops input:checked')].map(x=>x.value).join(', ')||'não marquei';
-  const t=`Oi, Jade! Quero entrar no Programa 12 Semanas no Ar.\n\nNome: ${v('apNome')}\nÁrea de atuação: ${v('apArea')}\nO que me fez perceber que o programa pode me ajudar: ${v('apPorque')}\nO quanto acredito que é possível viver do digital: ${rd('apCre')}\nO quanto estou comprometida a iniciar e finalizar: ${rd('apCom')}\nO que já está funcionando: ${ops}\n\n(vim pelo Workshop Despertando Mentoras)`;
+  const t=`Oi, Jade! Quero entrar no Programa 12 Semanas no Ar.\n\nNome: ${v('apNome')}\nÁrea de atuação: ${v('apArea')}
+Rede social: ${v('apRede')||'ainda não tenho'}\nO que me fez perceber que o programa pode me ajudar: ${v('apPorque')}\nO quanto acredito que é possível viver do digital: ${rd('apCre')}\nO quanto estou comprometida a iniciar e finalizar: ${rd('apCom')}\nO que já está funcionando: ${ops}\n\n(vim pelo Workshop Despertando Mentoras)`;
   window.open('https://wa.me/'+WHATS_JADE+'?text='+encodeURIComponent(t),'_blank')}
 </script>
 </body>
