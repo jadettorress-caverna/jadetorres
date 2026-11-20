@@ -390,6 +390,13 @@ h2{font-size:28px;letter-spacing:-.02em;line-height:1.05}
 .redes-lin em{font-family:"Instrument Serif",serif;font-size:17px;color:var(--cinza)}
 .cb-titulo{font-family:"Instrument Serif",serif;font-style:italic;font-size:26px;color:var(--ouro-forte);margin:10px 0 4px}
 .fichas .cubo{margin-top:8px}
+.bl-grade{display:grid;grid-template-columns:110px repeat(4,1fr);gap:8px 14px;align-items:center;min-width:600px}
+.bl-grupo{display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
+.bl-grupo b{text-align:center;font-size:12px;color:var(--cinza)}
+.bl-grupo span{position:relative;display:grid;place-items:center;height:40px;border:1px solid;border-radius:8px;font-size:13px;font-weight:700;color:#3b3526}
+.bl-grupo em{position:absolute;right:4px;bottom:4px;width:8px;height:8px;border:1.5px solid #9A968E;border-radius:50%;background:#fff}
+.bl-obj{display:flex;align-items:center;gap:6px;font-weight:700;font-size:14px}.bl-obj i{width:12px;height:12px;border-radius:50%}
+@media print{.blocos{page:cubo;break-before:page;break-after:page}.bl-grade{min-width:0}}
 .desenho{margin:6px 0 14px}
 .desenho svg{width:100%;max-width:380px;display:block;margin:0 auto}
 .desenho .causa{width:168px;height:168px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;color:#EDEAE3;padding:10px}
@@ -763,6 +770,15 @@ function quadroFmt(n,i,val){const E=fmtEscolhas();
 function marcarFmt(n,i){
   const txt=CUBO.map(([nm],t)=>nm+': '+FMT.filter((f,j)=>{const x=document.querySelector(`#inv${n} input[data-t="${t}"][data-o="${j}"]`);return x&&x.checked}).join(', ')).join('\n');
   document.getElementById('q'+n+'_'+i).value=txt; guardarInv(n)}
+function desenhoBlocos(){
+  const T=cuboDados();
+  const leg=`<div class="cb-leg">${Array.from({length:12},(_,r)=>{const t=T[r+1];return `<span${t?'':' class="vazio"'}><i>T${r+1}</i>${t?esc(t.nome):'etapa 5'}</span>`}).join('')}</div>`;
+  const cab=`<div></div>${[0,1,2,3].map(g=>`<div class="bl-grupo">${[1,2,3].map(b=>`<b>B${g*3+b}</b>`).join('')}</div>`).join('')}`;
+  const lin=CUBO.map(([n,cor,claro,seq])=>`<div class="bl-obj" style="color:${cor}"><i style="background:${cor}"></i>${n}</div>${[0,1,2,3].map(g=>`<div class="bl-grupo">${[0,1,2].map(b=>`<span style="background:${claro};border-color:${cor}">T${seq[g*3+b]}<em></em></span>`).join('')}</div>`).join('')}`).join('');
+  return `<div class="desenho blocos"><p class="cb-titulo">Os meus blocos de distribuição</p>
+    <p class="cb-dica">Cada bloco tem um tema de cada cor. Poste o bloco inteiro e passe para o próximo, de 3 em 3. Marque o círculo quando o conteúdo for ao ar. É um guia, não uma obrigação: poste no seu ritmo.</p>
+    <p class="cb-sub">Os meus 12 tópicos</p>${leg}
+    <div class="cb-rolagem"><div class="bl-grade">${cab}${lin}</div></div></div>`}
 function desenhoFichas(){
   const c=campos(6), T=cuboDados(), E=fmtEscolhas();
   return `<div class="desenho fichas">
@@ -777,7 +793,7 @@ function desenhoFichas(){
         <div><small class="ficha-sub">Sequência lógica do embaralho</small><ol class="seq">${seq.map(k=>`<li><i style="background:${cor}">${k}</i><span>${T[k]&&T[k].temas[o]?esc(T[k].temas[o]):'<em>tema da etapa 5</em>'}</span></li>`).join('')}</ol></div>
         <div><small class="ficha-sub">Exemplos de quadros para testar</small>${QUADROS[o].map(q=>`<p class="qd"><span class="q"></span> ${q}</p>`).join('')}</div>
       </div></div>`).join('')}
-    ${desenhoCubo(true)}
+    ${desenhoBlocos()}
   </div>`}
 const VERIFICA6=['Já sei qual formato vou usar em cada cor?','Cada conteúdo termina com um CTA claro?','A minha bio diz em 5 segundos o que eu faço e para quem?','Vou seguir a ordem embaralhada, sem repetir temas parecidos em sequência?'];
 function concluirRedes(){
