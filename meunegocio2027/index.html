@@ -228,7 +228,9 @@ h2{font-size:28px;letter-spacing:-.02em;line-height:1.05}
 .pils span{border:1.5px solid var(--ouro);border-radius:10px;padding:8px 10px;text-align:center;font-weight:600;font-size:15px;background:#FBF6E8}
 .mt-pil.vazia .pils span{border-style:dashed;background:#fff;font-weight:400}
 .datas-mt{display:grid;gap:2px;margin-bottom:12px}.datas-mt .data-linha{margin:4px 0}
-.aulas{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
+.aulas{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:560px){.aulas{grid-template-columns:1fr}}
+.aulas-tit{margin-top:34px;color:var(--ouro-forte)}.aulas-tit span{font-weight:400;color:var(--tinta)}
 .aula-card{border:1px solid var(--linha);border-radius:14px;padding:12px 14px;background:#fff}
 .aula-card b{display:block;font-size:16px;margin:2px 0 4px}
 .aula-card .linhas i{height:30px}
@@ -584,7 +586,7 @@ function concluirMetodo(){
   return `<div class="concluir"><div class="concluir-tit">Para concluir</div>
     <p>O método nasce no papel e ganha vida na prática. Marque a data de cada fase. A gravação é opcional: depende do produto que você escolher primeiro.</p>
     <div class="datas-mt">${['Finalizei as minhas ferramentas em','Finalizei a gravação em','Finalizei a edição em','Finalizei a hospedagem em','Finalizei a validação em'].map(f=>`<div class="data-linha"><span>${f}:</span>${d}</div>`).join('')}</div>
-    ${ms.length?`<p class="msg-tit">As aulas de cada módulo:</p><div class="aulas">${ms.map((m,i)=>`<div class="aula-card"><small>Módulo ${i+1}</small><b>${esc(m.nome)}</b><div class="linhas"><i></i><i></i><i></i><i></i></div></div>`).join('')}</div>`:''}
+    ${ms.length?`<p class="msg-tit aulas-tit">As aulas de cada módulo: <span>(esta estrutura de módulos é uma sugestão. Fique à vontade para desenvolver do seu jeito.)</span></p><div class="aulas">${ms.map((m,i)=>`<div class="aula-card"><small>Módulo ${i+1}</small><b>${esc(m.nome)}</b><div class="linhas"><i></i><i></i><i></i><i></i><i></i><i></i></div></div>`).join('')}</div>`:''}
   </div>`}
 // DESENHO 2 · Posicionamento: a receita da pizza (escada + pizza com a fatia)
 function desenhoPizza(){
