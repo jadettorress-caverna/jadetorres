@@ -583,7 +583,7 @@ function concluirMetodo(){
   const ms=modulos(), d='<span class="data"><i></i>/<i></i>/2027</span>';
   return `<div class="concluir"><div class="concluir-tit">Para concluir</div>
     <p>O método nasce no papel e ganha vida na prática. Marque a data de cada fase. A gravação é opcional: depende do produto que você escolher primeiro.</p>
-    <div class="datas-mt">${['Ferramentas','Gravação (opcional)','Edição','Hospedagem','Validação'].map(f=>`<div class="data-linha"><span>${f}:</span>${d}</div>`).join('')}</div>
+    <div class="datas-mt">${['Finalizei as minhas ferramentas em','Finalizei a gravação em','Finalizei a edição em','Finalizei a hospedagem em','Finalizei a validação em'].map(f=>`<div class="data-linha"><span>${f}:</span>${d}</div>`).join('')}</div>
     ${ms.length?`<p class="msg-tit">As aulas de cada módulo:</p><div class="aulas">${ms.map((m,i)=>`<div class="aula-card"><small>Módulo ${i+1}</small><b>${esc(m.nome)}</b><div class="linhas"><i></i><i></i><i></i><i></i></div></div>`).join('')}</div>`:''}
   </div>`}
 // DESENHO 2 · Posicionamento: a receita da pizza (escada + pizza com a fatia)
