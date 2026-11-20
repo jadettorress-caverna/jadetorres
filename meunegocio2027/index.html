@@ -329,6 +329,7 @@ h2{font-size:28px;letter-spacing:-.02em;line-height:1.05}
 .qo-op{display:flex!important;gap:8px;align-items:flex-start;font-size:15px;padding:5px 0;cursor:pointer}
 .qo-op input{width:18px;height:18px;margin-top:2px;accent-color:#8A6410;flex:none}
 .des-email{border-radius:12px;padding:10px;background:#F3EEE6}.des-email .env{font-size:26px;color:#C9A84C;line-height:1}.des-email b{display:block;font-size:12px;margin:6px 0 8px}.des-email i{display:block;height:8px;border-radius:4px;background:#fff;margin:0 0 7px}.des-email i.curta{width:60%}.des-email span{display:block;font-size:11px;text-align:center;margin-top:10px}
+.ticket{font-family:"Instrument Serif",serif;font-style:italic;font-weight:400;text-transform:none;letter-spacing:0;font-size:16px;color:#3b3526}
 .desenho{margin:6px 0 14px}
 .desenho svg{width:100%;max-width:380px;display:block;margin:0 auto}
 .desenho .causa{width:168px;height:168px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;color:#EDEAE3;padding:10px}
@@ -660,6 +661,8 @@ function desenhoMarcaAneis(){
 function etapaTit(n,t){return `<div class="etapa-tit"><small>Etapa ${n}</small>${t}</div>`}
 const ONB_OP=['aula de onboard','mensagem individual no WhatsApp','grupo só dela no WhatsApp','ferramenta personalizada','encontro de onboard no Zoom','e-mail de onboard'];
 const ONB_T=[['gera movimento','Gera movimento',[0,1],[0,1,3,5]],['sustenta o negócio','Sustenta o negócio',[0,2],[0,1,2,3,4,5]],['eleva a autoridade','Eleva a autoridade',[0,1,3,4],[0,1,2,3,4,5]]];
+const TICKET={'gera movimento':'ticket baixo','sustenta o negócio':'ticket médio','eleva a autoridade':'ticket alto'};
+const tk=k=>` <em class="ticket">(${TICKET[k]})</em>`;
 function onbEscolhas(){const t=((est.inv||{})[11]||[])[0]||'', r={};
   ONB_T.forEach(([k,pk,pad])=>{const l=t.split('\n').find(x=>x.toLowerCase().startsWith(pk.toLowerCase()+':'));
     r[k]= l!==undefined ? ONB_OP.map((o,i)=>l.includes(o)?i:-1).filter(i=>i>=0) : pad});
@@ -682,7 +685,7 @@ function desenhoOnb(){
   const c=campos(11), p=campos(4), E=onbEscolhas();
   const CAN=[['▶ aula de onboard',[0]],['✉ e-mail',[5]],['💬 WhatsApp',[1,2]],['🔗 ferramenta personalizada',[3]],['🎥 Zoom',[4]]];
   return `<div class="desenho onb"><div class="celulares">${ONB_T.map(([k,pk])=>{const m=c['Mensagem '+k], nome=p[pk], op=E[k];
-    return `<div class="cel-col"><div class="cel-info"><small>Produto que ${k}</small><b class="cel-nome">${nome?esc(nome):'etapa 4'}</b><div class="canais">${CAN.map(([t,ix])=>{const on=ix.some(i=>op.includes(i));return `<span class="${on?'on':'off'}">${t}${on&&op.includes(2)&&ix.includes(2)?' · grupo':''}</span>`}).join('')}</div></div>
+    return `<div class="cel-col"><div class="cel-info"><small>Produto que ${k}${tk(k)}</small><b class="cel-nome">${nome?esc(nome):'etapa 4'}</b><div class="canais">${CAN.map(([t,ix])=>{const on=ix.some(i=>op.includes(i));return `<span class="${on?'on':'off'}">${t}${on&&op.includes(2)&&ix.includes(2)?' · grupo':''}</span>`}).join('')}</div></div>
       <div class="onb-des">${telaOnb(k,m,op)}</div></div>`}).join('')}</div></div>`}
 const VERIFICA11=['Cada produto tem a sua aula de onboard?','Já sei qual é o primeiro passo da minha aluna logo depois da compra?','No primeiro dia, ela já sabe onde estão as aulas, os materiais, o grupo e o suporte?','A intensidade do onboarding combina com o produto que ela comprou?','Quem compra o produto de autoridade recebe atenção individual, e não mensagens de grupo?'];
 function concluirOnb(){
@@ -916,7 +919,7 @@ function quadroOnb(n,i,val){
   const p=campos(4), E=onbEscolhas();
   return `<div class="perg"><label><span>1</span>Marque o que vai ter no onboarding de cada um dos seus produtos. Já vem marcado o modelo da Jade: ajuste ao seu jeito.</label>
     <textarea id="q${n}_${i}" hidden>${esc(val||'')}</textarea>
-    <div class="quadro-onb">${ONB_T.map(([k,pk],t)=>`<div class="qo-prod"><small>Produto que ${k}</small><b>${p[pk]?esc(p[pk]):pk}</b>
+    <div class="quadro-onb">${ONB_T.map(([k,pk],t)=>`<div class="qo-prod"><small>Produto que ${k}${tk(k)}</small><b>${p[pk]?esc(p[pk]):pk}</b>
       ${ONB_OP.map((o,j)=>ONB_T[t][3].includes(j)?`<label class="qo-op"><input type="checkbox" data-t="${t}" data-o="${j}" ${E[k].includes(j)?'checked':''} onchange="marcarOnb(${n},${i})"> ${o}</label>`:'').join('')}</div>`).join('')}</div></div>`}
 function marcarOnb(n,i){
   const txt=ONB_T.map(([k,pk],t)=>pk+': '+ONB_OP.filter((o,j)=>{const x=document.querySelector(`#inv${n} input[data-t="${t}"][data-o="${j}"]`);return x&&x.checked}).join(', ')).join('\n');
