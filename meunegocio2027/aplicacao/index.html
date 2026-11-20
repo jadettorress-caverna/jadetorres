@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aplicação · 12 Semanas no Ar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{--fundo:#F3F1EC;--tinta:#141414;--cinza:#6B6862;--linha:#DEDAD2;--ouro:#C9A84C;--ouro-forte:#8A6410}
+*{box-sizing:border-box}
+body{margin:0;background:var(--fundo);color:var(--tinta);font-family:"Instrument Sans",system-ui,sans-serif;line-height:1.5}
+main{max-width:640px;margin:0 auto;padding:40px 16px 60px}
+.sel{font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--ouro-forte)}
+h1{font-family:"Instrument Serif",serif;font-weight:400;font-size:clamp(32px,6vw,44px);line-height:1.1;margin:6px 0 14px}
+.cx{background:#FBF6E8;border:1.5px solid var(--ouro);border-radius:20px;padding:22px;display:grid;gap:14px}
+label{display:grid;gap:6px;font-weight:600;font-size:16px}
+input,textarea{font:inherit;font-weight:400;padding:12px 14px;border-radius:12px;border:1px solid var(--linha);background:#fff;color:var(--tinta)}
+textarea{min-height:90px}
+.q{font-weight:600;font-size:16px;margin:4px 0 0}
+.pct{display:flex;flex-wrap:wrap;gap:8px}
+.pct label{display:flex;gap:6px;align-items:center;border:1.5px solid var(--ouro);border-radius:999px;padding:7px 16px;background:#fff}
+.ops{display:grid;gap:8px}.ops label{display:flex;gap:10px;align-items:center;font-weight:400}
+input[type=checkbox],input[type=radio]{width:18px;height:18px;accent-color:#8A6410}
+button{font:inherit;font-weight:700;font-size:17px;padding:15px 20px;border:0;border-radius:999px;background:var(--ouro);color:#141414;cursor:pointer}
+.dica{font-size:14px;color:var(--cinza);margin:0}
+</style>
+</head>
+<body>
+<main>
+  <p class="sel">Programa 12 Semanas no Ar</p>
+  <h1>Quero entrar no programa</h1>
+  <div class="cx">
+    <label>O seu nome<input id="apNome"></label>
+    <label>A sua área de atuação<input id="apArea"></label>
+    <label>O que te fez perceber que o Programa 12 Semanas no Ar pode te ajudar?<textarea id="apPorque"></textarea></label>
+    <p class="q">O quanto você acredita que é possível viver do digital?</p>
+    <div class="pct"><label><input type="radio" name="apCre" value="25%"> 25%</label><label><input type="radio" name="apCre" value="50%"> 50%</label><label><input type="radio" name="apCre" value="75%"> 75%</label><label><input type="radio" name="apCre" value="100%"> 100%</label></div>
+    <p class="q">O quanto você está comprometida a iniciar e finalizar o programa?</p>
+    <div class="pct"><label><input type="radio" name="apCom" value="25%"> 25%</label><label><input type="radio" name="apCom" value="50%"> 50%</label><label><input type="radio" name="apCom" value="75%"> 75%</label><label><input type="radio" name="apCom" value="100%"> 100%</label></div>
+    <p class="q">O que já está funcionando no seu negócio?</p>
+    <div class="ops">
+      <label><input type="checkbox" value="Marca pessoal"> Marca pessoal</label>
+      <label><input type="checkbox" value="Método e produtos"> Método e produtos</label>
+      <label><input type="checkbox" value="Linha editorial e Instagram"> Linha editorial e Instagram</label>
+      <label><input type="checkbox" value="Funil e vendas"> Funil e vendas</label>
+      <label><input type="checkbox" value="Estou começando"> Estou começando</label>
+    </div>
+    <button onclick="enviar()">Enviar pelo WhatsApp</button>
+    <p class="dica">Quanto antes você enviar, antes a Jade entra em contato para ver a melhor forma de você entrar.</p>
+  </div>
+</main>
+<script>
+const WHATS_JADE='5598999012270';
+// nome e área vêm do planner (mesmo site), quando existirem
+try{const e=JSON.parse(localStorage.getItem('dm2027')||'{}');
+  if(e.nome)document.getElementById('apNome').value=e.nome;
+  const r=(e.resp||{})[2]||'', pega=k=>{const l=r.split('\n').find(x=>x.toLowerCase().startsWith(k));return l?l.slice(l.indexOf(':')+1).trim():''};
+  const a=[pega('área de atuação'),pega('nicho')].filter(Boolean).join(' · '); if(a)document.getElementById('apArea').value=a;
+}catch(err){}
+function enviar(){
+  const v=id=>document.getElementById(id).value.trim(), rd=n=>(document.querySelector('input[name='+n+']:checked')||{}).value||'—';
+  const ops=[...document.querySelectorAll('.ops input:checked')].map(x=>x.value).join(', ')||'não marquei';
+  const t=`Oi, Jade! Quero entrar no Programa 12 Semanas no Ar.\n\nNome: ${v('apNome')}\nÁrea de atuação: ${v('apArea')}\nO que me fez perceber que o programa pode me ajudar: ${v('apPorque')}\nO quanto acredito que é possível viver do digital: ${rd('apCre')}\nO quanto estou comprometida a iniciar e finalizar: ${rd('apCom')}\nO que já está funcionando: ${ops}\n\n(vim pelo Workshop Despertando Mentoras)`;
+  window.open('https://wa.me/'+WHATS_JADE+'?text='+encodeURIComponent(t),'_blank')}
+</script>
+</body>
+</html>
