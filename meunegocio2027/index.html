@@ -1290,7 +1290,8 @@ async function abrir(n){
 function copiar(n,b){const t=document.getElementById('p'+n).textContent;
   (navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(()=>{b.textContent='Copiado!';setTimeout(()=>b.textContent='Copiar prompt',1800)}).catch(()=>{b.textContent='Selecione e copie'})}
 function guardar(n){const v=document.getElementById('r'+n).value.trim(); if(!v)return;
-  est.resp[n]=v; salvar(); pintar(n,true); concluir(n);}
+  est.resp[n]=v; salvar(); pintar(n,true); concluir(n);
+  setTimeout(()=>{irPara('ebook');setTimeout(()=>irEtapa(n),300)},700);}
 function concluir(n){const c=document.getElementById('etapa'+n);c.classList.add('concluida');c.classList.remove('ver-prompt')}
 function verPrompt(n){document.getElementById('etapa'+n).classList.toggle('ver-prompt')}
 function colarDeNovo(n){const c=document.getElementById('etapa'+n);c.classList.remove('concluida','ver-prompt');const t=document.getElementById('r'+n);t.focus();t.select()}
