@@ -489,8 +489,9 @@ h2{font-size:28px;letter-spacing:-.02em;line-height:1.05}
 body.ver-etapas .v-home,body.ver-progresso .v-home,body.ver-ebook .v-home{display:none!important}
 body.ver-etapas .v-etapas,body.ver-progresso .v-progresso,body.ver-ebook .v-ebook{display:block}
 body.ver-ebook .teste{display:none}
-.menu{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:28px;max-width:640px}
-@media(max-width:620px){.menu{grid-template-columns:1fr}}
+.menu{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.menu a{flex:1 1 auto;white-space:nowrap;padding-left:24px!important;padding-right:24px!important}
+@media(max-width:620px){.menu{flex-direction:column}}
 .menu a{display:flex;align-items:center;justify-content:center;text-align:center;min-height:58px;text-decoration:none;color:var(--tinta);background:#fff;border:1px solid var(--linha);border-radius:999px;padding:14px 22px;transition:transform .15s,box-shadow .15s;box-shadow:0 2px 0 rgba(0,0,0,.06)}
 .menu a:hover{transform:translateY(-2px);box-shadow:0 6px 14px rgba(0,0,0,.08)}
 .menu b{font-size:17px;font-weight:700;letter-spacing:-.01em}
