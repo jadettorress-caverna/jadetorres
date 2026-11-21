@@ -362,7 +362,7 @@ h2{font-size:28px;letter-spacing:-.02em;line-height:1.05}
 .cb-top b{font-weight:600}.cb-top small{display:block;font-size:9px;color:var(--cinza);text-transform:uppercase;letter-spacing:.06em}
 .cb-top.vazio b{color:#B8B4AB;font-weight:400}
 .cb-tema{border-radius:6px;padding:5px 7px;font-size:11px;line-height:1.3;min-height:38px}
-@media print{.cubo{break-inside:avoid}.cb-grade{min-width:0}.cb-rolagem{overflow:visible}.cb-tema{font-size:11px}}
+@media print{.cubo{break-inside:auto}.cb-tema{break-inside:avoid}.cb-grade{min-width:0}.cb-rolagem{overflow:visible}.cb-tema{font-size:11px}}
 .bio{border:1.5px solid var(--ouro);border-radius:14px;padding:12px 16px;background:#FBF6E8;margin-bottom:18px}
 .bio small,.ficha-lin small,.ficha-sub{display:block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--ouro-forte)}
 .bio p{font-size:17px;margin:4px 0 0}.bio.vazio p{color:#B8B4AB;font-size:15px}
@@ -395,7 +395,7 @@ h2{font-size:28px;letter-spacing:-.02em;line-height:1.05}
 .bl-grupo span{position:relative;display:grid;place-items:center;height:40px;border:1px solid;border-radius:8px;font-size:13px;font-weight:700;color:#3b3526}
 .bl-grupo em{position:absolute;right:4px;bottom:4px;width:8px;height:8px;border:1.5px solid #9A968E;border-radius:50%;background:#fff}
 .bl-obj{display:flex;align-items:center;gap:6px;font-weight:700;font-size:14px}.bl-obj i{width:12px;height:12px;border-radius:50%}
-@media print{.blocos{break-inside:avoid}.bl-grade{min-width:0}}
+@media print{.blocos{break-inside:auto}.bl-grade{min-width:0}}
 .perfil-pg{margin-bottom:22px}
 .perfil-grade{display:grid;grid-template-columns:minmax(0,340px) 1fr;gap:24px;align-items:start}
 @media(max-width:620px){.perfil-grade{grid-template-columns:1fr}}
@@ -465,6 +465,12 @@ h2{font-size:28px;letter-spacing:-.02em;line-height:1.05}
 .fc-ops{display:grid;gap:6px}.fc-ops label{display:flex!important;gap:8px;align-items:center;font-weight:400}.fc-ops input{width:18px;height:18px;accent-color:#C9A84C}
 .fc-q{font-weight:600;font-size:14px;margin:4px 0 0}
 .fc-btn{justify-self:start;text-decoration:none;font-size:17px;padding:14px 26px}.fc-dica{font-size:13px;color:var(--cinza)}
+.cronograma{margin-top:36px}.cronograma ol{list-style:none;margin:14px 0 0;padding:0;border:1px solid var(--linha);border-radius:18px;background:#fff;overflow:hidden}
+.cronograma li{display:grid;grid-template-columns:120px 1fr;gap:12px;padding:12px 16px;border-top:1px solid var(--linha)}.cronograma li:first-child{border-top:0}
+.cr-per{display:block!important;background:#FBF6E8;font-family:"Instrument Serif",serif;font-style:italic;font-size:22px;color:var(--ouro-forte)}
+.cr-pil{display:block!important;font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--cinza);padding-bottom:4px!important}
+.cr-h{font-weight:700;color:var(--ouro-forte);font-size:15px}.cronograma li b{display:block;font-size:16px}.cronograma li small{display:block;font-size:14px;color:var(--cinza)}
+@media(max-width:480px){.cronograma li{grid-template-columns:1fr;gap:2px}}
 .desenho{margin:6px 0 14px}
 .desenho svg{width:100%;max-width:380px;display:block;margin:0 auto}
 .desenho .causa{width:168px;height:168px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;color:#EDEAE3;padding:10px}
@@ -532,7 +538,7 @@ body.ver-ebook .teste{display:none}
 .centro{order:-1;justify-self:center;margin-bottom:14px}
 .seta{padding:10px 0}
 .s4{order:9}
-@media print{.pj{break-before:page}.pj-marca{break-before:auto}.seta{display:none}.compromisso{break-before:page}.verifica,.concluir,.mp-topo,.postits,.causa-box,.pz-grade,.pz-quem,.org,.pronta,.parada,.aula-card,.degrau,.meta,.ent-prod,.cel-col,.fq-lin,.fn-fim,.perfil-pg,.ficha,.cubo,.blocos,.crm,.ads,.tf-painel,.mt-ana,.mt-pil,.datas-mt,.bio{break-inside:avoid}.etapa-tit,.mp-tit,.cb-titulo,.concluir-tit{break-after:avoid}}
+@media print{.pj{break-before:page;border:0!important;padding:0!important;border-radius:0!important;background:none!important;box-shadow:none!important}.pj-marca{break-before:auto}.seta{display:none}.compromisso{break-before:page}.etapa-tit{break-before:page;margin-top:0!important;padding-top:0!important;border-top:0!important}.papel+.etapa-tit{break-before:auto}.verifica,.concluir,.postit,.degrau,.cel-col,.fq-lin,.ficha,.parada,.aula-card,.meta,.fn-fim,.ads,.tf-painel,.crm-col,.ent-prod,.bio,.pz-quem,.mt-ana,.mt-pil,.causa-box,.mp-topo,.org,.pronta,.perfil-pg,.datas-mt{break-inside:avoid}}
 
 .preparo{background:#fff;border:1px solid var(--linha);border-radius:22px;padding:22px}
 .prep-botoes{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
@@ -633,6 +639,7 @@ body.ver-ebook .teste{display:none}
     <a href="#" class="m-preto" onclick="irPara('progresso');return false"><b>Acompanhe o seu progresso</b></a>
     <a href="#" class="m-ouro" onclick="irPara('ebook');return false"><b>🎁 Planner de Negócio 2027</b></a>
   </div>
+  <section class="cronograma nao-imprime v-home"><div class="selo">Sábado, 21 de novembro</div><h3>O cronograma do <em>workshop</em></h3><ol><li class="cr-per">Manhã</li><li><span class="cr-h">9h00</span><div><b>Abertura</b></div></li><li class="cr-pil">Pilar 1 · Marca pessoal</li><li><span class="cr-h">9h25</span><div><b>Etapa 1 · Lugar de Fala</b></div></li><li><span class="cr-h">10h00</span><div><b>Etapa 2 · Posicionamento</b></div></li><li class="cr-pil">Pilar 2 · Metodologia autoral</li><li><span class="cr-h">10h25</span><div><b>Etapa 3 · Método Autoral</b></div></li><li><span class="cr-h">10h55</span><div><b>Etapa 4 · Produtos</b></div></li><li><span class="cr-h">11h30</span><div><b>Etapa 11 · Onboarding</b></div></li><li><span class="cr-h">11h45</span><div><b>Etapa 12 · Entrega</b></div></li><li><span class="cr-h">12h00</span><div><b>Almoço</b><small>até 14h</small></div></li><li class="cr-per">Tarde</li><li class="cr-pil">Pilar 3 · Marketing orgânico e pago</li><li><span class="cr-h">14h00</span><div><b>Etapa 5 · Linha Editorial</b></div></li><li><span class="cr-h">14h25</span><div><b>Etapa 6 · Redes Sociais</b></div></li><li class="cr-pil">Pilar 4 · Sistema de vendas</li><li><span class="cr-h">14h45</span><div><b>Etapa 7 · Oferta</b></div></li><li><span class="cr-h">15h15</span><div><b>Etapa 8 · Funil</b></div></li><li><span class="cr-h">15h40</span><div><b>Etapa 9 · Tráfego</b></div></li><li><span class="cr-h">16h00</span><div><b>Café e toalete</b></div></li><li><span class="cr-h">16h15</span><div><b>Etapa 10 · Comercial</b></div></li><li><span class="cr-h">16h40</span><div><b>Fechamento</b><small>planner completo e convite para o programa</small></div></li><li><span class="cr-h">17h00</span><div><b>Hot seat</b><small>dúvidas e orientações, até 18h</small></div></li></ol></section>
 
   <!-- A visão do projeto: o negócio funcionando -->
   <section id="projeto" class="secao v-ebook">
