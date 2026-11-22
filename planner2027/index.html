@@ -50,6 +50,9 @@ li.atual{background:rgba(255,255,255,.18);border-radius:10px}
 .cta p em{color:var(--ouro)}
 .botao{display:inline-block;background:var(--ouro);color:var(--tinta);text-decoration:none;font:600 18px/1 "Instrument Sans",sans-serif;padding:20px 30px;border-radius:999px}
 .botao:hover{background:#E2C878}
+.botao.escuro{background:#161616;color:var(--creme)}
+.botao.escuro:hover{background:#2a2926}
+html{scroll-behavior:smooth}
 .preco{display:block;margin-top:14px;font-size:16px;color:#B9B4AA}
 footer{text-align:center;font-size:14px;margin-top:34px;color:var(--texto)}
 </style>
@@ -65,6 +68,7 @@ footer{text-align:center;font-size:14px;margin-top:34px;color:var(--texto)}
     <iframe src="https://www.youtube.com/embed/5kyNKhqE-TM?rel=0" title="Aula 1 · Abertura do workshop" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
   </div>
   <p class="legenda-video">Aula 1 · Abertura do workshop</p>
+  <p style="text-align:center;margin:-26px 0 44px"><a class="botao escuro" href="#comprar">Quero fazer meu Planner 2027</a></p>
 
   <p class="rotulo" style="margin-bottom:16px">As aulas</p>
   <div class="padrao">
@@ -94,7 +98,7 @@ footer{text-align:center;font-size:14px;margin-top:34px;color:var(--texto)}
     <li><span class="n">14</span><span class="t">A Caverna e encerramento</span></li>
   </ol>
 
-  <div class="cta">
+  <div class="cta" id="comprar">
     <p>Pronta para desenhar o seu <em>2027</em>?</p>
     <a class="botao" href="https://pay.kiwify.com.br/1V9u3XO" target="_blank" rel="noopener">Quero fazer meu Planner 2027</a>
     <span class="preco">Gravação completa + materiais · R$27</span>
