@@ -29,6 +29,10 @@ h1 em{font-style:italic}
 
 .video{position:relative;aspect-ratio:16/9;border-radius:18px;overflow:hidden;background:#161616;box-shadow:0 18px 40px rgba(58,49,34,.35)}
 .video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.capa-video{position:absolute;inset:0;border:0;padding:0;cursor:pointer;background:#161616}
+.capa-video img{width:100%;height:100%;object-fit:cover;display:block}
+.capa-video .play{position:absolute;left:50%;top:50%;width:76px;height:76px;margin:-38px 0 0 -38px;border-radius:50%;background:rgba(20,20,20,.82);box-shadow:0 6px 18px rgba(0,0,0,.35)}
+.capa-video .play::after{content:"";position:absolute;left:31px;top:24px;border-style:solid;border-width:14px 0 14px 22px;border-color:transparent transparent transparent #C9A84C}
 .video .vazio{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#B9B4AA;font-size:16px;text-align:center;padding:20px}
 .legenda-video{text-align:center;margin:14px 0 44px;font:400 24px/1.2 "Instrument Serif",serif;color:var(--tinta)}
 
@@ -65,7 +69,10 @@ footer{text-align:center;font-size:14px;margin-top:34px;color:var(--texto)}
   <p class="intro">O workshop estará <strong>todo disponível na quarta-feira</strong>, editado em aulas, com a liberação das senhas de cada etapa, para você construir o seu Planner de Negócio Digital 2027 sem dificuldade.</p>
 
   <div class="video">
-    <iframe src="https://www.youtube.com/embed/5kyNKhqE-TM?rel=0" title="Aula 1 · Abertura do workshop" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <button class="capa-video" id="capaVideo" aria-label="Assistir à Aula 1 · Abertura do workshop">
+      <img src="capa-aula-01.jpg" alt="Aula 1 · Abertura do workshop">
+      <span class="play"></span>
+    </button>
   </div>
   <p class="legenda-video">Aula 1 · Abertura do workshop</p>
   <p style="text-align:center;margin:-26px 0 44px"><a class="botao escuro" href="#comprar">Quero fazer meu Planner 2027</a></p>
@@ -106,5 +113,15 @@ footer{text-align:center;font-size:14px;margin-top:34px;color:var(--texto)}
 
   <footer>Caverna · Jade Torres</footer>
 </main>
+<script>
+document.getElementById('capaVideo').addEventListener('click',function(){
+  var f=document.createElement('iframe');
+  f.src='https://www.youtube.com/embed/5kyNKhqE-TM?rel=0&autoplay=1';
+  f.title='Aula 1 · Abertura do workshop';
+  f.allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+  f.allowFullscreen=true;
+  this.replaceWith(f);
+});
+</script>
 </body>
 </html>
